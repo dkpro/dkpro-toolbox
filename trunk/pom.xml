@@ -9,4 +9,7 @@
   <artifactId>dkpro.toolbox</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <modules>
+  <module>dkpro.toolbox.core-asl</module>
+  </modules>
 </project>
