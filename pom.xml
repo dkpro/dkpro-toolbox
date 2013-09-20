@@ -102,5 +102,6 @@
   <modules>
   <module>dkpro.toolbox.core-asl</module>
   <module>dkpro.toolbox.corpus-asl</module>
+  <module>dkpro.toolbox.tools-asl</module>
   </modules>
 </project>
