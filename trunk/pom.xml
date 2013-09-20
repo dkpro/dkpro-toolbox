@@ -91,5 +91,6 @@
     </dependencyManagement>
   <modules>
   <module>dkpro.toolbox.core-asl</module>
+  <module>dkpro.toolbox.corpus-asl</module>
   </modules>
 </project>
