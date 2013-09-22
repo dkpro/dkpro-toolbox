@@ -34,6 +34,12 @@
         </dependency>
         <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>
+                de.tudarmstadt.ukp.dkpro.core.io.bincas-asl
+            </artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.negra-asl</artifactId>
         </dependency>
         <dependency>
@@ -43,6 +49,18 @@
         <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.tei-asl</artifactId>
-        </dependency>        
-    </dependencies>
+        </dependency>
+        <dependency>
+        	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        	<artifactId>
+        		de.tudarmstadt.ukp.dkpro.core.tokit-asl
+        	</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        	<artifactId>
+        		de.tudarmstadt.ukp.dkpro.core.opennlp-asl
+        	</artifactId>
+        </dependency>
+      </dependencies>
 </project>
