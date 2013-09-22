@@ -47,6 +47,8 @@ import dkpro.toolbox.core.Text;
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"})
 
+// usually this should not be necessary, as the corpora use readers themselves.
+@Deprecated
 public class CorpusReader extends JCasCollectionReader_ImplBase {
 
 	/**
