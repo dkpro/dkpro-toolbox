@@ -17,7 +17,6 @@
  ******************************************************************************/
 package dkpro.toolbox.corpus;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -25,6 +24,7 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasReader;
 
 
@@ -41,6 +41,7 @@ public class SerializedCorpus
     protected CollectionReaderDescription reader;
     private String language;
     private String name;
+    private String description;
 
     public SerializedCorpus(String corpusPath)
             throws CorpusException
@@ -60,11 +61,12 @@ public class SerializedCorpus
         Properties prop = new Properties();
         
         try {
-               //load a properties file
-            prop.load(new FileInputStream(corpusPath + "/metadata.prop"));
+            //load a properties file
+            prop.load(ResourceUtils.resolveLocation(corpusPath + "/metadata.prop").openStream());
  
             name = prop.getProperty("name");
-            language = prop.getProperty("language"); 
+            language = prop.getProperty("language");
+            description = prop.getProperty("description");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -86,5 +88,11 @@ public class SerializedCorpus
     public String getName()
     {
         return name;
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return description;
     }
 }

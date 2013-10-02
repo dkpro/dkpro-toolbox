@@ -43,11 +43,20 @@ public class TextCorpus
     protected CollectionReaderDescription reader;
     private String language;
     private String name;
+    private String description;
 
-    public TextCorpus(String corpusPath, String language, String name, String ... patterns) throws Exception
+    public TextCorpus(
+            String corpusPath,
+            String language,
+            String name,
+            String description,
+            String ... patterns
+    )
+            throws Exception
     {
         this.language = language;
         this.name = name;
+        this.description = description;
      
         CollectionReaderDescription sourceReader = CollectionReaderFactory.createReaderDescription(
                 TextReader.class,
@@ -55,14 +64,16 @@ public class TextCorpus
                 TextReader.PARAM_SOURCE_LOCATION, corpusPath,
                 TextReader.PARAM_PATTERNS, patterns
         );
-           
+          
+        // TODO should not serialize to target but into temp directory
+        
         // preprocess text file (tokenize, sentence split, POS tag) and serialize
         AnalysisEngineDescription desc = AnalysisEngineFactory.createEngineDescription(
                 AnalysisEngineFactory.createEngineDescription(BreakIteratorSegmenter.class),
                 AnalysisEngineFactory.createEngineDescription(OpenNlpPosTagger.class),
                 AnalysisEngineFactory.createEngineDescription(
                         BinaryCasWriter.class,
-                        BinaryCasWriter.PARAM_TARGET_LOCATION, "target/textcorpus/"
+                        BinaryCasWriter.PARAM_TARGET_LOCATION, "target/textcorpus/" + name
                 )
         );
         SimplePipeline.runPipeline(sourceReader, desc);
@@ -70,7 +81,7 @@ public class TextCorpus
         // read serialized data
         reader = CollectionReaderFactory.createReaderDescription(
                 BinaryCasReader.class,
-                BinaryCasReader.PARAM_SOURCE_LOCATION, "target/textcorpus/",
+                BinaryCasReader.PARAM_SOURCE_LOCATION, "target/textcorpus/" + name,
                 BinaryCasReader.PARAM_PATTERNS, "*.bin"
         );
     }
@@ -91,5 +102,10 @@ public class TextCorpus
     public String getName()
     {
         return name;
+    }
+
+    public String getDescription()
+    {
+        return description;
     }
 }

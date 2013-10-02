@@ -43,4 +43,9 @@ public interface Corpus {
      * @return The name of the corpus.
      */
     public String getName();
+    
+    /**
+     * @return A short description of the corpus.
+     */
+    public String getDescription();
 }

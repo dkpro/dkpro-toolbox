@@ -41,6 +41,7 @@ public class TazCorpus
 {
     
     private final static String NAME = "taz";
+    private final static String DESCRIPTION = "The TAZ corpus";
     private final static String LANG_CODE = "de";
     private final static String CHARSET = "UTF-8";
 //    private final static String CHARSET = "ISO-8859-15";
@@ -121,5 +122,11 @@ public class TazCorpus
     public String getName()
     {
         return NAME;
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return DESCRIPTION;
     }
 }

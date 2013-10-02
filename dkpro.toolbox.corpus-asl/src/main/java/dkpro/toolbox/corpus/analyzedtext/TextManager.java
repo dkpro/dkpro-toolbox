@@ -10,21 +10,35 @@ import dkpro.toolbox.corpus.SerializedCorpus;
 public class TextManager
 {
     public enum TextName {
-        MobyDick
+        MobyDick,
+        SenseAndSensibility,
+        BookOfGenesis,
+        InauguralAddresses,
+        ChatCorpus,
+        MontyPython,
+        WallStreetJournal,
+        PersonalsCorpus,
+        TheManWhoWasThursday
     }
     
     private static Map<TextName, AnalyzedText> texts = null;
     private static Map<TextName, Sentence> sentences = null;
     
     private static void initialize()
-        throws CorpusException
     {
         texts = new HashMap<TextName, AnalyzedText>();
-        sentences = new HashMap<TextName, Sentence>();
-     
-        // load texts
-        System.out.println("Loading Moby Dick.");
-        texts.put(TextName.MobyDick, new AnalyzedText(new SerializedCorpus("src/main/resources/corpus/mobydick/")));
+        sentences = new HashMap<TextName, Sentence>();     
+    }
+    
+    private static void load(TextName name)
+            throws CorpusException
+    {
+        switch (name) {
+            case MobyDick : texts.put(TextName.MobyDick, new AnalyzedText(new SerializedCorpus("classpath:/corpus/mobydick/")));
+            case SenseAndSensibility : texts.put(TextName.SenseAndSensibility, new AnalyzedText(new SerializedCorpus("classpath:/corpus/sense_sensibility/")));
+            case TheManWhoWasThursday: texts.put(TextName.TheManWhoWasThursday, new AnalyzedText(new SerializedCorpus("classpath:/corpus/thursday/")));
+            case InauguralAddresses: texts.put(TextName.InauguralAddresses, new AnalyzedText(new SerializedCorpus("classpath:/corpus/inaugural/")));
+        }
     }
     
     public static AnalyzedText getText(TextName name)
@@ -32,6 +46,10 @@ public class TextManager
     {
         if (texts == null) {
             initialize();
+        }
+        
+        if (!texts.containsKey(name)) {
+            load(name);
         }
         
         return texts.get(name);
@@ -42,6 +60,10 @@ public class TextManager
     {
         if (sentences == null) {
             initialize();
+        }
+
+        if (!texts.containsKey(name)) {
+            load(name);
         }
         
         return sentences.get(name);

@@ -43,6 +43,9 @@ public abstract class CorpusBase
     @Override
     public abstract String getName();
 
+    @Override
+    public abstract String getDescription();
+
     protected abstract CollectionReaderDescription getReader();
 
     @Override
