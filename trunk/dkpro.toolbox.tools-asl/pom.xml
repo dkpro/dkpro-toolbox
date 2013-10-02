@@ -36,5 +36,5 @@
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
         </dependency>
-    </dependencies>
+     </dependencies>
 </project>

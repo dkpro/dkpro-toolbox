@@ -37,6 +37,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbReader;
 public class WackyCorpus
     extends CorpusBase
 {
+    private static final String DESCRIPTION = "The Wacky corpus.";
 
     public enum WackyLanguageEdition {
         // FIXME are those really the right tagsets for the corpora and isn't there a better method to provide this?
@@ -111,5 +112,11 @@ public class WackyCorpus
     protected CollectionReaderDescription getReader()
     {
         return reader;
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return DESCRIPTION;
     }
 }

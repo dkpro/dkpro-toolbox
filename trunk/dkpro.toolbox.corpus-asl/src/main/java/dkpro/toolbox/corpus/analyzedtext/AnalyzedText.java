@@ -1,6 +1,10 @@
 package dkpro.toolbox.corpus.analyzedtext;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import dkpro.toolbox.corpus.Corpus;
+import dkpro.toolbox.corpus.CorpusException;
 
 /**
  * A text is a special object that is backed by a corpus, but provides additional analysis methods.
@@ -11,15 +15,31 @@ import dkpro.toolbox.corpus.Corpus;
  */
 public class AnalyzedText
 {
-    private Corpus corpus;
+    private Corpus underlyingCorpus;
 
     public AnalyzedText(Corpus corpus)
     {
-        this.corpus = corpus;
+        this.underlyingCorpus = corpus;
     }
 
-    public Corpus getCorpus()
+    public Corpus getUnderlyingCorpus()
     {
-        return corpus;
+        return underlyingCorpus;
+    }
+    
+    public List<String> getTokens()
+            throws CorpusException
+    {
+        List<String> tokens = new ArrayList<String>();
+        for (String token : underlyingCorpus.getTokens()) {
+            tokens.add(token);
+        }
+        return tokens;
+    }
+
+    public String getName()
+            throws CorpusException
+    {
+        return underlyingCorpus.getName();
     }
 }

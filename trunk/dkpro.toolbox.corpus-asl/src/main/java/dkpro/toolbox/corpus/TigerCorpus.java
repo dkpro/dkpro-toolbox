@@ -36,6 +36,8 @@ public class TigerCorpus
 
     static final String LANGUAGE = "de";
     static final String NAME = "Tiger";
+    static final String DESCRIPTION = "The Tiger corpus. A German newspaper corpus.";
+
 
     CollectionReaderDescription reader;
 
@@ -77,5 +79,11 @@ public class TigerCorpus
     public String getName()
     {
         return NAME;
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return DESCRIPTION;
     }
 }

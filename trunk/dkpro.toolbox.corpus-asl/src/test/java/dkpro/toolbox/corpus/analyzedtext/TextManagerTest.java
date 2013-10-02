@@ -14,6 +14,13 @@ public class TextManagerTest
     public void textManagerTest() throws CorpusException {
         AnalyzedText text = TextManager.getText(TextName.MobyDick);
         
-        assertEquals("mobydick-melville", text.getCorpus().getName());
+        assertEquals("mobydick-melville", text.getName());
+    }
+
+    @Test
+    public void multipleFilesTest() throws CorpusException {
+        AnalyzedText text = TextManager.getText(TextName.InauguralAddresses);
+        
+        assertEquals(145240, text.getTokens().size());
     }
 }

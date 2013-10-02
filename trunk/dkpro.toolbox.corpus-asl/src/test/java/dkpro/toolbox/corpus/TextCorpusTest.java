@@ -29,14 +29,17 @@ import dkpro.toolbox.core.Text;
 public class TextCorpusTest
 {
 
+    @SuppressWarnings("unused")
     @Test
     public void textCorpusTest() throws Exception {
         Corpus corpus = new TextCorpus(
                 "src/test/resources/text/",
                 "en",
                 "Moby Dick - Melville",
-                "melville-moby_dick.txt");
-        
+                "Moby Dick by Herman Melville 1851",
+                "melville-moby_dick.txt"
+        );
+  
         int nrOfTexts = 0;
         for (Text text : corpus.getTexts()) {
             nrOfTexts++;

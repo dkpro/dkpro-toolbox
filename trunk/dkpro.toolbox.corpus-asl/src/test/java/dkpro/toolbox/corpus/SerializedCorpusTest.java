@@ -29,12 +29,14 @@ import dkpro.toolbox.core.Text;
 public class SerializedCorpusTest
 {
 
+    @SuppressWarnings("unused")
     @Test
     public void textCorpusTest() throws Exception {
         Corpus corpus = new SerializedCorpus("src/main/resources/corpus/mobydick/");
         
         System.out.println(corpus.getLanguage());
         System.out.println(corpus.getName());
+        System.out.println(corpus.getDescription());
 
         int nrOfTexts = 0;
         for (Text text : corpus.getTexts()) {

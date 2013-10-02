@@ -37,6 +37,7 @@ public class BrownTeiCorpus
 {
     static final String LANGUAGE = "en";
     static final String NAME = "Brown";
+    static final String DESCRIPTION = "The Brown corpus";
 
     CollectionReaderDescription reader;
 
@@ -78,5 +79,11 @@ public class BrownTeiCorpus
     public String getName()
     {
         return NAME;
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return DESCRIPTION;
     }
 }
