@@ -17,17 +17,10 @@
  ******************************************************************************/
 package dkpro.toolbox.corpus;
 
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
-import org.apache.uima.fit.pipeline.SimplePipeline;
 
-import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasReader;
-import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 
 /**
@@ -40,10 +33,7 @@ public class TextCorpus
     extends CorpusBase
 {
 
-    protected CollectionReaderDescription reader;
-    private String language;
-    private String name;
-    private String description;
+    private DkproCorpus corpus;
 
     public TextCorpus(
             String corpusPath,
@@ -53,59 +43,39 @@ public class TextCorpus
             String ... patterns
     )
             throws Exception
-    {
-        this.language = language;
-        this.name = name;
-        this.description = description;
-     
-        CollectionReaderDescription sourceReader = CollectionReaderFactory.createReaderDescription(
+    {   
+        CollectionReaderDescription reader = CollectionReaderFactory.createReaderDescription(
                 TextReader.class,
                 TextReader.PARAM_LANGUAGE, language,
                 TextReader.PARAM_SOURCE_LOCATION, corpusPath,
                 TextReader.PARAM_PATTERNS, patterns
         );
-          
-        // TODO should not serialize to target but into temp directory
         
-        // preprocess text file (tokenize, sentence split, POS tag) and serialize
-        AnalysisEngineDescription desc = AnalysisEngineFactory.createEngineDescription(
-                AnalysisEngineFactory.createEngineDescription(BreakIteratorSegmenter.class),
-                AnalysisEngineFactory.createEngineDescription(OpenNlpPosTagger.class),
-                AnalysisEngineFactory.createEngineDescription(
-                        BinaryCasWriter.class,
-                        BinaryCasWriter.PARAM_TARGET_LOCATION, "target/textcorpus/" + name
-                )
-        );
-        SimplePipeline.runPipeline(sourceReader, desc);
-                
-        // read serialized data
-        reader = CollectionReaderFactory.createReaderDescription(
-                BinaryCasReader.class,
-                BinaryCasReader.PARAM_SOURCE_LOCATION, "target/textcorpus/" + name,
-                BinaryCasReader.PARAM_PATTERNS, "*.bin"
-        );
+        corpus = new DkproCorpus(language, name, description, reader);
+         
     }
 
     @Override
     protected CollectionReaderDescription getReader()
     {
-        return reader;
+        return corpus.getReader();
     }
 
     @Override
     public String getLanguage()
     {
-        return language;
+        return corpus.getLanguage();
     }
 
     @Override
     public String getName()
     {
-        return name;
+        return corpus.getName();
     }
 
+    @Override
     public String getDescription()
     {
-        return description;
+        return corpus.getDescription();
     }
 }
