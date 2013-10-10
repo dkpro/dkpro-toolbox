@@ -33,7 +33,7 @@ public class TextCorpusTest
     @Test
     public void textCorpusTest() throws Exception {
         Corpus corpus = new TextCorpus(
-                "src/test/resources/text/",
+                "src/test/resources/test_corpora/text/",
                 "en",
                 "Moby Dick - Melville",
                 "Moby Dick by Herman Melville 1851",

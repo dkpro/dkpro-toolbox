@@ -29,6 +29,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasReader;
 import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 
@@ -42,7 +43,7 @@ public class DkproCorpus
     extends CorpusBase
 {
 
-    protected CollectionReaderDescription reader;
+    protected CollectionReaderDescription serializedReader;
     protected String language;
     protected String name;
     protected String description;
@@ -68,7 +69,7 @@ public class DkproCorpus
             try {
                 AnalysisEngineDescription desc = AnalysisEngineFactory.createEngineDescription(
                         AnalysisEngineFactory.createEngineDescription(BreakIteratorSegmenter.class),
-//                        AnalysisEngineFactory.createEngineDescription(OpenNlpPosTagger.class),
+                        AnalysisEngineFactory.createEngineDescription(OpenNlpPosTagger.class),
                         AnalysisEngineFactory.createEngineDescription(
                                 BinaryCasWriter.class,
                                 BinaryCasWriter.PARAM_TARGET_LOCATION, "target/textcorpus/" + name
@@ -78,7 +79,7 @@ public class DkproCorpus
                 SimplePipeline.runPipeline(sourceReader, desc);
                 
                 // read serialized data
-                reader = CollectionReaderFactory.createReaderDescription(
+                serializedReader = CollectionReaderFactory.createReaderDescription(
                         BinaryCasReader.class,
                         BinaryCasReader.PARAM_SOURCE_LOCATION, "target/textcorpus/" + name,
                         BinaryCasReader.PARAM_PATTERNS, "*.bin"
@@ -98,7 +99,7 @@ public class DkproCorpus
     @Override
     protected CollectionReaderDescription getReader()
     {
-        return reader;
+        return serializedReader;
     }
 
     @Override
