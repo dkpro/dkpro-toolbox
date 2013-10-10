@@ -46,12 +46,18 @@ public class SerializedCorpus
     public SerializedCorpus(String corpusPath)
             throws CorpusException
     {
+        this(corpusPath, "*.bin");
+    }
+    
+    public SerializedCorpus(String corpusPath, String ... patterns)
+            throws CorpusException
+    {
         // read serialized data
         try {
             reader = CollectionReaderFactory.createReaderDescription(
                     BinaryCasReader.class,
                     BinaryCasReader.PARAM_SOURCE_LOCATION, corpusPath,
-                    BinaryCasReader.PARAM_PATTERNS, "*.bin"
+                    BinaryCasReader.PARAM_PATTERNS, patterns
             );
         }
         catch (ResourceInitializationException e) {

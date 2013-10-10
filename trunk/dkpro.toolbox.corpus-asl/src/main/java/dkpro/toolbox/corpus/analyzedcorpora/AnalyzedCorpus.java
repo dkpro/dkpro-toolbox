@@ -28,11 +28,22 @@ public class AnalyzedCorpus
     }
     
     public List<String> getTokens()
+            throws CorpusException 
+    {
+        return getTokens(false);
+    }
+    
+    public List<String> getTokens(boolean toLowerCase)
             throws CorpusException
     {
         List<String> tokens = new ArrayList<String>();
         for (String token : underlyingCorpus.getTokens()) {
-            tokens.add(token);
+            if (toLowerCase) {
+                tokens.add(token.toLowerCase());
+            }
+            else {
+                tokens.add(token);
+            }
         }
         return tokens;
     }
