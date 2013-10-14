@@ -23,6 +23,11 @@
             </dependency>
             <dependency>
                 <groupId>dkpro.toolbox</groupId>
+                <artifactId>dkpro.toolbox.tagger-asl</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>dkpro.toolbox</groupId>
                 <artifactId>dkpro.toolbox.tools-asl</artifactId>
                 <version>0.1.0-SNAPSHOT</version>
             </dependency>
@@ -114,5 +119,6 @@
   <module>dkpro.toolbox.corpus-asl</module>
   <module>dkpro.toolbox.tools-asl</module>
   <module>dkpro.toolbox.tutorial-asl</module>
+  <module>dkpro.toolbox.tagger-asl</module>
   </modules>
 </project>
