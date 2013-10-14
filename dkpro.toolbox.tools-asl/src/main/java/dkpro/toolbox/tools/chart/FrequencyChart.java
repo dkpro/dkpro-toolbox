@@ -2,6 +2,9 @@ package dkpro.toolbox.tools.chart;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -40,7 +43,9 @@ public class FrequencyChart
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
             for (String condition : cfd.getConditions()) {
-                for (String key : cfd.getFrequencyDistribution(condition).getKeys()) {
+                List<String> keys = new ArrayList<String>(cfd.getFrequencyDistribution(condition).getKeys());
+                Collections.sort(keys);
+                for (String key : keys) {
                     dataset.addValue(cfd.getFrequencyDistribution(condition).getCount(key), condition, key);
                 }                
             }
