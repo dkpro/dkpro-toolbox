@@ -29,17 +29,24 @@ public class Tag
     private String simplifiedTag;
 
     public Tag(String tag, String language)
-            throws ResourceInitializationException
-    {
-        this(tag, language, TagUtil.getMappingProvider(language));
-    }
-
-    public Tag(String tag, String language, MappingProvider mappingProvider)
-            throws ResourceInitializationException
+            throws ToolboxException
     {
         super();
-        this.tag = mappingProvider.getTagType(tag).getName();
-        this.simplifiedTag = mappingProvider.getTagType(tag).getShortName();
+        initialize(language);
+    }
+    
+    private void initialize(String language)
+            throws ToolboxException
+    {
+        MappingProvider provider;
+        try {
+            provider = TagUtil.getMappingProvider(language);
+            this.tag = provider.getTagType(tag).getName();
+            this.simplifiedTag = provider.getTagType(tag).getShortName();
+        }
+        catch (ResourceInitializationException e) {
+            throw new ToolboxException();
+        }
     }
     
     public String getTag()

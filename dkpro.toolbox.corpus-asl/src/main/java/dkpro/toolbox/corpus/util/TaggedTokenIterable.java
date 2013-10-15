@@ -22,11 +22,11 @@ import java.util.Queue;
 import org.apache.uima.fit.pipeline.JCasIterator;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import dkpro.toolbox.core.TaggedToken;
+import dkpro.toolbox.core.ToolboxException;
 
 public class TaggedTokenIterable
     extends CorpusIterableBase<TaggedToken>
@@ -39,7 +39,7 @@ public class TaggedTokenIterable
 
     @Override
     protected void fillQueue(JCasIterator jcasIterator, Queue<TaggedToken> items)
-        throws ResourceInitializationException
+        throws ToolboxException
     {
         if (jcasIterator.hasNext()) {
             JCas jcas = jcasIterator.next();

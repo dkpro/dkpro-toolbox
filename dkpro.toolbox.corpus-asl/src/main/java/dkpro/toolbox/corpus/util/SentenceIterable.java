@@ -22,9 +22,9 @@ import java.util.Queue;
 import org.apache.uima.fit.pipeline.JCasIterator;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
 
 import dkpro.toolbox.core.Sentence;
+import dkpro.toolbox.core.ToolboxException;
 
 public class SentenceIterable
     extends CorpusIterableBase<Sentence>
@@ -37,7 +37,7 @@ public class SentenceIterable
 
     @Override
     protected void fillQueue(JCasIterator jcasIterator, Queue<Sentence> items)
-        throws ResourceInitializationException
+        throws ToolboxException
     {
         if (jcasIterator.hasNext()) {
             JCas jcas = jcasIterator.next();
