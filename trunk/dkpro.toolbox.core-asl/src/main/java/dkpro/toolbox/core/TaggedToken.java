@@ -50,6 +50,6 @@ public class TaggedToken
     @Override
     public String toString()
     {
-    	return token + " (" + pos.toString() + ")";
+    	return token + " (" + pos.getSimplifiedTag() + ")";
     }
 }

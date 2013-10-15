@@ -22,10 +22,10 @@ import java.util.Queue;
 import org.apache.uima.fit.pipeline.JCasIterator;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.ToolboxException;
 
 public class TagIterable
     extends CorpusIterableBase<Tag>
@@ -38,7 +38,7 @@ public class TagIterable
 
     @Override
     protected void fillQueue(JCasIterator jcasIterator, Queue<Tag> items)
-        throws ResourceInitializationException
+        throws ToolboxException
     {
         if (jcasIterator.hasNext()) {
             JCas jcas = jcasIterator.next();

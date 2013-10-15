@@ -22,13 +22,13 @@ import java.util.List;
 
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.ToolboxException;
 
 public class ToolboxUtils
 {
@@ -38,7 +38,7 @@ public class ToolboxUtils
             String languageCode,
             de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence uimaSentence
     )
-        throws ResourceInitializationException
+        throws ToolboxException
     {
         List<String> tokens = JCasUtil.toText(JCasUtil.selectCovered(jcas, Token.class, uimaSentence));
 
@@ -59,7 +59,7 @@ public class ToolboxUtils
             String languageCode,
             POS pos
     )
-        throws ResourceInitializationException
+        throws ToolboxException
     {
         return new Tag(pos.getPosValue(), languageCode);
     }

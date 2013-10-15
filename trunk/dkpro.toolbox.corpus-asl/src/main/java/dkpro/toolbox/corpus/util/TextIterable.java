@@ -25,10 +25,10 @@ import java.util.List;
 import org.apache.uima.fit.pipeline.JCasIterator;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import dkpro.toolbox.core.Text;
+import dkpro.toolbox.core.ToolboxException;
 
 public class TextIterable
     implements Iterable<Text>
@@ -69,7 +69,7 @@ public class TextIterable
                 try {
                     toolboxSentences.add(ToolboxUtils.UimaSentence2ToolboxSentence(jcas, language , sentence));
                 }
-                catch (ResourceInitializationException e) {
+                catch (ToolboxException e) {
                     throw new RuntimeException(e);
                 }
             }

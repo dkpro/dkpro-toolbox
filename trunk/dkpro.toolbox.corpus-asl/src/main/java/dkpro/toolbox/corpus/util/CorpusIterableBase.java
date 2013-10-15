@@ -22,7 +22,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import org.apache.uima.fit.pipeline.JCasIterator;
-import org.apache.uima.resource.ResourceInitializationException;
+
+import dkpro.toolbox.core.ToolboxException;
 
 public abstract class CorpusIterableBase
     <T> implements Iterable<T>
@@ -42,7 +43,7 @@ public abstract class CorpusIterableBase
     }
 
     protected abstract void fillQueue(JCasIterator jcasIterator, Queue<T> items)
-            throws ResourceInitializationException;
+            throws ToolboxException;
 
     private class CorpusItemIterator
         <A> implements Iterator<T>
@@ -64,7 +65,7 @@ public abstract class CorpusIterableBase
                 try {
                     fillQueue(jcasIterator, items);
                 }
-                catch (ResourceInitializationException e) {
+                catch (ToolboxException e) {
                     e.printStackTrace();
                 }
             }
