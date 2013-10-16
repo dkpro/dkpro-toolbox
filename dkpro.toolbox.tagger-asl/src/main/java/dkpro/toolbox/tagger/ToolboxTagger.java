@@ -9,8 +9,11 @@ import dkpro.toolbox.core.ToolboxException;
 public interface ToolboxTagger
 {
 
-    public List<TaggedToken> assignTags(Sentence s) throws ToolboxException;
-    
+    public List<Sentence> assignTags(Sentence ... sentences) throws ToolboxException;
+    public List<TaggedToken> assignTags(String ... tokens) throws ToolboxException;
     public List<TaggedToken> assignTags(List<String> tokens) throws ToolboxException;
-
+    
+    public double getAccuracy(Sentence ... taggedSentences) throws ToolboxException;
+    public double getAccuracy(TaggedToken ... taggedTokens) throws ToolboxException;
+    public double getAccuracy(List<TaggedToken> taggedTokens) throws ToolboxException;
 }

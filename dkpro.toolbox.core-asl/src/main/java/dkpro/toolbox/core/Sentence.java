@@ -106,4 +106,18 @@ public class Sentence {
     {
         return tags;
     }
+    
+    public List<TaggedToken> getTaggedTokens() {
+        List<TaggedToken> taggedToken = new ArrayList<TaggedToken>();
+        for (int i=0; i<tokens.size(); i++) {
+            if (tags.size() > i) {
+                taggedToken.add(new TaggedToken(tokens.get(i), tags.get(i)));
+            }
+            else {
+                taggedToken.add(new TaggedToken(tokens.get(i)));
+            }
+        }
+        
+        return taggedToken;
+    }
 }

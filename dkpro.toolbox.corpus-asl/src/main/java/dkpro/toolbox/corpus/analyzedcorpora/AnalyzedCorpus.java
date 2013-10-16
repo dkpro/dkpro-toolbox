@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dkpro.toolbox.core.Sentence;
+import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.corpus.Corpus;
 import dkpro.toolbox.corpus.CorpusException;
 
@@ -45,6 +46,16 @@ public class AnalyzedCorpus
             else {
                 tokens.add(token);
             }
+        }
+        return tokens;
+    }
+    
+    public List<TaggedToken> getTaggedTokens()
+            throws CorpusException
+    {
+        List<TaggedToken> tokens = new ArrayList<TaggedToken>();
+        for (TaggedToken taggedToken : underlyingCorpus.getTaggedTokens()) {
+            tokens.add(taggedToken);
         }
         return tokens;
     }

@@ -21,13 +21,19 @@ public class TaggedToken
 {
 
     private String token;
-    private Tag pos;
+    private Tag tag;
     
-    public TaggedToken(String token, Tag pos)
+    public TaggedToken(String token) {
+        super();
+        this.token = token;
+        this.tag = null;
+    }
+    
+    public TaggedToken(String token, Tag tag)
     {
         super();
         this.token = token;
-        this.pos = pos;
+        this.tag = tag;
     }
 
     public String getToken()
@@ -38,18 +44,18 @@ public class TaggedToken
     {
         this.token = token;
     }
-    public Tag getPos()
+    public Tag getTag()
     {
-        return pos;
+        return tag;
     }
-    public void setPos(Tag pos)
+    public void setTag(Tag tag)
     {
-        this.pos = pos;
+        this.tag = tag;
     }
     
     @Override
     public String toString()
     {
-    	return token + " (" + pos.getSimplifiedTag() + ")";
+    	return token + " (" + tag.getFullTag() + "/" + tag.getSimplifiedTag() + ")"; 
     }
 }
