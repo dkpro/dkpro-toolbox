@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import dkpro.toolbox.core.Tag;
 import dkpro.toolbox.core.TaggedToken;
 
 public class RegularExpressionTaggerTest
@@ -18,7 +19,7 @@ public class RegularExpressionTaggerTest
         
         Map<String, String> patternMap = new HashMap<String, String>();
         patternMap.put("^-?[0-9]+(.[0-9]+)?$", "CD");   // cardinal numbers
-        patternMap.put("(The|the|A|a|An|an)$", "AT");   // articles
+        patternMap.put("(The|the|A|a|An|an)$", "DT");   // articles
         patternMap.put(".*able$", "JJ");                // adjectives
         patternMap.put(".*ness$", "NN");                // nouns formed from adjectives
         patternMap.put(".*ly$", "RB");                  // adverbs
@@ -38,5 +39,16 @@ public class RegularExpressionTaggerTest
         for (TaggedToken taggedToken : taggedTokens) {
             System.out.println(taggedToken);
         }
+        
+        // TODO add full test sentence
+        List<TaggedToken> goldTokens = new ArrayList<TaggedToken>();
+        goldTokens.add(new TaggedToken("The", new Tag("DT", "en")));
+        goldTokens.add(new TaggedToken("Fulton", new Tag("NNP", "en")));
+        goldTokens.add(new TaggedToken("County", new Tag("NNP", "en")));
+        goldTokens.add(new TaggedToken("Grand", new Tag("NN", "en")));
+        goldTokens.add(new TaggedToken("Jury", new Tag("NN", "en")));
+
+        double accuracy = tagger.getAccuracy(goldTokens);
+        System.out.println("Accuracy: " + accuracy);
     }
 }

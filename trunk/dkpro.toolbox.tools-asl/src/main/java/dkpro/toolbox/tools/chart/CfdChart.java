@@ -24,7 +24,7 @@ import org.jfree.ui.RectangleInsets;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 
-public class FrequencyChart
+public class CfdChart
     extends ApplicationFrame
 {
 
@@ -84,7 +84,7 @@ public class FrequencyChart
         }
     }
 
-    public FrequencyChart(String title, ConditionalFrequencyDistribution<String, String> cfd)
+    public CfdChart(String title, ConditionalFrequencyDistribution<String, String> cfd)
     {
         super(title);
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

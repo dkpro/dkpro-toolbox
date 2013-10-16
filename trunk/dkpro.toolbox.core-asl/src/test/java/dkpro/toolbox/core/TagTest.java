@@ -20,8 +20,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import dkpro.toolbox.core.Tag;
-
 public class TagTest
 {
 
@@ -29,6 +27,13 @@ public class TagTest
     public void test() throws Exception {
         
         Tag tag = new Tag("NNS", "en");
+        assertEquals("NN", tag.getSimplifiedTag());
+    }
+    
+    @Test
+    public void test2() throws Exception {
+        
+        Tag tag = new Tag("NN", "en");
         assertEquals("NN", tag.getSimplifiedTag());
     }
 }
