@@ -27,13 +27,15 @@ public class TagTest
     public void test() throws Exception {
         
         Tag tag = new Tag("NNS", "en");
-        assertEquals("NN", tag.getSimplifiedTag());
+        assertEquals("NN", tag.getFullTag());
+        assertEquals("N", tag.getSimplifiedTag());
     }
     
     @Test
     public void test2() throws Exception {
         
         Tag tag = new Tag("NN", "en");
-        assertEquals("NN", tag.getSimplifiedTag());
+        assertEquals("NN", tag.getFullTag());
+        assertEquals("N", tag.getSimplifiedTag());
     }
 }
