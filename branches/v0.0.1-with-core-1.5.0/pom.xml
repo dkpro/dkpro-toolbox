@@ -7,34 +7,34 @@
   </parent>
   <groupId>dkpro.toolbox</groupId>
   <artifactId>dkpro.toolbox</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>0.0.1</version>
   <packaging>pom</packaging>
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>dkpro.toolbox</groupId>
                 <artifactId>dkpro.toolbox.core-asl</artifactId>
-                <version>0.1.0-SNAPSHOT</version>
+                <version>0.0.1</version>
             </dependency>
             <dependency>
                 <groupId>dkpro.toolbox</groupId>
                 <artifactId>dkpro.toolbox.corpus-asl</artifactId>
-                <version>0.1.0-SNAPSHOT</version>
+                <version>0.0.1</version>
             </dependency>
             <dependency>
                 <groupId>dkpro.toolbox</groupId>
                 <artifactId>dkpro.toolbox.tagger-asl</artifactId>
-                <version>0.1.0-SNAPSHOT</version>
+                <version>0.0.1</version>
             </dependency>
             <dependency>
                 <groupId>dkpro.toolbox</groupId>
                 <artifactId>dkpro.toolbox.tools-asl</artifactId>
-                <version>0.1.0-SNAPSHOT</version>
+                <version>0.0.1</version>
             </dependency>
             <dependency>
                 <groupId>dkpro.toolbox</groupId>
                 <artifactId>dkpro.toolbox.tutorial-asl</artifactId>
-                <version>0.1.0-SNAPSHOT</version>
+                <version>0.0.1</version>
             </dependency>
 	        <dependency>
 	            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -122,9 +122,9 @@
   <module>dkpro.toolbox.tagger-asl</module>
   </modules>
   <scm>
-  	<url>http://code.google.com/p/dkpro-toolbox/source/browse/#svn/branches</url>
-  	<connection>http://dkpro-toolbox.googlecode.com/svn/branches/</connection>
-  	<developerConnection>scm:svn:https://dkpro-toolbox.googlecode.com/svn/branches/</developerConnection>
+  	<url>http://code.google.com/p/dkpro-toolbox/source/browse/#svn/tags/dkpro.toolbox-0.0.1</url>
+  	<connection>http://dkpro-toolbox.googlecode.com/svn/tags/dkpro.toolbox-0.0.1</connection>
+  	<developerConnection>scm:svn:https://dkpro-toolbox.googlecode.com/svn/tags/dkpro.toolbox-0.0.1</developerConnection>
   </scm>
   <dependencies>
   	<dependency>
