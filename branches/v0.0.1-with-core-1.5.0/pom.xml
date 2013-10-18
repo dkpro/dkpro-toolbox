@@ -9,6 +9,16 @@
   <artifactId>dkpro.toolbox</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
+      <distributionManagement>
+          <repository>
+                  <id>ukp-oss</id>
+                  <url>dav:https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ukp-releases-local</url>
+          </repository>
+          <snapshotRepository>
+                  <id>ukp-oss</id>
+                  <url>dav:https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ukp-snapshots-local</url>
+          </snapshotRepository>
+  </distributionManagement>
     <dependencyManagement>
         <dependencies>
             <dependency>
