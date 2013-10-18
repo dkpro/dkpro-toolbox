@@ -140,6 +140,11 @@
   <module>dkpro.toolbox.tutorial-asl</module>
   <module>dkpro.toolbox.tagger-asl</module>
   </modules>
+    <scm>
+    <url>http://code.google.com/p/dkpro-toolbox/source/browse/#svn/trunk</url>
+    <connection>http://dkpro-toolbox.googlecode.com/svn/trunk</connection>
+    <developerConnection>scm:svn:https://dkpro-toolbox.googlecode.com/svn/trunk</developerConnection>
+  </scm>
   <dependencies>
   	<dependency>
   		<groupId>junit</groupId>
