@@ -7,34 +7,34 @@
   </parent>
   <groupId>dkpro.toolbox</groupId>
   <artifactId>dkpro.toolbox</artifactId>
-  <version>0.0.1</version>
+  <version>0.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>dkpro.toolbox</groupId>
                 <artifactId>dkpro.toolbox.core-asl</artifactId>
-                <version>0.0.1</version>
+                <version>0.1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>dkpro.toolbox</groupId>
                 <artifactId>dkpro.toolbox.corpus-asl</artifactId>
-                <version>0.0.1</version>
+                <version>0.1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>dkpro.toolbox</groupId>
                 <artifactId>dkpro.toolbox.tagger-asl</artifactId>
-                <version>0.0.1</version>
+                <version>0.1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>dkpro.toolbox</groupId>
                 <artifactId>dkpro.toolbox.tools-asl</artifactId>
-                <version>0.0.1</version>
+                <version>0.1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>dkpro.toolbox</groupId>
                 <artifactId>dkpro.toolbox.tutorial-asl</artifactId>
-                <version>0.0.1</version>
+                <version>0.1.0-SNAPSHOT</version>
             </dependency>
 	        <dependency>
 	            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -127,10 +127,4 @@
   		<artifactId>junit</artifactId>
   	</dependency>
   </dependencies>
-
-  <scm>
-    <connection>scm:svn:http://dkpro-core-asl.googlecode.com/svn/dkpro-parent-pom/tags/0.0.1</connection>
-    <developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/dkpro-parent-pom/tags/0.0.1</developerConnection>
-    <url>http://code.google.com/p/dkpro-core-asl/source/browse/dkpro-parent-pom/tags/0.0.1</url>
-  </scm>
 </project>
