@@ -114,6 +114,15 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+       <build>
+          <extensions>
+                  <extension>
+                          <groupId>org.apache.maven.wagon</groupId>
+                          <artifactId>wagon-webdav</artifactId>
+                          <version>1.0-beta-2</version>
+                  </extension>
+          </extensions>
+  </build>
   <modules>
   <module>dkpro.toolbox.core-asl</module>
   <module>dkpro.toolbox.corpus-asl</module>
