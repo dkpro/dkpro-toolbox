@@ -20,7 +20,7 @@ public class ChartUtil
         ConditionalFrequencyDistribution<String, String> cfd = new ConditionalFrequencyDistribution<String, String>();
         for (String category : corpus.getCategories()) {
             for (String token : corpus.getTokens(category)) {
-                cfd.inc(category, token.substring(token.length()-1, token.length()));
+                cfd.addSample(category, token.substring(token.length()-1, token.length()));
             }
         }
         

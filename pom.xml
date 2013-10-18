@@ -9,6 +9,16 @@
   <artifactId>dkpro.toolbox</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <distributionManagement>
+    <repository>
+            <id>ukp-oss</id>
+            <url>dav:https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ukp-releases-local</url>
+    </repository>
+    <snapshotRepository>
+            <id>ukp-oss</id>
+            <url>dav:https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ukp-snapshots-local</url>
+    </snapshotRepository>
+  </distributionManagement>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -39,7 +49,7 @@
 	        <dependency>
 	            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 	            <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-	            <version>1.6.0-SNAPSHOT</version>
+	            <version>1.5.0</version>
 	            <type>pom</type>
 	            <scope>import</scope>
 	        </dependency>
@@ -114,6 +124,15 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+      <extensions>
+              <extension>
+                      <groupId>org.apache.maven.wagon</groupId>
+                      <artifactId>wagon-webdav</artifactId>
+                      <version>1.0-beta-2</version>
+              </extension>
+      </extensions>
+    </build>
   <modules>
   <module>dkpro.toolbox.core-asl</module>
   <module>dkpro.toolbox.corpus-asl</module>
