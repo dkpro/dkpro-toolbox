@@ -75,7 +75,7 @@ public class OpenNlpTaggerTest
         int i = 0;
         for (TaggedToken taggedToken : actual) {
             assertEquals("In position "+i, expected[i].getToken(), taggedToken.getToken());
-            assertEquals("In position "+i, expected[i].getTag().getFullTag(), taggedToken.getTag().getFullTag());
+            assertEquals("In position "+i, expected[i].getTag().getCanonicalTag(), taggedToken.getTag().getCanonicalTag());
             i++;
         }
     }
