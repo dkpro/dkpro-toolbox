@@ -5,24 +5,24 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
-public class NGram
+public class NGram<T>
 {
 
-    private List<String> parts;
+    private List<T> parts;
 
-    public NGram(List<String> parts)
+    public NGram(List<T> parts)
     {
         super();
         this.parts = parts;
     }
     
-    public NGram(String ... parts)
+    public NGram(T ... parts)
     {
         super();
         this.parts = Arrays.asList(parts);
     }
     
-    public String getPart(int position) {
+    public T getPart(int position) {
         if (position < 0 || position > parts.size()) {
             return null;
         }
