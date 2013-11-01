@@ -25,7 +25,8 @@ import dkpro.toolbox.core.util.TagUtil;
 public class Tag
 {
 
-    private String fullTag;
+    private String originalTag;
+    private String canonicalTag;
     private String simplifiedTag;
 
     public Tag(String aTag, String language)
@@ -41,26 +42,40 @@ public class Tag
         MappingProvider provider;
         try {
             provider = TagUtil.getMappingProvider(language);
-            this.fullTag = provider.getTagType(aTag).getShortName();
-            this.simplifiedTag = this.fullTag.substring(0, 1);
+            this.originalTag = aTag;
+            this.canonicalTag = provider.getTagType(aTag).getShortName();
+            this.simplifiedTag = this.canonicalTag.substring(0, 1);
         }
         catch (ResourceInitializationException e) {
             throw new ToolboxException();
         }
     }
     
-    public String getFullTag()
+    public String getOriginalTag()
     {
-        return fullTag;
+        return originalTag;
     }
-    public void setFullTag(String fullTag)
+
+    public void setOriginalTag(String originalTag)
     {
-        this.fullTag = fullTag;
+        this.originalTag = originalTag;
     }
+
+    public String getCanonicalTag()
+    {
+        return canonicalTag;
+    }
+
+    public void setCanonicalTag(String canonicalTag)
+    {
+        this.canonicalTag = canonicalTag;
+    }
+
     public String getSimplifiedTag()
     {
         return simplifiedTag;
     }
+
     public void setSimplifiedTag(String simplifiedTag)
     {
         this.simplifiedTag = simplifiedTag;
@@ -69,6 +84,6 @@ public class Tag
     @Override
     public String toString()
     {
-        return this.fullTag + "/" + this.simplifiedTag; 
+        return this.originalTag + "/" + this.canonicalTag + "/" + this.simplifiedTag; 
     }
 }

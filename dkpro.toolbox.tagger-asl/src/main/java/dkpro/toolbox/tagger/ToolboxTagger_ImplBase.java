@@ -88,7 +88,7 @@ public abstract class ToolboxTagger_ImplBase
         for (int i=0; i<goldTokens.length; i++) {
             Tag gold = goldTokens[i].getTag();
             Tag assigned = assignedTags.get(i).getTag();
-            if (gold.getFullTag().equals(assigned.getFullTag())) {
+            if (gold.getCanonicalTag().equals(assigned.getCanonicalTag())) {
                 correct++;
             }
         }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2011
+ * Copyright 2013
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -15,47 +15,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package dkpro.toolbox.core;
+package dkpro.toolbox.corpus.specialcorpora;
 
-public class TaggedToken
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
+public class CmuCorpusTest
 {
 
-    private String token;
-    private Tag tag;
-    
-    public TaggedToken(String token) {
-        super();
-        this.token = token;
-        this.tag = null;
-    }
-    
-    public TaggedToken(String token, Tag tag)
-    {
-        super();
-        this.token = token;
-        this.tag = tag;
-    }
-
-    public String getToken()
-    {
-        return token;
-    }
-    public void setToken(String token)
-    {
-        this.token = token;
-    }
-    public Tag getTag()
-    {
-        return tag;
-    }
-    public void setTag(Tag tag)
-    {
-        this.tag = tag;
-    }
-    
-    @Override
-    public String toString()
-    {
-    	return token + " (" + tag + ")"; 
+    @Test
+    public void textCorpusTest() throws Exception {
+        CmuDict dict = new CmuDict();
+        
+        assertTrue(dict.containsPronunciation("fire")); 
+        assertEquals("F AY1 ER0", dict.getMostProbablyPronunciation("fire").toString()); 
     }
 }

@@ -107,6 +107,33 @@ public class Sentence {
         return tags;
     }
     
+    public List<String> getSimplifiedTags()
+    {
+        List<String> tagStrings = new ArrayList<String>();
+        for (Tag tag : tags) {
+            tagStrings.add(tag.getSimplifiedTag());
+        }
+        return tagStrings;
+    }
+    
+    public List<String> getCanoncialTags()
+    {
+        List<String> tagStrings = new ArrayList<String>();
+        for (Tag tag : tags) {
+            tagStrings.add(tag.getCanonicalTag());
+        }
+        return tagStrings;
+    }
+    
+    public List<String> getOriginalTags()
+    {
+        List<String> tagStrings = new ArrayList<String>();
+        for (Tag tag : tags) {
+            tagStrings.add(tag.getOriginalTag());
+        }
+        return tagStrings;
+    }
+    
     public List<TaggedToken> getTaggedTokens() {
         List<TaggedToken> taggedToken = new ArrayList<TaggedToken>();
         for (int i=0; i<tokens.size(); i++) {

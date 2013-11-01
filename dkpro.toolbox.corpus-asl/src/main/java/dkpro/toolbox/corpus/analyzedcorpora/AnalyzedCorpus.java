@@ -3,6 +3,8 @@ package dkpro.toolbox.corpus.analyzedcorpora;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.corpus.Corpus;
@@ -66,38 +68,77 @@ public class AnalyzedCorpus
         return underlyingCorpus.getName();
     }
     
-    // TODO implement as real concordancer (with alignment on the target word and fixed left and right context)
+    // Contributed by Marian Waltereit
     public void getConcordance(String token)
             throws CorpusException
     {
         int counter = 0;
-        
+        int maxLengthBefore = 0;
+        int maxLengthAfter = 0;
+        int maxLength = 0;
+
+        // collects max. 10 sentences containing the target token
+        // also computes max sentence length, max length left and right of the target 
+        List<Sentence> sentencesWithTarget = new ArrayList<Sentence>();
         for (Sentence s : this.getUnderlyingCorpus().getSentences()) {
+            if (counter == 10) {
+                break;
+            }
             List<String> tokens = s.getTokens();
-            for (int i=0; i<tokens.size(); i++) {
+            for (int i = 0; counter != 10 && i < tokens.size(); i++) {
                 if (token.equals(tokens.get(i))) {
                     counter++;
-                    System.out.println(getHighlightedSentence(tokens, i));
-                    
-                    if (counter == 10) {
-                        return;
+                    sentencesWithTarget.add(s);
+                    if (maxLength < s.toString().length()) {
+                        maxLength = s.toString().length();
+                        maxLengthBefore = StringUtils.join(tokens.subList(0, i), ' ').length();
+                        maxLengthAfter = StringUtils.join(tokens.subList(i + 1, tokens.size()), ' ').length();
                     }
+                }
+            }
+        }
+        
+        // output sentences with padding
+        for (Sentence s : sentencesWithTarget) {
+            List<String> tokens = s.getTokens();
+            for (int i = 0; i < tokens.size(); i++) {
+                if (token.equals(tokens.get(i))) {
+                    String beforeToken = StringUtils.join(tokens.subList(0, i), ' ');
+                    String afterToken = StringUtils.join(tokens.subList(i + 1, tokens.size()), ' ');
+
+                    int leftDiff = maxLengthBefore - beforeToken.length();
+                    int rightDiff = maxLengthAfter - afterToken.length();
+                    
+                    String highLightedSentence = getHighlightedSentence(leftDiff, rightDiff, tokens, i);
+                    
+                    // trim sentence so that if fits in the console
+                    int trimLeftSize = Math.min(50, leftDiff + beforeToken.length());
+                    int trimRightSize = Math.min(50, rightDiff + afterToken.length());
+                    String trimmedSentence = highLightedSentence.substring(
+                            leftDiff + beforeToken.length() - trimLeftSize,
+                            leftDiff + beforeToken.length() + token.length() + 2 + trimRightSize
+                    );
+                    System.out.println(trimmedSentence);
                 }
             }
         }
     }
     
-    private String getHighlightedSentence(List<String> tokens, int offset) {
+    private String getHighlightedSentence(int leftDiff, int rightDiff, List<String> tokens, int offset)
+    {
         StringBuilder sb = new StringBuilder();
-        for (int i=0; i<tokens.size(); i++) {
+        sb.append(StringUtils.leftPad("", leftDiff));
+        for (int i = 0; i < tokens.size(); i++) {
             if (i == offset) {
-                sb.append(tokens.get(i).toUpperCase());
-            }
-            else {
+                sb.append(" ");
+                sb.append(tokens.get(i));
+                sb.append(" ");
+            } else {
                 sb.append(tokens.get(i));
             }
             sb.append(" ");
         }
+        sb.append(StringUtils.leftPad("", rightDiff));
         return sb.toString();
     }
 }

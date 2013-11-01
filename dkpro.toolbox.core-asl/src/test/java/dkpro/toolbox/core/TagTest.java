@@ -27,7 +27,8 @@ public class TagTest
     public void test() throws Exception {
         
         Tag tag = new Tag("NNS", "en");
-        assertEquals("NN", tag.getFullTag());
+        assertEquals("NNS", tag.getOriginalTag());
+        assertEquals("NN", tag.getCanonicalTag());
         assertEquals("N", tag.getSimplifiedTag());
     }
     
@@ -35,7 +36,8 @@ public class TagTest
     public void test2() throws Exception {
         
         Tag tag = new Tag("NN", "en");
-        assertEquals("NN", tag.getFullTag());
+        assertEquals("NN", tag.getOriginalTag());
+        assertEquals("NN", tag.getCanonicalTag());
         assertEquals("N", tag.getSimplifiedTag());
     }
 }
