@@ -17,6 +17,12 @@
  ******************************************************************************/
 package dkpro.toolbox.core;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+
+import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.Type;
+import org.apache.uima.fit.component.NoOpAnnotator;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -28,6 +34,8 @@ public class Tag
     private String originalTag;
     private String canonicalTag;
     private String simplifiedTag;
+    
+    private CAS cas;
 
     public Tag(String aTag, String language)
             throws ToolboxException
@@ -39,15 +47,64 @@ public class Tag
     private void initialize(String aTag, String language)
             throws ToolboxException
     {
+        try {
+            AnalysisEngine engine = createEngine(NoOpAnnotator.class);
+            cas = engine.newCAS();
+
+        }
+        catch (ResourceInitializationException e) {
+            throw new ToolboxException(e);
+        }
+        
         MappingProvider provider;
         try {
             provider = TagUtil.getMappingProvider(language);
+            Type posType = provider.getTagType(aTag);
+            String simpleTag = getSimpleTag(posType.getShortName());
+
             this.originalTag = aTag;
-            this.canonicalTag = provider.getTagType(aTag).getShortName();
-            this.simplifiedTag = this.canonicalTag.substring(0, 1);
+            this.canonicalTag = posType.getShortName();
+            this.simplifiedTag = simpleTag;
         }
         catch (ResourceInitializationException e) {
             throw new ToolboxException();
+        }
+    }
+    
+    private String getSimpleTag(String shortName) {
+        
+        if (shortName.equals("ADJ")) {
+            return "J";
+        }
+        else if (shortName.equals("ADV")) {
+            return "A";
+        }
+        else if (shortName.equals("ARt")) {
+            return "D";
+        }
+        else if (shortName.equals("CARD")) {
+            return "1";
+        }
+        else if (shortName.equals("CONJ")) {
+            return "&";
+        }
+        else if (shortName.startsWith("N")) {
+            return "N";
+        }
+        else if (shortName.equals("PP")) {
+            return "P";
+        }
+        else if (shortName.equals("PR")) {
+            return "$";
+        }
+        else if (shortName.equals("PUNC")) {
+            return ".";
+        }
+        else if (shortName.equals("V")) {
+            return "V";
+        }
+        else {
+            return "O";
         }
     }
     
