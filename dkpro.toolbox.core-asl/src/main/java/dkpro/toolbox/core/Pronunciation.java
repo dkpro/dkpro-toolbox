@@ -29,4 +29,37 @@ public class Pronunciation
     {
         return StringUtils.join(phonemes, " ");
     }
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((phonemes == null) ? 0 : phonemes.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Pronunciation other = (Pronunciation) obj;
+        if (phonemes == null) {
+            if (other.phonemes != null) {
+                return false;
+            }
+        }
+        else if (!phonemes.equals(other.phonemes)) {
+            return false;
+        }
+        return true;
+    }
 }

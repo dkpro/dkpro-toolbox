@@ -147,4 +147,55 @@ public class Sentence {
         
         return taggedToken;
     }
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((lemmas == null) ? 0 : lemmas.hashCode());
+        result = prime * result + ((tags == null) ? 0 : tags.hashCode());
+        result = prime * result + ((tokens == null) ? 0 : tokens.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Sentence other = (Sentence) obj;
+        if (lemmas == null) {
+            if (other.lemmas != null) {
+                return false;
+            }
+        }
+        else if (!lemmas.equals(other.lemmas)) {
+            return false;
+        }
+        if (tags == null) {
+            if (other.tags != null) {
+                return false;
+            }
+        }
+        else if (!tags.equals(other.tags)) {
+            return false;
+        }
+        if (tokens == null) {
+            if (other.tokens != null) {
+                return false;
+            }
+        }
+        else if (!tokens.equals(other.tokens)) {
+            return false;
+        }
+        return true;
+    }
 }

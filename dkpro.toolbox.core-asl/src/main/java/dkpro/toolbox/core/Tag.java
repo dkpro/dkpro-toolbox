@@ -86,4 +86,55 @@ public class Tag
     {
         return this.originalTag + "/" + this.canonicalTag + "/" + this.simplifiedTag; 
     }
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((canonicalTag == null) ? 0 : canonicalTag.hashCode());
+        result = prime * result + ((originalTag == null) ? 0 : originalTag.hashCode());
+        result = prime * result + ((simplifiedTag == null) ? 0 : simplifiedTag.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Tag other = (Tag) obj;
+        if (canonicalTag == null) {
+            if (other.canonicalTag != null) {
+                return false;
+            }
+        }
+        else if (!canonicalTag.equals(other.canonicalTag)) {
+            return false;
+        }
+        if (originalTag == null) {
+            if (other.originalTag != null) {
+                return false;
+            }
+        }
+        else if (!originalTag.equals(other.originalTag)) {
+            return false;
+        }
+        if (simplifiedTag == null) {
+            if (other.simplifiedTag != null) {
+                return false;
+            }
+        }
+        else if (!simplifiedTag.equals(other.simplifiedTag)) {
+            return false;
+        }
+        return true;
+    }
 }
