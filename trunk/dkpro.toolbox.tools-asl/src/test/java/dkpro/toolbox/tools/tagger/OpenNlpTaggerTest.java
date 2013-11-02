@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package dkpro.toolbox.tools;
+package dkpro.toolbox.tools.tagger;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,6 +25,7 @@ import org.junit.Test;
 
 import dkpro.toolbox.core.Tag;
 import dkpro.toolbox.core.TaggedToken;
+import dkpro.toolbox.tools.tagger.OpenNlpPosTagger;
 
 public class OpenNlpTaggerTest
 {
