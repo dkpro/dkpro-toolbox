@@ -17,12 +17,7 @@
  ******************************************************************************/
 package dkpro.toolbox.core;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
-import org.apache.uima.fit.component.NoOpAnnotator;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -35,8 +30,6 @@ public class Tag
     private String canonicalTag;
     private String simplifiedTag;
     
-    private CAS cas;
-
     public Tag(String aTag, String language)
             throws ToolboxException
     {
@@ -47,15 +40,6 @@ public class Tag
     private void initialize(String aTag, String language)
             throws ToolboxException
     {
-        try {
-            AnalysisEngine engine = createEngine(NoOpAnnotator.class);
-            cas = engine.newCAS();
-
-        }
-        catch (ResourceInitializationException e) {
-            throw new ToolboxException(e);
-        }
-        
         MappingProvider provider;
         try {
             provider = TagUtil.getMappingProvider(language);
@@ -149,9 +133,7 @@ public class Tag
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((canonicalTag == null) ? 0 : canonicalTag.hashCode());
         result = prime * result + ((originalTag == null) ? 0 : originalTag.hashCode());
-        result = prime * result + ((simplifiedTag == null) ? 0 : simplifiedTag.hashCode());
         return result;
     }
 
@@ -168,28 +150,12 @@ public class Tag
             return false;
         }
         Tag other = (Tag) obj;
-        if (canonicalTag == null) {
-            if (other.canonicalTag != null) {
-                return false;
-            }
-        }
-        else if (!canonicalTag.equals(other.canonicalTag)) {
-            return false;
-        }
         if (originalTag == null) {
             if (other.originalTag != null) {
                 return false;
             }
         }
         else if (!originalTag.equals(other.originalTag)) {
-            return false;
-        }
-        if (simplifiedTag == null) {
-            if (other.simplifiedTag != null) {
-                return false;
-            }
-        }
-        else if (!simplifiedTag.equals(other.simplifiedTag)) {
             return false;
         }
         return true;
