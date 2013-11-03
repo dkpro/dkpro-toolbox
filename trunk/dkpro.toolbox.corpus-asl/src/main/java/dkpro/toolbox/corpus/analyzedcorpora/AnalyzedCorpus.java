@@ -31,6 +31,16 @@ public class AnalyzedCorpus
         return underlyingCorpus;
     }
     
+    public List<Sentence> getSentences()
+            throws CorpusException
+    {
+        List<Sentence> sentences = new ArrayList<Sentence>();
+        for (Sentence sentence : underlyingCorpus.getSentences()) {
+            sentences.add(sentence);
+        }
+        return sentences;
+    }
+    
     public List<String> getTokens()
             throws CorpusException 
     {

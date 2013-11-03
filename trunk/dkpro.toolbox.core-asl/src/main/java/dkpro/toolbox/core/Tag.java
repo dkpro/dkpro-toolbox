@@ -42,7 +42,7 @@ public class Tag
     {
         MappingProvider provider;
         try {
-            provider = TagUtil.getMappingProvider(language);
+            provider = TagUtil.getMappingProviderBrown();
             Type posType = provider.getTagType(aTag);
             String simpleTag = getSimpleTag(posType.getShortName());
 
@@ -56,14 +56,13 @@ public class Tag
     }
     
     private String getSimpleTag(String shortName) {
-        
         if (shortName.equals("ADJ")) {
             return "J";
         }
         else if (shortName.equals("ADV")) {
             return "A";
         }
-        else if (shortName.equals("ARt")) {
+        else if (shortName.equals("ART")) {
             return "D";
         }
         else if (shortName.equals("CARD")) {

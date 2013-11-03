@@ -32,6 +32,21 @@ public class TagUtil
 
     private static MappingProvider posMappingProvider = null;
 
+    public static MappingProvider getMappingProviderBrown() throws ResourceInitializationException {
+        if (posMappingProvider == null) {
+
+            posMappingProvider = new MappingProvider();
+            posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/tagmapping/en-brown.map");
+            posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+            posMappingProvider.setDefault("pos.tagset", "default");
+
+            AnalysisEngine engine = createEngine(OpenNlpPosTagger.class);
+            posMappingProvider.configure(engine.newCAS());
+        }
+
+        return posMappingProvider;
+    }
+    
     public static MappingProvider getMappingProvider(String language) throws ResourceInitializationException {
         if (posMappingProvider == null) {
 

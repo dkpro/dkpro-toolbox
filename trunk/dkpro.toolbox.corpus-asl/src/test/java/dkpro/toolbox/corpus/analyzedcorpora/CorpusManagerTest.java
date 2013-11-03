@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.corpus.CorpusException;
 import dkpro.toolbox.corpus.analyzedcorpora.CorpusManager.CorpusName;
 
@@ -22,5 +23,13 @@ public class CorpusManagerTest
         AnalyzedCorpus text = CorpusManager.getCorpus(CorpusName.InauguralAddresses);
         
         assertEquals(145240, text.getTokens().size());
+        assertEquals(4878, text.getSentences().size());
+    }
+    
+    @Test
+    public void getSentenceTest() throws CorpusException {
+        Sentence sentence = CorpusManager.getSentence(CorpusName.MobyDick);
+        
+        assertEquals(10, sentence.getTokens().size());
     }
 }
