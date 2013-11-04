@@ -47,7 +47,7 @@ public class TagUtil
         return posMappingProvider;
     }
     
-    public static MappingProvider getMappingProvider(String language) throws ResourceInitializationException {
+    public static MappingProvider getMappingProviderPTB(String language) throws ResourceInitializationException {
         if (posMappingProvider == null) {
 
             posMappingProvider = new MappingProvider();
