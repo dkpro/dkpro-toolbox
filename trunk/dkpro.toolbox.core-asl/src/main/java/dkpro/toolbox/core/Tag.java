@@ -43,7 +43,7 @@ public class Tag
         MappingProvider provider;
         try {
             provider = TagUtil.getMappingProviderBrown();
-            Type posType = provider.getTagType(aTag);
+            Type posType = provider.getTagType(aTag.toUpperCase());
             String simpleTag = getSimpleTag(posType.getShortName());
 
             this.originalTag = aTag;
