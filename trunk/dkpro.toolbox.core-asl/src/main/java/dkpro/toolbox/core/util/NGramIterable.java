@@ -89,7 +89,11 @@ public class NGramIterable<T> implements Iterable<NGram<T>>
 
 		int size = itemList.size();
 		for (int i = 0; i < (size + 1 - k); i++) {
-		    nGrams.add(new NGram<T>(itemList.get(i), itemList.get(i+1), itemList.get(i+2)));
+		    List<T> parts = new ArrayList<T>(); 
+		    for (int j=0; j<k; j++) {
+		        parts.add(itemList.get(i+j));
+		    }
+		    nGrams.add(new NGram<T>(parts));
 		}
 
 		return nGrams;
