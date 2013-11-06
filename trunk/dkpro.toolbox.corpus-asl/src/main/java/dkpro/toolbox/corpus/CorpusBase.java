@@ -17,11 +17,11 @@
  ******************************************************************************/
 package dkpro.toolbox.corpus;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.pipeline.JCasIterable;
-import org.apache.uima.resource.ResourceConfigurationException;
-import org.apache.uima.resource.ResourceInitializationException;
 
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
@@ -34,8 +34,17 @@ import dkpro.toolbox.corpus.util.TextIterable;
 import dkpro.toolbox.corpus.util.TokenIterable;
 
 public abstract class CorpusBase
-    implements Corpus
+    implements CachableCorpus
 {
+    private boolean useCaching;
+    
+    // there are not used unless useCaching is explicitly enabled
+    // caching might require a lot of RAM
+    private List<String> tokens;
+    private List<Sentence> sentences;
+    private List<Tag> tags;
+    private List<TaggedToken> taggedTokens;
+    private List<Text> texts;
 
     @Override
     public abstract String getLanguage();
@@ -52,52 +61,95 @@ public abstract class CorpusBase
     public Iterable<Sentence> getSentences()
         throws CorpusException
     {
-        // reconfigure to re-initialize the reader
-        try {
-            CollectionReaderFactory.createReader(getReader()).reconfigure();
+        if (useCaching) {
+            if (sentences == null) {
+                sentences = new ArrayList<Sentence>();
+                for (Sentence sentence : new SentenceIterable(new JCasIterable(getReader()).iterator(), getLanguage())) {
+                    sentences.add(sentence);
+                }
+            }
+            return sentences;
         }
-        catch (ResourceConfigurationException e) {
-            throw new CorpusException(e);
+        else {
+            return new SentenceIterable(new JCasIterable(getReader()).iterator(), getLanguage());
         }
-        catch (ResourceInitializationException e) {
-            throw new CorpusException(e);
-        }
-        return new SentenceIterable(new JCasIterable(getReader()).iterator(), getLanguage());
     }
 
     @Override
     public Iterable<TaggedToken> getTaggedTokens()
         throws CorpusException
     {
-        // reconfigure to re-initialize the reader
-//        getReader().reconfigure();
-        return new TaggedTokenIterable(new JCasIterable(getReader()).iterator(), getLanguage());
+        if (useCaching) {
+            if (taggedTokens == null) {
+                taggedTokens = new ArrayList<TaggedToken>();
+                for (TaggedToken taggedToken : new TaggedTokenIterable(new JCasIterable(getReader()).iterator(), getLanguage())) {
+                    taggedTokens.add(taggedToken);
+                }
+            }
+            return taggedTokens;
+        }
+        else {
+            return new TaggedTokenIterable(new JCasIterable(getReader()).iterator(), getLanguage());
+        }
     }
 
     @Override
     public Iterable<Tag> getTags()
         throws CorpusException
     {
-        // reconfigure to re-initialize the reader
-//        getReader().reconfigure();
-        return new TagIterable(new JCasIterable(getReader()).iterator(), getLanguage());
+        if (useCaching) {
+            if (tags == null) {
+                tags = new ArrayList<Tag>();
+                for (Tag tag : new TagIterable(new JCasIterable(getReader()).iterator(), getLanguage())) {
+                    tags.add(tag);
+                }
+            }
+            return tags;
+        }
+        else {
+            return new TagIterable(new JCasIterable(getReader()).iterator(), getLanguage());
+        }
     }
 
     @Override
     public Iterable<Text> getTexts()
         throws CorpusException
     {
-        // reconfigure to re-initialize the reader
-//        getReader().reconfigure();
-        return new TextIterable(new JCasIterable(getReader()).iterator(), getLanguage());
+        if (useCaching) {
+            if (texts == null) {
+                texts = new ArrayList<Text>();
+                for (Text text : new TextIterable(new JCasIterable(getReader()).iterator(), getLanguage())) {
+                    texts.add(text);
+                }
+            }
+            return texts;
+        }
+        else {
+            return new TextIterable(new JCasIterable(getReader()).iterator(), getLanguage());
+        }
     }
 
     @Override
     public Iterable<String> getTokens()
         throws CorpusException
     {
-        // reconfigure to re-initialize the reader
-//        getReader().reconfigure();
-        return new TokenIterable(new JCasIterable(getReader()).iterator(), getLanguage());
+        if (useCaching) {
+            if (tokens == null) {
+                tokens = new ArrayList<String>();
+                for (String token : new TokenIterable(new JCasIterable(getReader()).iterator(), getLanguage())) {
+                    tokens.add(token);
+                }
+            }
+            return tokens;
+        }
+        else {
+            return new TokenIterable(new JCasIterable(getReader()).iterator(), getLanguage());
+        }
+    }
+
+    @Override
+    public void setUseCaching(boolean useCaching)
+    {
+        this.useCaching = useCaching;
     }
 }
