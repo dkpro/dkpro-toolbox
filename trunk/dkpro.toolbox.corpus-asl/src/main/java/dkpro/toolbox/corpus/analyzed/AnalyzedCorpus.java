@@ -6,7 +6,9 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import dkpro.toolbox.core.Sentence;
+import dkpro.toolbox.core.Tag;
 import dkpro.toolbox.core.TaggedToken;
+import dkpro.toolbox.core.Text;
 import dkpro.toolbox.corpus.Corpus;
 import dkpro.toolbox.corpus.CorpusException;
 
@@ -18,6 +20,7 @@ import dkpro.toolbox.corpus.CorpusException;
  *
  */
 public class AnalyzedCorpus
+    implements Corpus
 {
     private Corpus underlyingCorpus;
 
@@ -31,7 +34,7 @@ public class AnalyzedCorpus
         return underlyingCorpus;
     }
     
-    public List<Sentence> getSentences()
+    public List<Sentence> getSentenceList()
             throws CorpusException
     {
         List<Sentence> sentences = new ArrayList<Sentence>();
@@ -41,13 +44,13 @@ public class AnalyzedCorpus
         return sentences;
     }
     
-    public List<String> getTokens()
+    public List<String> getTokenList()
             throws CorpusException 
     {
-        return getTokens(false);
+        return getTokenList(false);
     }
     
-    public List<String> getTokens(boolean toLowerCase)
+    public List<String> getTokenList(boolean toLowerCase)
             throws CorpusException
     {
         List<String> tokens = new ArrayList<String>();
@@ -62,7 +65,7 @@ public class AnalyzedCorpus
         return tokens;
     }
     
-    public List<TaggedToken> getTaggedTokens()
+    public List<TaggedToken> getTaggedTokenList()
             throws CorpusException
     {
         List<TaggedToken> tokens = new ArrayList<TaggedToken>();
@@ -70,12 +73,6 @@ public class AnalyzedCorpus
             tokens.add(taggedToken);
         }
         return tokens;
-    }
-
-    public String getName()
-            throws CorpusException
-    {
-        return underlyingCorpus.getName();
     }
     
     // Contributed by Marian Waltereit
@@ -150,5 +147,58 @@ public class AnalyzedCorpus
         }
         sb.append(StringUtils.leftPad("", rightDiff));
         return sb.toString();
+    }
+
+    @Override
+    public Iterable<Tag> getTags()
+        throws CorpusException
+    {
+        return underlyingCorpus.getTags();
+    }
+
+    @Override
+    public Iterable<Text> getTexts()
+        throws CorpusException
+    {
+        return underlyingCorpus.getTexts();
+    }
+
+    @Override
+    public String getLanguage()
+    {
+        return underlyingCorpus.getLanguage();
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return underlyingCorpus.getDescription();
+    }
+
+    @Override
+    public String getName()
+    {
+        return underlyingCorpus.getName();
+    }
+
+    @Override
+    public Iterable<String> getTokens()
+        throws CorpusException
+    {
+        return underlyingCorpus.getTokens();
+    }
+
+    @Override
+    public Iterable<TaggedToken> getTaggedTokens()
+        throws CorpusException
+    {
+        return underlyingCorpus.getTaggedTokens();
+    }
+
+    @Override
+    public Iterable<Sentence> getSentences()
+        throws CorpusException
+    {
+        return underlyingCorpus.getSentences();
     }
 }

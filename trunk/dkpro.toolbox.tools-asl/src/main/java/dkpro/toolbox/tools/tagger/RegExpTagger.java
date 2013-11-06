@@ -1,7 +1,6 @@
 package dkpro.toolbox.tools.tagger;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,7 @@ import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
 
 public class RegExpTagger
-    implements ToolboxTagger
+    extends ToolboxTaggerBase
 {
     private Map<String, Tag> patternMap;
     
@@ -21,15 +20,7 @@ public class RegExpTagger
     }
 
     @Override
-    public Collection<TaggedToken> tag(String text, String language)
-        throws ToolboxException
-    {
-        List<String> tokens = Arrays.asList(text.split(" "));
-        return tag(tokens, language);
-    }
-
-    @Override
-    public Collection<TaggedToken> tag(List<String> tokens, String language)
+    public Collection<TaggedToken> tag(List<String> tokens)
         throws ToolboxException
     {
         List<TaggedToken> taggedTokens = new ArrayList<TaggedToken>();
@@ -41,6 +32,12 @@ public class RegExpTagger
                     taggedTokens.add(new TaggedToken(token, patternMap.get(pattern)));
                     matched = true;
                 }
+            }
+            
+            // catch case that no default rule was assigned
+            if (!matched) {
+                taggedTokens.add(new TaggedToken(token, new Tag("O", "en")));
+                matched = true;
             }
         }
         

@@ -64,7 +64,7 @@ public class CorpusManager
     private static void addSentence(CorpusName name)
             throws CorpusException
     {
-        sentences.put(name, corpora.get(name).getSentences().get(0));
+        sentences.put(name, corpora.get(name).getSentenceList().get(0));
     }
     
     public static AnalyzedCorpus getCorpus(CorpusName name)

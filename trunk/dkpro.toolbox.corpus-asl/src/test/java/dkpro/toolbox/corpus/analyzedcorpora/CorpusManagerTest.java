@@ -24,8 +24,8 @@ public class CorpusManagerTest
     public void multipleFilesTest() throws CorpusException {
         AnalyzedCorpus text = CorpusManager.getCorpus(CorpusName.InauguralAddresses);
         
-        assertEquals(145240, text.getTokens().size());
-        assertEquals(4878, text.getSentences().size());
+        assertEquals(145240, text.getTokenList().size());
+        assertEquals(4878, text.getSentenceList().size());
     }
     
     @Test
