@@ -12,6 +12,11 @@ import dkpro.toolbox.core.ToolboxException;
 public abstract class ToolboxTaggerBase
     implements ToolboxTagger
 {
+    protected ToolboxTagger backoffTagger;
+    
+    public void setBackoffTagger(ToolboxTagger tagger) {
+        backoffTagger = tagger;
+    }
     
     @Override
     public Collection<TaggedToken> tag(String text)
@@ -23,6 +28,18 @@ public abstract class ToolboxTaggerBase
     
     @Override
     public void evaluate(List<Sentence> taggedSentences)
+        throws ToolboxException
+    {
+        evaluateTags(taggedSentences, false);
+    }
+    
+    public void evaluateCanonical(List<Sentence> taggedSentences)
+        throws ToolboxException
+    {
+        evaluateTags(taggedSentences, true);
+    }
+    
+    private void evaluateTags(List<Sentence> taggedSentences, boolean useCanonical)
         throws ToolboxException
     {
         int correct = 0;
@@ -37,9 +54,17 @@ public abstract class ToolboxTaggerBase
             
             for (int i=0; i<goldTags.size(); i++) {
                 n++;
-                String assignedTag = assignedTags.get(i).getTag().getCanonicalTag();
-                String goldTag = goldTags.get(i).getTag().getCanonicalTag();
-            
+                
+                String assignedTag;
+                String goldTag;            
+                if (useCanonical) {
+                    assignedTag = assignedTags.get(i).getTag().getCanonicalTag();
+                    goldTag = goldTags.get(i).getTag().getCanonicalTag();
+                }
+                else {
+                    assignedTag = assignedTags.get(i).getTag().getOriginalTag();
+                    goldTag = goldTags.get(i).getTag().getOriginalTag();                    
+                }
                 if (goldTag.equals(assignedTag)) {
                     correct++;
                 }
