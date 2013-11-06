@@ -25,7 +25,6 @@ import org.junit.Test;
 
 import dkpro.toolbox.core.Tag;
 import dkpro.toolbox.core.TaggedToken;
-import dkpro.toolbox.tools.tagger.OpenNlpPosTagger;
 
 public class OpenNlpTaggerTest
 {
@@ -64,10 +63,10 @@ public class OpenNlpTaggerTest
     private void runTest(String language, String testDocument, TaggedToken[] taggedTokens)
         throws Exception
     {
-        OpenNlpPosTagger tagger = new OpenNlpPosTagger();
+        OpenNlpPosTagger tagger = new OpenNlpPosTagger(language);
         
         if (taggedTokens != null) {
-            checkTaggedTokens(taggedTokens, tagger.tag(testDocument, language));
+            checkTaggedTokens(taggedTokens, tagger.tag(testDocument));
         }
     }
 

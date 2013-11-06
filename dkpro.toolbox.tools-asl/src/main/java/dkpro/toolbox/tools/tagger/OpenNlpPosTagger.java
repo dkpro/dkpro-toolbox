@@ -37,22 +37,25 @@ import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
 
 public class OpenNlpPosTagger
-    implements ToolboxTagger
+    extends ToolboxTaggerBase
 {
 
     private final AnalysisEngine segmenter;
     private final AnalysisEngine tagger;
+    
+    private String language;
 
 
-    public OpenNlpPosTagger()
+    public OpenNlpPosTagger(String language)
         throws Exception
    {
+        this.language = language;
         segmenter = createEngine(BreakIteratorSegmenter.class);
         tagger = createEngine(de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger.class);
     }
 
     @Override
-    public Collection<TaggedToken> tag(String text, String language)
+    public Collection<TaggedToken> tag(String text)
         throws ToolboxException
     {
         List<TaggedToken> taggedTokens = new ArrayList<TaggedToken>();
@@ -85,9 +88,9 @@ public class OpenNlpPosTagger
     }
 
     @Override
-    public Collection<TaggedToken> tag(List<String> tokens, String language)
+    public Collection<TaggedToken> tag(List<String> tokens)
         throws ToolboxException
     {
-        return tag(StringUtils.join(tokens, " "), language);
+        return tag(StringUtils.join(tokens, " "));
     }
 }

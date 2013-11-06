@@ -25,7 +25,7 @@ public class RegExpTaggerTest
 
         
         RegExpTagger tagger = new RegExpTagger(patterns);
-        for (TaggedToken taggedToken : tagger.tag("The only Conservative councillor representing Cambridge resigned from the city council .", "en")) {
+        for (TaggedToken taggedToken : tagger.tag("The only Conservative councillor representing Cambridge resigned from the city council .")) {
             System.out.println(taggedToken);
         }
     }
