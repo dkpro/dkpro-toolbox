@@ -1,6 +1,9 @@
 package dkpro.toolbox.corpus.categorized;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,7 +17,7 @@ import dkpro.toolbox.corpus.Corpus;
 import dkpro.toolbox.corpus.CorpusException;
 import dkpro.toolbox.corpus.DkproCorpus;
 
-public class CategorizedCorpusBase
+public abstract class CategorizedCorpusBase
     implements CategorizedCorpus
 {
     
@@ -36,61 +39,55 @@ public class CategorizedCorpusBase
     public Iterable<String> getTokens()
         throws CorpusException
     {
-        // how to create an iterable from multiple underlying iterables
-        return null;
+        List<Iterator<String>> iterators = new ArrayList<Iterator<String>>();
+        for (String category : this.getCategories()) {
+            iterators.add(this.getTokens(category).iterator());
+        }
+        return new CombinedIterable<String>(iterators);
     }
 
     @Override
     public Iterable<TaggedToken> getTaggedTokens()
         throws CorpusException
     {
-        // TODO Auto-generated method stub
-        return null;
+        List<Iterator<TaggedToken>> iterators = new ArrayList<Iterator<TaggedToken>>();
+        for (String category : this.getCategories()) {
+            iterators.add(this.getTaggedTokens(category).iterator());
+        }
+        return new CombinedIterable<TaggedToken>(iterators);
     }
 
     @Override
     public Iterable<Sentence> getSentences()
         throws CorpusException
     {
-        // TODO Auto-generated method stub
-        return null;
+        List<Iterator<Sentence>> iterators = new ArrayList<Iterator<Sentence>>();
+        for (String category : this.getCategories()) {
+            iterators.add(this.getSentences(category).iterator());
+        }
+        return new CombinedIterable<Sentence>(iterators);
     }
 
     @Override
     public Iterable<Tag> getTags()
         throws CorpusException
     {
-        // TODO Auto-generated method stub
-        return null;
+        List<Iterator<Tag>> iterators = new ArrayList<Iterator<Tag>>();
+        for (String category : this.getCategories()) {
+            iterators.add(this.getTags(category).iterator());
+        }
+        return new CombinedIterable<Tag>(iterators);
     }
 
     @Override
     public Iterable<Text> getTexts()
         throws CorpusException
     {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public String getLanguage()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public String getName()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public String getDescription()
-    {
-        // TODO Auto-generated method stub
-        return null;
+        List<Iterator<Text>> iterators = new ArrayList<Iterator<Text>>();
+        for (String category : this.getCategories()) {
+            iterators.add(this.getTexts(category).iterator());
+        }
+        return new CombinedIterable<Text>(iterators);
     }
 
     @Override

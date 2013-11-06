@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import dkpro.toolbox.corpus.CorpusException;
@@ -32,5 +33,30 @@ public class UdhrCorpus
             String[] parts = file.getName().split("-");
             addCorpus(parts[0], new SerializedCorpus("classpath:/corpus/udhr/", file.getName()));
         }
+    }
+
+    @Override
+    public String getLanguage()
+    {
+        return StringUtils.join(getCategories(), ",");
+    }
+    
+    @Override
+    public String getLanguage(String category)
+        throws CorpusException
+    {
+        return category;
+    }
+
+    @Override
+    public String getName()
+    {
+        return "UHDR";
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return "Universal Declaration of Human Rights in various languages";
     }
 }

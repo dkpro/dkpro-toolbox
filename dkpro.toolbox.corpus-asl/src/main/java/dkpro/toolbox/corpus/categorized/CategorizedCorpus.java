@@ -23,5 +23,7 @@ public interface CategorizedCorpus
     
     public Iterable<Text> getTexts(String category) throws CorpusException;
 
+    public String getLanguage(String category) throws CorpusException;
+
     public Set<String> getCategories();
 }
