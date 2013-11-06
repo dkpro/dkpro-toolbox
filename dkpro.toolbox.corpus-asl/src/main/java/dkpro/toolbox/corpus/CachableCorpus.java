@@ -17,35 +17,8 @@
  ******************************************************************************/
 package dkpro.toolbox.corpus;
 
-import dkpro.toolbox.core.Sentence;
-import dkpro.toolbox.core.Tag;
-import dkpro.toolbox.core.TaggedToken;
-import dkpro.toolbox.core.Text;
-
-public interface Corpus {
-
-	public Iterable<String> getTokens() throws CorpusException;
-	
-	public Iterable<TaggedToken> getTaggedTokens() throws CorpusException;
-	
-	public Iterable<Sentence> getSentences() throws CorpusException;
-	
-    public Iterable<Tag> getTags() throws CorpusException;
-    
-    public Iterable<Text> getTexts() throws CorpusException;
-
-    /**
-     * @return The language code of the corpus language.
-     */
-    public String getLanguage();
-    
-    /**
-     * @return The name of the corpus.
-     */
-    public String getName();
-    
-    /**
-     * @return A short description of the corpus.
-     */
-    public String getDescription();
+public interface CachableCorpus 
+    extends Corpus
+{
+    public void setUseCaching(boolean useCaching);
 }
