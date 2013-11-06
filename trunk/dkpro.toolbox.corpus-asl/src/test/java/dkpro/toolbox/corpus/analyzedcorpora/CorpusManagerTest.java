@@ -6,7 +6,9 @@ import org.junit.Test;
 
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.corpus.CorpusException;
-import dkpro.toolbox.corpus.analyzedcorpora.CorpusManager.CorpusName;
+import dkpro.toolbox.corpus.analyzed.AnalyzedCorpus;
+import dkpro.toolbox.corpus.analyzed.CorpusManager;
+import dkpro.toolbox.corpus.analyzed.CorpusManager.CorpusName;
 
 public class CorpusManagerTest
 {

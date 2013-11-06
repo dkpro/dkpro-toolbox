@@ -7,7 +7,7 @@ import dkpro.toolbox.corpus.Corpus;
 import dkpro.toolbox.corpus.CorpusException;
 
 /**
- * A raw texts constructed from the corpus that backs this text.
+ * A raw text constructed from the corpus that backs this text.
  * For some corpora, it is easier to construct the raw text from the structured input provided by the corpus,
  * instead of trying to read the plain text itself.
  * 

@@ -69,6 +69,22 @@ public class BrownCorpusTest
         }
         assertEquals(6783, nrOfTaggedTokens);
     }
+    
+    @Ignore
+    @Test    
+    public void cacheTest()
+        throws Exception
+    {
+        CachableCorpus corpus = new BrownTeiCorpus();
+        corpus.setUseCaching(true);
+        
+        for (Sentence s : corpus.getSentences()) {
+        }
+        System.out.println("Finished 1");
+        for (Sentence s : corpus.getSentences()) {
+        }
+        System.out.println("Finished 2");
+    }
 
     @Ignore
     @Test

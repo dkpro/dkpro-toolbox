@@ -33,4 +33,29 @@ public class InauguralCorpus
             addCorpus(parts[0], new SerializedCorpus("classpath:/corpus/inaugural/", file.getName()));
         }
     }
+
+    @Override
+    public String getLanguage()
+    {
+        return "en";
+    }
+    
+    @Override
+    public String getLanguage(String category)
+        throws CorpusException
+    {
+        return getLanguage();
+    }
+
+    @Override
+    public String getName()
+    {
+        return "InauguralAddresses";
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return "Presidential Inaugural Addresses";
+    }
 }

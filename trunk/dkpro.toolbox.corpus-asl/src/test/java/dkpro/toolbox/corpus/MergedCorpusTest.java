@@ -21,9 +21,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import dkpro.toolbox.corpus.analyzedcorpora.AnalyzedCorpus;
-import dkpro.toolbox.corpus.analyzedcorpora.CorpusManager;
-import dkpro.toolbox.corpus.analyzedcorpora.CorpusManager.CorpusName;
+import dkpro.toolbox.corpus.analyzed.AnalyzedCorpus;
+import dkpro.toolbox.corpus.analyzed.CorpusManager;
+import dkpro.toolbox.corpus.analyzed.CorpusManager.CorpusName;
 
 public class MergedCorpusTest
 {

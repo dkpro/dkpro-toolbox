@@ -5,9 +5,9 @@ import org.jfree.ui.RefineryUtilities;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import dkpro.toolbox.core.TaggedToken;
-import dkpro.toolbox.corpus.analyzedcorpora.AnalyzedCorpus;
-import dkpro.toolbox.corpus.analyzedcorpora.CorpusManager;
-import dkpro.toolbox.corpus.analyzedcorpora.CorpusManager.CorpusName;
+import dkpro.toolbox.corpus.analyzed.AnalyzedCorpus;
+import dkpro.toolbox.corpus.analyzed.CorpusManager;
+import dkpro.toolbox.corpus.analyzed.CorpusManager.CorpusName;
 import dkpro.toolbox.corpus.categorized.CategorizedCorpus;
 import dkpro.toolbox.corpus.categorized.FirstNamesCorpus;
 
