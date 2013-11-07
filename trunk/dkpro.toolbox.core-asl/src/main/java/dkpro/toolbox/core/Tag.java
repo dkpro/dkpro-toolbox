@@ -30,6 +30,12 @@ public class Tag
         penntreebank,
         stts
     }
+    
+    public enum TagLevel {
+        original,
+        canonical,
+        simplified
+    }
 
     private String originalTag;
     private String canonicalTag;
@@ -47,6 +53,12 @@ public class Tag
     {
         super();
         initialize(aTag, tagset);
+    }
+    
+    public Tag(String originalTag, String canonicalTag, String simplifiedTag) {
+        this.originalTag = originalTag;
+        this.canonicalTag = canonicalTag;
+        this.simplifiedTag = simplifiedTag;
     }
     
     private void initialize(String aTag, Tagset tagset)

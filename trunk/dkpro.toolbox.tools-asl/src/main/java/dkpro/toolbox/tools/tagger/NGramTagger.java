@@ -9,7 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
-import dkpro.toolbox.core.Tag.Tagset;
+import dkpro.toolbox.core.Tag.TagLevel;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
 import dkpro.toolbox.corpus.CorpusException;
@@ -21,15 +21,13 @@ public class NGramTagger
     public static final String BOS = "<BOS>";
     
     private ConditionalFrequencyDistribution<String, String> cfd;
-    private Tagset tagset;
     private int ngramSize;
     private TagLevel tagLevel;
     
-    public NGramTagger(Tagset tagset, Iterable<Sentence> sentences, int ngramSize)
+    public NGramTagger(TagLevel tagLevel, Iterable<Sentence> sentences, int ngramSize)
         throws CorpusException
     {
-        this.tagset = tagset;
-        this.tagLevel = TagLevel.original;
+        this.tagLevel = tagLevel;
         this.ngramSize = ngramSize;
         
         LimitedQueue<String> context = initializeContext();
@@ -73,14 +71,41 @@ public class NGramTagger
             // get prediction
             String predictedString = getTag(context, token);
             
+            Tag tag = null;
+        
             // if unknown tag is predicted, fall back to backoff tagger
             if (predictedString.equals(UNKNOWN_TAG) && backoffTagger != null) {
-                predictedString = backoffTaggedTokens.get(i).getTag().getOriginalTag();
+                if (tagLevel.equals(TagLevel.original)) {
+                    predictedString = backoffTaggedTokens.get(i).getTag().getOriginalTag();
+                    tag = new Tag(predictedString, null, null);
+                    context.add(tag.getOriginalTag());
+                }
+                else if (tagLevel.equals(TagLevel.canonical)) {
+                    predictedString = backoffTaggedTokens.get(i).getTag().getCanonicalTag();
+                    tag = new Tag(null, predictedString, null);
+                    context.add(tag.getCanonicalTag());
+                }
+                else if (tagLevel.equals(TagLevel.simplified)) {
+                    predictedString = backoffTaggedTokens.get(i).getTag().getSimplifiedTag();
+                    tag = new Tag(null, null, predictedString);
+                    context.add(tag.getSimplifiedTag());
+                }
             }
-            
-            Tag tag = new Tag(predictedString, tagset);
+            else {
+                if (tagLevel.equals(TagLevel.original)) {
+                    tag = new Tag(predictedString, null, null);
+                    context.add(tag.getOriginalTag());
+                }
+                else if (tagLevel.equals(TagLevel.canonical)) {
+                    tag = new Tag(null, predictedString, null);
+                    context.add(tag.getCanonicalTag());
+                }
+                else if (tagLevel.equals(TagLevel.simplified)) {
+                    tag = new Tag(null, null, predictedString);
+                    context.add(tag.getSimplifiedTag());
+                }
+            }
             taggedTokens.add(new TaggedToken(token, tag));
-            context.add(tag.getOriginalTag());
         }
         
         return taggedTokens;

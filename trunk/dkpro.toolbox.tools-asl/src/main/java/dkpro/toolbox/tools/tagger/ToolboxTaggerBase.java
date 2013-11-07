@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import dkpro.toolbox.core.Sentence;
+import dkpro.toolbox.core.Tag.TagLevel;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
 
@@ -73,9 +74,11 @@ public abstract class ToolboxTaggerBase
                     goldTag = goldTags.get(i).getTag().getOriginalTag();                    
                 }
                 
-//                System.out.println(taggedSentence.getTokens().get(i) + " - " + goldTag + " - " + assignedTag);
                 if (goldTag.equals(assignedTag)) {
                     correct++;
+                }
+                else {
+//                    System.out.println(taggedSentence.getTokens().get(i) + " - " + goldTag + " - " + assignedTag);
                 }
             }
         }
