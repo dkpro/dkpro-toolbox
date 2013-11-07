@@ -24,6 +24,7 @@ import java.io.IOException;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DkproContext;
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.Text;
 import dkpro.toolbox.corpus.util.TazSentenceIterable;
@@ -128,5 +129,11 @@ public class TazCorpus
     public String getDescription()
     {
         return DESCRIPTION;
+    }
+
+    @Override
+    public Tagset getTagset()
+    {
+        return Tagset.stts;
     }
 }

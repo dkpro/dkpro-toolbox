@@ -7,6 +7,7 @@ import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.corpus.analyzed.AnalyzedCorpus;
 import dkpro.toolbox.corpus.analyzed.CorpusManager;
 import dkpro.toolbox.corpus.analyzed.CorpusManager.CorpusName;
+import dkpro.toolbox.tools.tagger.ToolboxTagger.TagLevel;
 
 public class LookupTaggerTest
 {
@@ -19,7 +20,7 @@ public class LookupTaggerTest
         
         ToolboxTagger lookupTagger = new LookupTagger(corpus, 100);
         
-        lookupTagger.evaluate(corpus.getSentenceList());
+        lookupTagger.evaluate(corpus.getSentenceList(), TagLevel.original);
         
         for (TaggedToken taggedToken : lookupTagger.tag(sentence.getTokens())) {
             System.out.println(taggedToken);

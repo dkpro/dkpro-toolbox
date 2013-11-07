@@ -27,6 +27,7 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.Text;
 import dkpro.toolbox.core.ToolboxException;
 
@@ -35,11 +36,11 @@ public class TextIterable
 {
 
     private final JCasIterator jcasIterator;
-    private final String language;
+    private final Tagset tagset;
 
-    public TextIterable(JCasIterator jcasIterator, String language) {
+    public TextIterable(JCasIterator jcasIterator, Tagset tagset) {
         this.jcasIterator = jcasIterator;
-        this.language = language;
+        this.tagset = tagset;
     }
 
     @Override
@@ -67,7 +68,7 @@ public class TextIterable
             Collection<Sentence> sentences = JCasUtil.select(jcas, Sentence.class);
             for (Sentence sentence : sentences) {
                 try {
-                    toolboxSentences.add(ToolboxUtils.UimaSentence2ToolboxSentence(jcas, language , sentence));
+                    toolboxSentences.add(ToolboxUtils.UimaSentence2ToolboxSentence(jcas, tagset , sentence));
                 }
                 catch (ToolboxException e) {
                     throw new RuntimeException(e);

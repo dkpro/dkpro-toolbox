@@ -25,6 +25,7 @@ import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
 
@@ -32,9 +33,9 @@ public class TaggedTokenIterable
     extends CorpusIterableBase<TaggedToken>
 {
 
-    public TaggedTokenIterable(JCasIterator jcasIterator, String language)
+    public TaggedTokenIterable(JCasIterator jcasIterator, Tagset tagset)
     {
-        super(jcasIterator, language);
+        super(jcasIterator, tagset);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class TaggedTokenIterable
                 POS pos = token.getPos();
                 items.add(new TaggedToken(
                         token.getCoveredText(),
-                        ToolboxUtils.UimaPos2ToolboxTag(jcas, language, pos)
+                        ToolboxUtils.UimaPos2ToolboxTag(jcas, tagset, pos)
                 ));
             }
         }

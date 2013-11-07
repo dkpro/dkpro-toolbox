@@ -22,6 +22,8 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
+import dkpro.toolbox.core.Tag.Tagset;
+
 public class Sentence {
 
 	private final List<String> tokens;
@@ -80,19 +82,20 @@ public class Sentence {
         return "[" + StringUtils.join(getTokens(), ' ') + "]";
     }
 
-    
-    public void addToken(String token) {
+    public void addElement(String token, String lemma, String tag, Tagset tagset)
+        throws ToolboxException
+    {
         this.tokens.add(token);
-    }
-    
-    public void addLemma(String lemma) {
         this.lemmas.add(lemma);
+        this.tags.add(new Tag(tag, tagset));
     }
     
-    public void addTag(Tag tag) {
+    public void addElement(String token, String lemma, Tag tag) {
+        this.tokens.add(token);
+        this.lemmas.add(lemma);
         this.tags.add(tag);
     }
-
+ 
     public List<String> getTokens() {
 		return tokens;
 	}

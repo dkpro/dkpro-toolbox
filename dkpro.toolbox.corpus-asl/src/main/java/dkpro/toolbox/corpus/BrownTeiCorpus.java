@@ -24,6 +24,7 @@ import org.apache.uima.fit.factory.CollectionReaderFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DkproContext;
 import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader;
+import dkpro.toolbox.core.Tag.Tagset;
 
 
 /**
@@ -69,6 +70,12 @@ public class BrownTeiCorpus
         return reader;
     }
 
+    @Override
+    public Tagset getTagset()
+    {
+        return Tagset.brown;
+    }
+    
     @Override
     public String getLanguage()
     {

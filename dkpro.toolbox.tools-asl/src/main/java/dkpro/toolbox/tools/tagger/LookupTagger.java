@@ -9,6 +9,7 @@ import java.util.Set;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
 import dkpro.toolbox.corpus.Corpus;
@@ -19,10 +20,13 @@ public class LookupTagger
 {
 
     private ConditionalFrequencyDistribution<String, String> wordTagCfd;
+    private Tagset tagset;
     
     public LookupTagger(Corpus corpus, int useTopN)
         throws CorpusException
     {
+        this.tagset = corpus.getTagset();
+        
         FrequencyDistribution<String> tokenFd = new FrequencyDistribution<String>();
         for (String token : corpus.getTokens()) {
             tokenFd.inc(token);
@@ -43,14 +47,14 @@ public class LookupTagger
     {
         List<TaggedToken> taggedTokens = new ArrayList<TaggedToken>();     
         for (String token : tokens) {
-            taggedTokens.add(new TaggedToken(token, new Tag(getMostLikelyTag(token), "en")));
+            taggedTokens.add(new TaggedToken(token, new Tag(getMostLikelyTag(token), tagset)));
         }
         
         return taggedTokens;
     }
 
     private String getMostLikelyTag(String token) {
-        String tag = "UNK";
+        String tag = UNKNOWN_TAG;
         if (wordTagCfd.getConditions().contains(token)) {
             tag = wordTagCfd.getFrequencyDistribution(token).getMostFrequentSamples(1).get(0);
         }

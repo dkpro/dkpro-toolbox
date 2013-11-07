@@ -25,15 +25,16 @@ import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.ToolboxException;
 
 public class TagIterable
     extends CorpusIterableBase<Tag>
 {
 
-    public TagIterable(JCasIterator jcasIterator, String language)
+    public TagIterable(JCasIterator jcasIterator, Tagset tagset)
     {
-        super(jcasIterator, language);
+        super(jcasIterator, tagset);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class TagIterable
         if (jcasIterator.hasNext()) {
             JCas jcas = jcasIterator.next();
             for (POS pos : JCasUtil.select(jcas, POS.class)) {
-                items.add(ToolboxUtils.UimaPos2ToolboxTag(jcas, language, pos));
+                items.add(ToolboxUtils.UimaPos2ToolboxTag(jcas, tagset, pos));
             }
         }
     }

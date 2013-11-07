@@ -20,13 +20,15 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import dkpro.toolbox.core.Tag.Tagset;
+
 public class TagTest
 {
 
     @Test
     public void test() throws Exception {
         
-        Tag tag = new Tag("NNS", "en");
+        Tag tag = new Tag("NNS", Tagset.brown);
         assertEquals("NNS", tag.getOriginalTag());
         assertEquals("NN", tag.getCanonicalTag());
         assertEquals("N", tag.getSimplifiedTag());
@@ -35,7 +37,7 @@ public class TagTest
     @Test
     public void test2() throws Exception {
         
-        Tag tag = new Tag("NN", "en");
+        Tag tag = new Tag("NN", Tagset.brown);
         assertEquals("NN", tag.getOriginalTag());
         assertEquals("NN", tag.getCanonicalTag());
         assertEquals("N", tag.getSimplifiedTag());

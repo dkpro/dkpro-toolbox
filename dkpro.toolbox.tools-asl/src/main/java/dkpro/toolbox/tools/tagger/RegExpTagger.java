@@ -8,6 +8,7 @@ import java.util.Map;
 import dkpro.toolbox.core.Tag;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
+import dkpro.toolbox.core.Tag.Tagset;
 
 public class RegExpTagger
     extends ToolboxTaggerBase
@@ -36,7 +37,7 @@ public class RegExpTagger
             
             // catch case that no default rule was assigned
             if (!matched) {
-                taggedTokens.add(new TaggedToken(token, new Tag("O", "en")));
+                taggedTokens.add(new TaggedToken(token, new Tag("O", Tagset.brown)));
                 matched = true;
             }
         }

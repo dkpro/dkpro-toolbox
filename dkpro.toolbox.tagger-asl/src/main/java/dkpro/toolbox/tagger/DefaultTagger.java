@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
 
@@ -18,9 +19,9 @@ public class DefaultTagger
 {
     private String defaultTag = "NN";
 
-    public DefaultTagger(String languageCode, String defaultTag)
+    public DefaultTagger(Tagset tagset, String defaultTag)
     {
-        super(languageCode);
+        super(tagset);
         this.defaultTag = defaultTag;
     }
     
@@ -30,7 +31,7 @@ public class DefaultTagger
     {
         List<TaggedToken> taggedTokens = new ArrayList<TaggedToken>();
         for (String token : tokens) {
-            taggedTokens.add(new TaggedToken(token, new Tag(defaultTag, languageCode)));
+            taggedTokens.add(new TaggedToken(token, new Tag(defaultTag, tagset)));
         }
         return taggedTokens;
     }

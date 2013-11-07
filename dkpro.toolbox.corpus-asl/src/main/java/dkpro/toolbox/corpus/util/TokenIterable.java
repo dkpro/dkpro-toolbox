@@ -24,15 +24,16 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.ToolboxException;
 
 public class TokenIterable
     extends CorpusIterableBase<String>
 {
 
-    public TokenIterable(JCasIterator jcasIterator, String language)
+    public TokenIterable(JCasIterator jcasIterator, Tagset tagset)
     {
-        super(jcasIterator, language);
+        super(jcasIterator, tagset);
     }
 
     @Override

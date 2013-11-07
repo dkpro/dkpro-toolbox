@@ -21,6 +21,7 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import dkpro.toolbox.core.Tag.Tagset;
 
 
 /**
@@ -37,6 +38,7 @@ public class TextCorpus
 
     public TextCorpus(
             String corpusPath,
+            Tagset tagset,
             String language,
             String name,
             String description,
@@ -51,7 +53,7 @@ public class TextCorpus
                 TextReader.PARAM_PATTERNS, patterns
         );
         
-        corpus = new DkproCorpus(language, name, description, reader);
+        corpus = new DkproCorpus(language, tagset, name, description, reader);
          
     }
 
@@ -61,6 +63,12 @@ public class TextCorpus
         return corpus.getReader();
     }
 
+    @Override
+    public Tagset getTagset()
+    {
+        return corpus.getTagset();
+    }
+    
     @Override
     public String getLanguage()
     {

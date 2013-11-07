@@ -31,6 +31,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasReader;
 import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import dkpro.toolbox.core.Tag.Tagset;
 
 
 /**
@@ -44,6 +45,7 @@ public class DkproCorpus
 {
 
     protected CollectionReaderDescription serializedReader;
+    protected Tagset tagset;
     protected String language;
     protected String name;
     protected String description;
@@ -52,6 +54,7 @@ public class DkproCorpus
 
     public DkproCorpus(
             String language,
+            Tagset tagset,
             String name,
             String description,
             CollectionReaderDescription reader
@@ -102,6 +105,12 @@ public class DkproCorpus
         return serializedReader;
     }
 
+    @Override
+    public Tagset getTagset()
+    {
+        return tagset;
+    }
+    
     @Override
     public String getLanguage()
     {

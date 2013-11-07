@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
 
@@ -13,9 +14,9 @@ public class RegularExpressionTagger
 {
     private Map<String, String> patternMap;
 
-    public RegularExpressionTagger(String languageCode, Map<String, String> patternMap)
+    public RegularExpressionTagger(Tagset tagset, Map<String, String> patternMap)
     {
-        super(languageCode);
+        super(tagset);
         this.patternMap = patternMap;
     }
     
@@ -28,12 +29,12 @@ public class RegularExpressionTagger
             boolean match = false;
             for (String pattern : patternMap.keySet()) {
                 if (!match && token.matches(pattern)) {
-                    taggedTokens.add(new TaggedToken(token, new Tag(patternMap.get(pattern), languageCode)));
+                    taggedTokens.add(new TaggedToken(token, new Tag(patternMap.get(pattern), tagset)));
                     match = true;
                 }
             }
             if (!match) {
-                taggedTokens.add(new TaggedToken(token, new Tag("NN", languageCode)));
+                taggedTokens.add(new TaggedToken(token, new Tag("NN", tagset)));
             }           
         }
         return taggedTokens;

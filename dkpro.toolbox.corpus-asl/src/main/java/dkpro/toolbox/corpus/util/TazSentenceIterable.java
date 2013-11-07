@@ -113,8 +113,7 @@ public class TazSentenceIterable implements Iterable<Sentence> {
                     if (parts.length != 3) {
                         throw new IOException("Ill-formed line: " + line);
                     }
-                    currentSentence.addToken(parts[0]);
-                    currentSentence.addLemma(parts[2]);
+                    currentSentence.addElement(parts[0],parts[2], null);
                 }
             }
             br.close();

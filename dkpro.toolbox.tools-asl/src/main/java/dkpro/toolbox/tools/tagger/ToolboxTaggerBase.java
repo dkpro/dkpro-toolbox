@@ -27,19 +27,22 @@ public abstract class ToolboxTaggerBase
     }
     
     @Override
-    public void evaluate(List<Sentence> taggedSentences)
+    public void evaluate(Sentence taggedSentence, TagLevel tagLevel)
         throws ToolboxException
     {
-        evaluateTags(taggedSentences, false);
+        List<Sentence> sentences = new ArrayList<Sentence>();
+        sentences.add(taggedSentence);
+        evaluateTags(sentences, tagLevel);
     }
     
-    public void evaluateCanonical(List<Sentence> taggedSentences)
+    @Override
+    public void evaluate(List<Sentence> taggedSentences, TagLevel tagLevel)
         throws ToolboxException
     {
-        evaluateTags(taggedSentences, true);
+        evaluateTags(taggedSentences, tagLevel);
     }
     
-    private void evaluateTags(List<Sentence> taggedSentences, boolean useCanonical)
+    private void evaluateTags(List<Sentence> taggedSentences, TagLevel tagLevel)
         throws ToolboxException
     {
         int correct = 0;
@@ -57,14 +60,20 @@ public abstract class ToolboxTaggerBase
                 
                 String assignedTag;
                 String goldTag;            
-                if (useCanonical) {
+                if (tagLevel.equals(TagLevel.canonical)) {
                     assignedTag = assignedTags.get(i).getTag().getCanonicalTag();
                     goldTag = goldTags.get(i).getTag().getCanonicalTag();
+                }
+                else if (tagLevel.equals(TagLevel.simplified)) {
+                    assignedTag = assignedTags.get(i).getTag().getSimplifiedTag();
+                    goldTag = goldTags.get(i).getTag().getSimplifiedTag();                    
                 }
                 else {
                     assignedTag = assignedTags.get(i).getTag().getOriginalTag();
                     goldTag = goldTags.get(i).getTag().getOriginalTag();                    
                 }
+                
+//                System.out.println(taggedSentence.getTokens().get(i) + " - " + goldTag + " - " + assignedTag);
                 if (goldTag.equals(assignedTag)) {
                     correct++;
                 }

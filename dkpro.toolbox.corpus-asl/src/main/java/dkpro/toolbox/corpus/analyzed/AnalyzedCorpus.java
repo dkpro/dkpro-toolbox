@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.Text;
 import dkpro.toolbox.corpus.Corpus;
@@ -200,5 +201,11 @@ public class AnalyzedCorpus
         throws CorpusException
     {
         return underlyingCorpus.getSentences();
+    }
+
+    @Override
+    public Tagset getTagset()
+    {
+        return underlyingCorpus.getTagset();
     }
 }

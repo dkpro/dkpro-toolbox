@@ -47,12 +47,12 @@ public class TagUtil
         return posMappingProvider;
     }
     
-    public static MappingProvider getMappingProviderPTB(String language) throws ResourceInitializationException {
+    public static MappingProvider getMappingProviderPTB() throws ResourceInitializationException {
         if (posMappingProvider == null) {
 
             posMappingProvider = new MappingProvider();
             posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-                    "core/api/lexmorph/tagset/" + language + "-default-pos.map");
+                    "core/api/lexmorph/tagset/en-ptb-pos.map");
             posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
             posMappingProvider.setDefault("pos.tagset", "default");
 

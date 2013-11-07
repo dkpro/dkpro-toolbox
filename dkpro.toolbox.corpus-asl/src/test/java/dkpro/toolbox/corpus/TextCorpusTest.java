@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.Text;
 
@@ -34,6 +35,7 @@ public class TextCorpusTest
     public void textCorpusTest() throws Exception {
         Corpus corpus = new TextCorpus(
                 "src/test/resources/test_corpora/text/",
+                Tagset.penntreebank,
                 "en",
                 "Moby Dick - Melville",
                 "Moby Dick by Herman Melville 1851",

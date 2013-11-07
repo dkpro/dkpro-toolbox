@@ -6,17 +6,18 @@ import java.util.List;
 
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
 
 public abstract class ToolboxTagger_ImplBase
     implements ToolboxTagger
 {
-    protected String languageCode;
+    protected Tagset tagset;
 
-    public ToolboxTagger_ImplBase(String languageCode)
+    public ToolboxTagger_ImplBase(Tagset tagset)
     {
-        this.languageCode = languageCode;
+        this.tagset = tagset;
     }
     
     @Override

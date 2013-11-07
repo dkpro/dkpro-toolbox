@@ -2,6 +2,7 @@ package dkpro.toolbox.corpus.categorized;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.apache.uima.collection.CollectionReaderDescription;
 
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.Text;
 import dkpro.toolbox.corpus.Corpus;
@@ -28,10 +30,10 @@ public abstract class CategorizedCorpusBase
         categoryCorpusMap.put(category, corpus);
     }
     
-    public void addCorpus(String category, String language, String name, String description, CollectionReaderDescription reader)
+    public void addCorpus(String category, Tagset tagset, String language, String name, String description, CollectionReaderDescription reader)
         throws CorpusException
     {
-        Corpus corpus = new DkproCorpus(language, name, description, reader);
+        Corpus corpus = new DkproCorpus(language, tagset, name, description, reader);
         addCorpus(category, corpus);
     }
     
@@ -147,5 +149,18 @@ public abstract class CategorizedCorpusBase
         if (!categoryCorpusMap.containsKey(category)) {
             throw new CorpusException("Unknown category " + category);
         }
+    }
+    
+    @Override
+    public Tagset getTagset()
+    {
+        Set<Tagset> tagsets = new HashSet<Tagset>();
+        for (Corpus corpus : categoryCorpusMap.values()) {
+            tagsets.add(corpus.getTagset());
+        }
+        if (tagsets.size() > 1) {
+            System.out.println("Warning: Corpora with different tagsets in collection. Returning first one.");
+        }
+        return tagsets.iterator().next();
     }
 }

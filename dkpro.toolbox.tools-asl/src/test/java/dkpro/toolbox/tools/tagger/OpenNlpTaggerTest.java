@@ -24,6 +24,7 @@ import java.util.Collection;
 import org.junit.Test;
 
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 
 public class OpenNlpTaggerTest
@@ -38,23 +39,23 @@ public class OpenNlpTaggerTest
                 new TaggedToken[] {
                     new TaggedToken(
                             "This",
-                            new Tag("DT", "en")
+                            new Tag("DT", Tagset.penntreebank)
                     ),
                     new TaggedToken(
                             "is",
-                            new Tag("VBZ", "en")
+                            new Tag("VBZ", Tagset.penntreebank)
                     ),
                     new TaggedToken(
                             "a",
-                            new Tag("DT", "en")
+                            new Tag("DT", Tagset.penntreebank)
                     ),
                     new TaggedToken(
                             "test",
-                            new Tag("NN", "en")
+                            new Tag("NN", Tagset.penntreebank)
                     ),
                     new TaggedToken(
                             ".",
-                            new Tag("SENT", "en")
+                            new Tag("SENT", Tagset.penntreebank)
                     ),
                 }
         );

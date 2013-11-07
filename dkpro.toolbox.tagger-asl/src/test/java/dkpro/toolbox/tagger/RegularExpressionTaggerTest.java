@@ -9,6 +9,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 
 public class RegularExpressionTaggerTest
@@ -28,7 +29,7 @@ public class RegularExpressionTaggerTest
         patternMap.put(".*ed$", "VBD");                 // past tense verbs
         patternMap.put(".*", "NN");                     // nouns (default)
         
-        RegularExpressionTagger tagger = new RegularExpressionTagger("en", patternMap);
+        RegularExpressionTagger tagger = new RegularExpressionTagger(Tagset.penntreebank, patternMap);
         
         List<String> tokens = new ArrayList<String>();
         String[] parts = "The Fulton County Grand Jury said Friday an investigation of Atlanta's recent primary election produced `` no evidence '' that any irregularities took place .".split(" ");
@@ -42,11 +43,11 @@ public class RegularExpressionTaggerTest
         
         // TODO add full test sentence
         List<TaggedToken> goldTokens = new ArrayList<TaggedToken>();
-        goldTokens.add(new TaggedToken("The", new Tag("DT", "en")));
-        goldTokens.add(new TaggedToken("Fulton", new Tag("NNP", "en")));
-        goldTokens.add(new TaggedToken("County", new Tag("NNP", "en")));
-        goldTokens.add(new TaggedToken("Grand", new Tag("NN", "en")));
-        goldTokens.add(new TaggedToken("Jury", new Tag("NN", "en")));
+        goldTokens.add(new TaggedToken("The", new Tag("DT", Tagset.penntreebank)));
+        goldTokens.add(new TaggedToken("Fulton", new Tag("NNP", Tagset.penntreebank)));
+        goldTokens.add(new TaggedToken("County", new Tag("NNP", Tagset.penntreebank)));
+        goldTokens.add(new TaggedToken("Grand", new Tag("NN", Tagset.penntreebank)));
+        goldTokens.add(new TaggedToken("Jury", new Tag("NN", Tagset.penntreebank)));
 
         double accuracy = tagger.getAccuracy(goldTokens);
         System.out.println("Accuracy: " + accuracy);

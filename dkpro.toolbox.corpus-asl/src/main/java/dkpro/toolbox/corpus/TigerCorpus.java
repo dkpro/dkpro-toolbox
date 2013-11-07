@@ -22,6 +22,7 @@ import org.apache.uima.fit.factory.CollectionReaderFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DkproContext;
 import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
+import dkpro.toolbox.core.Tag.Tagset;
 
 
 /**
@@ -73,6 +74,12 @@ public class TigerCorpus
     public String getLanguage()
     {
         return LANGUAGE;
+    }
+    
+    @Override
+    public Tagset getTagset()
+    {
+        return Tagset.stts;
     }
 
     @Override

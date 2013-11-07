@@ -28,6 +28,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.ToolboxException;
 
 public class ToolboxUtils
@@ -35,7 +36,7 @@ public class ToolboxUtils
 
     public static Sentence UimaSentence2ToolboxSentence(
             JCas jcas,
-            String languageCode,
+            Tagset tagset,
             de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence uimaSentence
     )
         throws ToolboxException
@@ -48,7 +49,7 @@ public class ToolboxUtils
         }
         List<Tag> tagList = new ArrayList<Tag>();
         for (POS pos : JCasUtil.selectCovered(jcas, POS.class, uimaSentence)) {
-            tagList.add(new Tag(pos.getPosValue(), languageCode));
+            tagList.add(new Tag(pos.getPosValue(), tagset));
         }
 
         return new Sentence(tokens, lemmas, tagList);
@@ -56,11 +57,11 @@ public class ToolboxUtils
 
     public static Tag UimaPos2ToolboxTag(
             JCas jcas,
-            String languageCode,
+            Tagset tagset,
             POS pos
     )
         throws ToolboxException
     {
-        return new Tag(pos.getPosValue(), languageCode);
+        return new Tag(pos.getPosValue(), tagset);
     }
 }

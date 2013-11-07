@@ -13,6 +13,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import dkpro.toolbox.core.Pronunciation;
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.Text;
 import dkpro.toolbox.corpus.Corpus;
@@ -134,5 +135,11 @@ public class CmuDict
     public String getDescription()
     {
         return "CMU pronunciation dictionary";
+    }
+
+    @Override
+    public Tagset getTagset()
+    {
+        throw new UnsupportedOperationException("CmuDict has no tagset.");
     }
 }

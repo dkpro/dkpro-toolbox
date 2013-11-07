@@ -1,3 +1,4 @@
 language=en
 name=man-who-was-thursday
 description="Sense and Sensibility by Jane Austen 1811"
+tagset=penntreebank
