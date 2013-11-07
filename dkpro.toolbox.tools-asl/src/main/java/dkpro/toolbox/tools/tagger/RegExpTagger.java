@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
-import dkpro.toolbox.core.Tag.Tagset;
 
 public class RegExpTagger
     extends ToolboxTaggerBase

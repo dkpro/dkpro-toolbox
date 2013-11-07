@@ -3,11 +3,11 @@ package dkpro.toolbox.tools.tagger;
 import org.junit.Test;
 
 import dkpro.toolbox.core.Sentence;
+import dkpro.toolbox.core.Tag.TagLevel;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.corpus.analyzed.AnalyzedCorpus;
 import dkpro.toolbox.corpus.analyzed.CorpusManager;
 import dkpro.toolbox.corpus.analyzed.CorpusManager.CorpusName;
-import dkpro.toolbox.tools.tagger.ToolboxTagger.TagLevel;
 
 public class LookupTaggerTest
 {

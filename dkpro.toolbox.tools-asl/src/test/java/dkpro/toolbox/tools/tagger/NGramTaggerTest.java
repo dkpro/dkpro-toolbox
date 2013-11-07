@@ -3,7 +3,7 @@ package dkpro.toolbox.tools.tagger;
 import org.junit.Test;
 
 import dkpro.toolbox.core.Sentence;
-import dkpro.toolbox.core.Tag.Tagset;
+import dkpro.toolbox.core.Tag.TagLevel;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.corpus.analyzed.AnalyzedCorpus;
 import dkpro.toolbox.corpus.analyzed.CorpusManager;
@@ -19,7 +19,7 @@ public class NGramTaggerTest
         Sentence sentence = CorpusManager.getSentence(CorpusName.MobyDick);      
         
         ToolboxTagger ngramTagger = new NGramTagger(
-                Tagset.penntreebank,
+                TagLevel.original,
                 corpus.getSentences(),
                 1
         );
