@@ -6,6 +6,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 
 public class RegExpTaggerTest
@@ -16,12 +17,12 @@ public class RegExpTaggerTest
             throws Exception
     {
         Map<String, Tag> patterns = new HashMap<String, Tag>();
-        patterns.put(".*ing$",  new Tag("VBG", "en"));  // gerunds
-        patterns.put(".*ed$",   new Tag("VBD", "en"));  // simple past
-        patterns.put(".*es$",   new Tag("VBZ", "en"));  // 3rd singular present
-        patterns.put(".*ould$", new Tag("MD",  "en"));  // modal verbs
-        patterns.put(".*s$",    new Tag("NNS", "en"));  // plural nouns
-        patterns.put(".*$",     new Tag("NN",  "en"));  // nouns (default)
+        patterns.put(".*ing$",  new Tag("VBG", Tagset.brown));  // gerunds
+        patterns.put(".*ed$",   new Tag("VBD", Tagset.brown));  // simple past
+        patterns.put(".*es$",   new Tag("VBZ", Tagset.brown));  // 3rd singular present
+        patterns.put(".*ould$", new Tag("MD",  Tagset.brown));  // modal verbs
+        patterns.put(".*s$",    new Tag("NNS", Tagset.brown));  // plural nouns
+        patterns.put(".*$",     new Tag("NN",  Tagset.brown));  // nouns (default)
 
         
         RegExpTagger tagger = new RegExpTagger(patterns);

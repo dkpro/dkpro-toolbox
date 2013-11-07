@@ -9,10 +9,17 @@ import dkpro.toolbox.core.ToolboxException;
 
 public interface ToolboxTagger
 {
-    public Collection<TaggedToken> tag(String text) throws ToolboxException;
+    public static final String UNKNOWN_TAG = "UNK";
     
+    public enum TagLevel {
+        original,
+        canonical,
+        simplified
+    }
+    
+    public Collection<TaggedToken> tag(String text) throws ToolboxException;
     public Collection<TaggedToken> tag(List<String> tokens) throws ToolboxException;
 
-    public void evaluate(List<Sentence> taggedSentences) throws ToolboxException;
-    public void evaluateCanonical(List<Sentence> taggedSentences) throws ToolboxException;
+    public void evaluate(Sentence taggedSentence, TagLevel tagLevel) throws ToolboxException;
+    public void evaluate(List<Sentence> taggedSentences, TagLevel tagLevel) throws ToolboxException;
 }

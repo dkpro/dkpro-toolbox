@@ -38,5 +38,4 @@ public class FirstNamesCorpus
     {
         return "Corpus of English first names";
     }
-
 }

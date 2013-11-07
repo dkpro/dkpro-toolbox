@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
 import dkpro.toolbox.corpus.CorpusException;
@@ -18,14 +19,17 @@ public class NGramTagger
     extends ToolboxTaggerBase
 {
     public static final String BOS = "<BOS>";
-
+    
     private ConditionalFrequencyDistribution<String, String> cfd;
-    
+    private Tagset tagset;
     private int ngramSize;
+    private TagLevel tagLevel;
     
-    public NGramTagger(Iterable<Sentence> sentences, int ngramSize)
+    public NGramTagger(Tagset tagset, Iterable<Sentence> sentences, int ngramSize)
         throws CorpusException
     {
+        this.tagset = tagset;
+        this.tagLevel = TagLevel.original;
         this.ngramSize = ngramSize;
         
         LimitedQueue<String> context = initializeContext();
@@ -35,7 +39,16 @@ public class NGramTagger
             for (TaggedToken taggedToken : sentence.getTaggedTokens()) {
                 // construct key from context tags and actual word
                 String tagKey = StringUtils.join(context, "+") + "+" + taggedToken.getToken();
-                String tag = taggedToken.getTag().getOriginalTag();
+                String tag = "";
+                if (tagLevel.equals(TagLevel.original)) {
+                    tag = taggedToken.getTag().getOriginalTag();
+                }
+                else if (tagLevel.equals(TagLevel.canonical)) {
+                    tag = taggedToken.getTag().getCanonicalTag();
+                }
+                else if (tagLevel.equals(TagLevel.simplified)) {
+                    tag = taggedToken.getTag().getSimplifiedTag();
+                }
                 cfd.inc(tagKey, tag);
                 context.add(tag);
             }
@@ -47,11 +60,25 @@ public class NGramTagger
         throws ToolboxException
     {
         LimitedQueue<String> context = initializeContext();
+       
+        List<TaggedToken> backoffTaggedTokens = null; 
+        if (backoffTagger != null) {
+            backoffTaggedTokens = new ArrayList<TaggedToken>(backoffTagger.tag(tokens));
+        }
         
-        List<TaggedToken> taggedTokens = new ArrayList<TaggedToken>();     
-        for (String token : tokens) {
+        List<TaggedToken> taggedTokens = new ArrayList<TaggedToken>();  
+        for (int i=0; i<tokens.size(); i++) {
+            String token = tokens.get(i);
+            
+            // get prediction
             String predictedString = getTag(context, token);
-            Tag tag = new Tag(predictedString, "en");
+            
+            // if unknown tag is predicted, fall back to backoff tagger
+            if (predictedString.equals(UNKNOWN_TAG) && backoffTagger != null) {
+                predictedString = backoffTaggedTokens.get(i).getTag().getOriginalTag();
+            }
+            
+            Tag tag = new Tag(predictedString, tagset);
             taggedTokens.add(new TaggedToken(token, tag));
             context.add(tag.getOriginalTag());
         }
@@ -62,7 +89,7 @@ public class NGramTagger
     private String getTag(LimitedQueue<String> context, String token) {
         String key = getCfdKey(context, token);
         
-        String tag = "UNK";
+        String tag = UNKNOWN_TAG;
         if (cfd.hasCondition(key)) {
             tag = cfd.getFrequencyDistribution(key).getMostFrequentSamples(1).get(0);
         }
@@ -81,5 +108,10 @@ public class NGramTagger
             context.add(BOS);
         }
         return context;
+    }
+
+    public void setTagLevel(TagLevel tagLevel)
+    {
+        this.tagLevel = tagLevel;
     }
 }

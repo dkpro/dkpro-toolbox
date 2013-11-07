@@ -19,6 +19,7 @@ package dkpro.toolbox.corpus;
 
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.Text;
 
@@ -33,6 +34,8 @@ public interface Corpus {
     public Iterable<Tag> getTags() throws CorpusException;
     
     public Iterable<Text> getTexts() throws CorpusException;
+
+    public Tagset getTagset();
 
     /**
      * @return The language code of the corpus language.

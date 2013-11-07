@@ -25,24 +25,47 @@ import dkpro.toolbox.core.util.TagUtil;
 
 public class Tag
 {
+    public enum Tagset {
+        brown,
+        penntreebank,
+        stts
+    }
 
     private String originalTag;
     private String canonicalTag;
     private String simplifiedTag;
     
-    public Tag(String aTag, String language)
+    public Tag(String aTag)
             throws ToolboxException
     {
         super();
-        initialize(aTag, language);
+        initialize(aTag, Tagset.penntreebank);
     }
-    
-    private void initialize(String aTag, String language)
+
+    public Tag(String aTag, Tagset tagset)
             throws ToolboxException
     {
-        MappingProvider provider;
+        super();
+        initialize(aTag, tagset);
+    }
+    
+    private void initialize(String aTag, Tagset tagset)
+            throws ToolboxException
+    {
+        MappingProvider provider = null;
         try {
-            provider = TagUtil.getMappingProviderBrown();
+            if (tagset.equals(Tagset.brown)) {
+                provider = TagUtil.getMappingProviderPTB();
+
+            }
+            else if (tagset.equals(Tagset.penntreebank)) {
+                provider = TagUtil.getMappingProviderPTB();
+ 
+            }
+            else {
+                throw new ToolboxException("Tagset currently not provided: " + tagset);
+            }
+            
             Type posType = provider.getTagType(aTag.toUpperCase());
             String simpleTag = getSimpleTag(posType.getShortName());
 

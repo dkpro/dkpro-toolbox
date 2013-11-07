@@ -24,15 +24,16 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
 import dkpro.toolbox.core.Sentence;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.ToolboxException;
 
 public class SentenceIterable
     extends CorpusIterableBase<Sentence>
 {
 
-    public SentenceIterable(JCasIterator jcasIterator, String language)
+    public SentenceIterable(JCasIterator jcasIterator, Tagset tagset)
     {
-        super(jcasIterator, language);
+        super(jcasIterator, tagset);
     }
 
     @Override
@@ -42,7 +43,7 @@ public class SentenceIterable
         if (jcasIterator.hasNext()) {
             JCas jcas = jcasIterator.next();
             for (de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence uimaSentence : JCasUtil.select(jcas, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence.class)) {
-                items.add(ToolboxUtils.UimaSentence2ToolboxSentence(jcas, language , uimaSentence));
+                items.add(ToolboxUtils.UimaSentence2ToolboxSentence(jcas, tagset , uimaSentence));
             }
         }
     }

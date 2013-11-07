@@ -1,5 +1,6 @@
 package dkpro.toolbox.corpus.analyzed.util;
 
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.corpus.TextCorpus;
 import dkpro.toolbox.corpus.analyzed.AnalyzedCorpus;
 
@@ -85,6 +86,7 @@ public class SerializeCorpora
         
         new TextCorpus(
               "src/test/resources/test_corpora/text/udhr/",
+              Tagset.penntreebank,
               "mixed", 
               "udhr",
               "Universal Declaration of Human Rights",

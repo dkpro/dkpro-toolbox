@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.Text;
 import dkpro.toolbox.corpus.util.merged.MergedSentenceIterable;
@@ -98,5 +99,18 @@ public class MergedCorpus
             descriptions.add(corpus.getLanguage());
         }
         return StringUtils.join(descriptions, "/");
+    }
+    
+    @Override
+    public Tagset getTagset()
+    {
+        Set<Tagset> tagsets = new HashSet<Tagset>();
+        for (Corpus corpus : corpora) {
+            tagsets.add(corpus.getTagset());
+        }
+        if (tagsets.size() > 1) {
+            System.out.println("Warning: Corpora with different tagsets in collection. Returning first one.");
+        }
+        return tagsets.iterator().next();
     }
 }

@@ -33,6 +33,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import dkpro.toolbox.core.Tag;
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
 
@@ -68,11 +69,12 @@ public class OpenNlpPosTagger
             segmenter.process(jcas);
             tagger.process(jcas);
 
+            // TODO get correct tagset according to language
             for (Token t : select(jcas, Token.class)) {
                 String token = t.getCoveredText();
                 Tag tag = new Tag(
                         t.getPos().getPosValue(),
-                        language
+                        Tagset.penntreebank
                 );
                 taggedTokens.add(new TaggedToken(token, tag));
             }

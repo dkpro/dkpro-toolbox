@@ -23,6 +23,7 @@ import org.apache.uima.fit.factory.CollectionReaderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DkproContext;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbReader;
+import dkpro.toolbox.core.Tag.Tagset;
 
 /**
  * A wrapper for the WaCky large-scale Web corpora. It searches a DKPRO_HOME
@@ -112,6 +113,12 @@ public class WackyCorpus
     protected CollectionReaderDescription getReader()
     {
         return reader;
+    }
+    
+    @Override
+    public Tagset getTagset()
+    {
+        return Tagset.penntreebank;
     }
 
     @Override

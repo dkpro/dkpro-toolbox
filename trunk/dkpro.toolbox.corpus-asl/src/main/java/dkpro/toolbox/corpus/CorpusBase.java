@@ -46,17 +46,8 @@ public abstract class CorpusBase
     private List<TaggedToken> taggedTokens;
     private List<Text> texts;
 
-    @Override
-    public abstract String getLanguage();
-
-    @Override
-    public abstract String getName();
-
-    @Override
-    public abstract String getDescription();
-
     protected abstract CollectionReaderDescription getReader();
-
+    
     @Override
     public Iterable<Sentence> getSentences()
         throws CorpusException
@@ -64,14 +55,14 @@ public abstract class CorpusBase
         if (useCaching) {
             if (sentences == null) {
                 sentences = new ArrayList<Sentence>();
-                for (Sentence sentence : new SentenceIterable(new JCasIterable(getReader()).iterator(), getLanguage())) {
+                for (Sentence sentence : new SentenceIterable(new JCasIterable(getReader()).iterator(), getTagset())) {
                     sentences.add(sentence);
                 }
             }
             return sentences;
         }
         else {
-            return new SentenceIterable(new JCasIterable(getReader()).iterator(), getLanguage());
+            return new SentenceIterable(new JCasIterable(getReader()).iterator(), getTagset());
         }
     }
 
@@ -82,14 +73,14 @@ public abstract class CorpusBase
         if (useCaching) {
             if (taggedTokens == null) {
                 taggedTokens = new ArrayList<TaggedToken>();
-                for (TaggedToken taggedToken : new TaggedTokenIterable(new JCasIterable(getReader()).iterator(), getLanguage())) {
+                for (TaggedToken taggedToken : new TaggedTokenIterable(new JCasIterable(getReader()).iterator(), getTagset())) {
                     taggedTokens.add(taggedToken);
                 }
             }
             return taggedTokens;
         }
         else {
-            return new TaggedTokenIterable(new JCasIterable(getReader()).iterator(), getLanguage());
+            return new TaggedTokenIterable(new JCasIterable(getReader()).iterator(), getTagset());
         }
     }
 
@@ -100,14 +91,14 @@ public abstract class CorpusBase
         if (useCaching) {
             if (tags == null) {
                 tags = new ArrayList<Tag>();
-                for (Tag tag : new TagIterable(new JCasIterable(getReader()).iterator(), getLanguage())) {
+                for (Tag tag : new TagIterable(new JCasIterable(getReader()).iterator(), getTagset())) {
                     tags.add(tag);
                 }
             }
             return tags;
         }
         else {
-            return new TagIterable(new JCasIterable(getReader()).iterator(), getLanguage());
+            return new TagIterable(new JCasIterable(getReader()).iterator(), getTagset());
         }
     }
 
@@ -118,14 +109,14 @@ public abstract class CorpusBase
         if (useCaching) {
             if (texts == null) {
                 texts = new ArrayList<Text>();
-                for (Text text : new TextIterable(new JCasIterable(getReader()).iterator(), getLanguage())) {
+                for (Text text : new TextIterable(new JCasIterable(getReader()).iterator(), getTagset())) {
                     texts.add(text);
                 }
             }
             return texts;
         }
         else {
-            return new TextIterable(new JCasIterable(getReader()).iterator(), getLanguage());
+            return new TextIterable(new JCasIterable(getReader()).iterator(), getTagset());
         }
     }
 
@@ -136,14 +127,14 @@ public abstract class CorpusBase
         if (useCaching) {
             if (tokens == null) {
                 tokens = new ArrayList<String>();
-                for (String token : new TokenIterable(new JCasIterable(getReader()).iterator(), getLanguage())) {
+                for (String token : new TokenIterable(new JCasIterable(getReader()).iterator(), getTagset())) {
                     tokens.add(token);
                 }
             }
             return tokens;
         }
         else {
-            return new TokenIterable(new JCasIterable(getReader()).iterator(), getLanguage());
+            return new TokenIterable(new JCasIterable(getReader()).iterator(), getTagset());
         }
     }
 

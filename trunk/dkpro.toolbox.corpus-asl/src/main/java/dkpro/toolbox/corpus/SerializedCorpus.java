@@ -26,6 +26,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasReader;
+import dkpro.toolbox.core.Tag.Tagset;
 
 
 /**
@@ -39,6 +40,7 @@ public class SerializedCorpus
 {
 
     protected CollectionReaderDescription reader;
+    private Tagset tagset;
     private String language;
     private String name;
     private String description;
@@ -73,6 +75,7 @@ public class SerializedCorpus
             name = prop.getProperty("name");
             language = prop.getProperty("language");
             description = prop.getProperty("description");
+            tagset = Tagset.valueOf(prop.getProperty("tagset"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -82,6 +85,12 @@ public class SerializedCorpus
     protected CollectionReaderDescription getReader()
     {
         return reader;
+    }
+    
+    @Override
+    public Tagset getTagset()
+    {
+        return tagset;
     }
 
     @Override

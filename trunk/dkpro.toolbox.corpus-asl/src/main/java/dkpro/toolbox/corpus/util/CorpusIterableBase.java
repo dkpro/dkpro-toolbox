@@ -23,17 +23,18 @@ import java.util.Queue;
 
 import org.apache.uima.fit.pipeline.JCasIterator;
 
+import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.ToolboxException;
 
 public abstract class CorpusIterableBase
     <T> implements Iterable<T>
 {
     protected final JCasIterator jcasIterator;
-    protected final String language;
+    protected final Tagset tagset;
 
-    public CorpusIterableBase(JCasIterator jcasIterator, String language) {
+    public CorpusIterableBase(JCasIterator jcasIterator, Tagset tagset) {
         this.jcasIterator = jcasIterator;
-        this.language = language;
+        this.tagset = tagset;
     }
 
     @Override
