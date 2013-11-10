@@ -1,4 +1,4 @@
-package dkpro.toolbox.tools.tagger;
+package dkpro.toolbox.tagger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,9 +76,11 @@ public abstract class ToolboxTaggerBase
                 
                 if (goldTag.equals(assignedTag)) {
                     correct++;
+//                    System.out.println("c: " + taggedSentence.getTokens().get(i) + " - " + goldTag + " - " + assignedTag);
+
                 }
                 else {
-//                    System.out.println(taggedSentence.getTokens().get(i) + " - " + goldTag + " - " + assignedTag);
+//                    System.out.println("w: " + taggedSentence.getTokens().get(i) + " - " + goldTag + " - " + assignedTag);
                 }
             }
         }

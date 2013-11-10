@@ -61,6 +61,7 @@ public class DkproCorpus
     )
             throws CorpusException
     {
+        this.tagset = tagset;
         this.language = language;
         this.name = name;
         this.description = description;

@@ -1,4 +1,4 @@
-package dkpro.toolbox.tools.tagger;
+package dkpro.toolbox.tagger;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,7 +13,7 @@ import dkpro.toolbox.core.Tag.TagLevel;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
 import dkpro.toolbox.corpus.CorpusException;
-import dkpro.toolbox.tools.tagger.util.LimitedQueue;
+import dkpro.toolbox.tagger.util.LimitedQueue;
 
 public class NGramTagger
     extends ToolboxTaggerBase
@@ -78,33 +78,32 @@ public class NGramTagger
                 if (tagLevel.equals(TagLevel.original)) {
                     predictedString = backoffTaggedTokens.get(i).getTag().getOriginalTag();
                     tag = new Tag(predictedString, null, null);
-                    context.add(tag.getOriginalTag());
                 }
                 else if (tagLevel.equals(TagLevel.canonical)) {
                     predictedString = backoffTaggedTokens.get(i).getTag().getCanonicalTag();
                     tag = new Tag(null, predictedString, null);
-                    context.add(tag.getCanonicalTag());
                 }
                 else if (tagLevel.equals(TagLevel.simplified)) {
                     predictedString = backoffTaggedTokens.get(i).getTag().getSimplifiedTag();
                     tag = new Tag(null, null, predictedString);
-                    context.add(tag.getSimplifiedTag());
                 }
             }
             else {
                 if (tagLevel.equals(TagLevel.original)) {
                     tag = new Tag(predictedString, null, null);
-                    context.add(tag.getOriginalTag());
                 }
                 else if (tagLevel.equals(TagLevel.canonical)) {
                     tag = new Tag(null, predictedString, null);
-                    context.add(tag.getCanonicalTag());
                 }
                 else if (tagLevel.equals(TagLevel.simplified)) {
                     tag = new Tag(null, null, predictedString);
-                    context.add(tag.getSimplifiedTag());
                 }
+                
+//                if (ngramSize == 2) {
+//                    System.out.println("bigram tagged: " + context + "+" + token + " -> " + predictedString);
+//                }
             }
+            context.add(predictedString);
             taggedTokens.add(new TaggedToken(token, tag));
         }
         

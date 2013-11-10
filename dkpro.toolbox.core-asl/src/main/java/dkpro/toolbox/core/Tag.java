@@ -67,17 +67,21 @@ public class Tag
         MappingProvider provider = null;
         try {
             if (tagset.equals(Tagset.brown)) {
-                provider = TagUtil.getMappingProviderPTB();
+                provider = TagUtil.getMappingProviderBrown();
 
             }
             else if (tagset.equals(Tagset.penntreebank)) {
                 provider = TagUtil.getMappingProviderPTB();
  
             }
+            else if (tagset.equals(Tagset.stts)) {
+                provider = TagUtil.getMappingProviderSTTS();
+ 
+            }
             else {
                 throw new ToolboxException("Tagset currently not provided: " + tagset);
             }
-            
+
             Type posType = provider.getTagType(aTag.toUpperCase());
             String simpleTag = getSimpleTag(posType.getShortName());
 

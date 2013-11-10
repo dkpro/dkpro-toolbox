@@ -1,4 +1,4 @@
-package dkpro.toolbox.tools.tagger.util;
+package dkpro.toolbox.tagger.util;
 
 import java.util.LinkedList;
 
