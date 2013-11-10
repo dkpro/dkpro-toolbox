@@ -30,36 +30,48 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 public class TagUtil
 {
 
-    private static MappingProvider posMappingProvider = null;
+    private static final String pathBase = "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/";
+
+    private static MappingProvider posMappingProviderBrown = null;
+    private static MappingProvider posMappingProviderPTB = null;
+    private static MappingProvider posMappingProviderSTTS = null;
+
 
     public static MappingProvider getMappingProviderBrown() throws ResourceInitializationException {
-        if (posMappingProvider == null) {
-
-            posMappingProvider = new MappingProvider();
-            posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/tagmapping/en-brown.map");
-            posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-            posMappingProvider.setDefault("pos.tagset", "default");
-
-            AnalysisEngine engine = createEngine(OpenNlpPosTagger.class);
-            posMappingProvider.configure(engine.newCAS());
+        if (posMappingProviderBrown == null) {
+            posMappingProviderBrown = initialize(pathBase + "/en-brown-pos.map");           
         }
 
-        return posMappingProvider;
+        return posMappingProviderBrown;
     }
     
     public static MappingProvider getMappingProviderPTB() throws ResourceInitializationException {
-        if (posMappingProvider == null) {
-
-            posMappingProvider = new MappingProvider();
-            posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-                    "core/api/lexmorph/tagset/en-ptb-pos.map");
-            posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-            posMappingProvider.setDefault("pos.tagset", "default");
-
-            AnalysisEngine engine = createEngine(OpenNlpPosTagger.class);
-            posMappingProvider.configure(engine.newCAS());
+        if (posMappingProviderPTB == null) {
+            posMappingProviderPTB = initialize(pathBase + "/en-ptb-pos.map");  
         }
 
-        return posMappingProvider;
+        return posMappingProviderPTB;
+    }
+    
+    public static MappingProvider getMappingProviderSTTS() throws ResourceInitializationException {
+        if (posMappingProviderSTTS == null) {
+            posMappingProviderSTTS = initialize(pathBase + "/de-stts-pos.map");           
+        }
+
+        return posMappingProviderSTTS;
+    }
+    
+    private static MappingProvider initialize(String path)
+            throws ResourceInitializationException 
+    {
+        MappingProvider provider = new MappingProvider();
+        provider.setDefault(MappingProvider.LOCATION, path);
+        provider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+        provider.setDefault("pos.tagset", "default");
+
+        AnalysisEngine engine = createEngine(OpenNlpPosTagger.class);
+        provider.configure(engine.newCAS());
+        
+        return provider;
     }
 }

@@ -1,4 +1,4 @@
-package dkpro.toolbox.tools.tagger;
+package dkpro.toolbox.tagger;
 
 import java.util.ArrayList;
 import java.util.Collection;

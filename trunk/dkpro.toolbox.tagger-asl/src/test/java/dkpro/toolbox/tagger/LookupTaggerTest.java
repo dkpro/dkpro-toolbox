@@ -1,4 +1,4 @@
-package dkpro.toolbox.tools.tagger;
+package dkpro.toolbox.tagger;
 
 import org.junit.Test;
 
@@ -9,7 +9,7 @@ import dkpro.toolbox.corpus.analyzed.AnalyzedCorpus;
 import dkpro.toolbox.corpus.analyzed.CorpusManager;
 import dkpro.toolbox.corpus.analyzed.CorpusManager.CorpusName;
 
-public class NGramTaggerTest
+public class LookupTaggerTest
 {
     @Test
     public void lookupTaggerTest()
@@ -18,13 +18,11 @@ public class NGramTaggerTest
         AnalyzedCorpus corpus = CorpusManager.getCorpus(CorpusName.MobyDick);
         Sentence sentence = CorpusManager.getSentence(CorpusName.MobyDick);      
         
-        ToolboxTagger ngramTagger = new NGramTagger(
-                TagLevel.original,
-                corpus.getSentences(),
-                1
-        );
-                
-        for (TaggedToken taggedToken : ngramTagger.tag(sentence.getTokens())) {
+        ToolboxTagger lookupTagger = new LookupTagger(corpus, 100);
+        
+        lookupTagger.evaluate(corpus.getSentenceList(), TagLevel.original);
+        
+        for (TaggedToken taggedToken : lookupTagger.tag(sentence.getTokens())) {
             System.out.println(taggedToken);
         }
     }
