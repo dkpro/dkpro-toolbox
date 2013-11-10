@@ -139,6 +139,7 @@
   <module>dkpro.toolbox.tools-asl</module>
   <module>dkpro.toolbox.tutorial-asl</module>
   <module>dkpro.toolbox.tagger-asl</module>
+  <module>dkpro.toolbox.wordnet-asl</module>
   </modules>
     <scm>
     <url>http://code.google.com/p/dkpro-toolbox/source/browse/#svn/trunk</url>
