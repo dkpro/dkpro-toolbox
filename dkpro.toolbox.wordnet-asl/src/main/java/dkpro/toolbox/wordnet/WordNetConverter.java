@@ -1,139 +1,91 @@
 package dkpro.toolbox.wordnet;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
+import java.util.HashSet;
+import java.util.Set;
 
-import net.sf.json.JSON;
-import net.sf.json.JSONSerializer;
+import net.didion.jwnl.dictionary.Dictionary;
 
-import org.apache.tools.bzip2.CBZip2InputStream;
-import org.apache.tools.bzip2.CBZip2OutputStream;
+import org.apache.commons.io.FileUtils;
+
+import com.google.gson.Gson;
 
 import de.tudarmstadt.ukp.dkpro.lexsemresource.Entity;
-import de.tudarmstadt.ukp.dkpro.lexsemresource.LexicalSemanticResource;
+import de.tudarmstadt.ukp.dkpro.lexsemresource.LexicalSemanticResource.LexicalRelation;
+import de.tudarmstadt.ukp.dkpro.lexsemresource.LexicalSemanticResource.SemanticRelation;
 import de.tudarmstadt.ukp.dkpro.lexsemresource.core.ResourceFactory;
+import de.tudarmstadt.ukp.dkpro.lexsemresource.wordnet.WordNetResource;
+import de.tudarmstadt.ukp.dkpro.lexsemresource.wordnet.util.WordNetUtils;
 
 public class WordNetConverter
 {
 
     public static void main(String[] args) throws Exception
     {
-        LexicalSemanticResource wordnet = ResourceFactory.getInstance().get("wordnet", "en");
-    
-//        JsonConfig config = new JsonConfig();        
+        Gson gson = new Gson();
+        File folder = new File("target/wordnet_json/");
+        folder.mkdirs();
         
-        int i=0;
+        WordNetResource wordnet = (WordNetResource) ResourceFactory.getInstance().get("wordnet", "en");
+        
+        Dictionary dict = wordnet.getDict();
+        
+        LemmaMap lemmaMap = new LemmaMap();
+        SynsetMap synsetMap = new SynsetMap();
+
         for (Entity entity : wordnet.getEntities()) {
-            File folder = new File("target/wordnet_j");
-            folder.mkdirs();
-            File file = new File(folder, i + ".json");
-            file.createNewFile();
-
-            JSON json = JSONSerializer.toJSON(entity);
-            json.write(new FileWriter(file));
+            Synset synset = new Synset();
             
-//            serialize(new File("target/wordnet_ser/e" + i + ".gz"), entity);
-            if (i == 5) {
-                break;
+            Set<String> antonyms = wordnet.getRelatedLexemes(entity.getFirstLexeme(), entity.getPos(), entity.getSense(entity.getFirstLexeme()), LexicalRelation.antonymy);
+            synset.setAntonyms(antonyms);
+            
+            for (SemanticRelation relation : SemanticRelation.values()) {
+                Set<String> items = new HashSet<String>();
+                
+                for (Entity relatedEntity : wordnet.getRelatedEntities(entity, relation))
+                {
+                    items.add(relatedEntity.getSense(relatedEntity.getFirstLexeme()));
+                }
+                
+                switch (relation) {
+                    case hypernymy:
+                        synset.setHypernyms(items);
+                        break;
+                    case hyponymy:
+                        synset.setHyponyms(items);
+                        break;
+                    case meronymy:
+                        synset.setMeronyms(items);
+                        break;
+                    case holonymy:
+                        synset.setHolonyms(items);
+                        break;
+                    default:
+                        break;
+                }
             }
-            i++;
-        }  
+            
+            StringBuilder sb = new StringBuilder();
+            for (net.didion.jwnl.data.Synset wnSynset : WordNetUtils.entityToSynsets(dict, entity, false)) {
+                sb.append(wnSynset.getGloss());
+                sb.append(" ");
+            }
+            synset.setDefinition(sb.toString());
+            
+            synset.setSenseId(entity.getSense(entity.getFirstLexeme()));
+            synset.setLemmas(entity.getLexemes());
+            synset.setPos(entity.getPos().name());
+            
+            for (String lemma : synset.getLemmas()) {
+                lemmaMap.addLemma(lemma, synset.getSenseId());
+            }
+            synsetMap.addSynset(synset.getSenseId(), synset);
+        }
+        
+        File lemmaFile = new File(folder, "lemmamap.json");
+        FileUtils.writeStringToFile(lemmaFile, gson.toJson(lemmaMap));
+        
+        File synsetFile = new File(folder, "synsetmap.json");
+        FileUtils.writeStringToFile(synsetFile, gson.toJson(synsetMap));
     }
-    
-    /**
-     * Saves a serializable object of type <T> to disk. Output file may be uncompressed, gzipped or
-     * bz2-compressed. Compressed files must have a .gz or .bz2 suffix.
-     * 
-     * @param serializedFile
-     *            model output file
-     * @param serializableObject
-     *            the object to serialize
-     * @throws IOException
-     */
-    public static void serialize(File serializedFile, Object serializableObject)
-        throws IOException
-    {
-
-        FileOutputStream fos = new FileOutputStream(serializedFile);
-        BufferedOutputStream bufStr = new BufferedOutputStream(fos);
-
-        OutputStream underlyingStream = null;
-        if (serializedFile.getName().endsWith(".gz")) {
-            underlyingStream = new GZIPOutputStream(bufStr);
-        }
-        else if (serializedFile.getName().endsWith(".bz2")) {
-            underlyingStream = new CBZip2OutputStream(bufStr);
-            // manually add bz2 prefix to make it compatible to normal bz2 tools
-            // prefix has to be skipped when reading the stream with CBZip2
-            fos.write("BZ".getBytes());
-        }
-        else {
-            underlyingStream = bufStr;
-        }
-        ObjectOutputStream serializer = new ObjectOutputStream(underlyingStream);
-        try {
-            serializer.writeObject(serializableObject);
-
-        }
-        finally {
-            serializer.flush();
-            serializer.close();
-        }
-    }
-
-    /**
-     * Loads serialized Object from disk. File can be uncompressed, gzipped or bz2-compressed.
-     * Compressed files must have a .gz or .bz2 suffix.
-     * 
-     * @param serializedFile
-     * @return the deserialized Object
-     * @throws IOException
-     */
-    @SuppressWarnings({ "unchecked" })
-    public static <T> T deserialize(File serializedFile)
-        throws IOException
-    {
-        FileInputStream fis = new FileInputStream(serializedFile);
-        BufferedInputStream bufStr = new BufferedInputStream(fis);
-
-        InputStream underlyingStream = null;
-        if (serializedFile.getName().endsWith(".gz")) {
-            underlyingStream = new GZIPInputStream(bufStr);
-        }
-        else if (serializedFile.getName().endsWith(".bz2")) {
-            // skip bzip2 prefix that we added manually
-            fis.read();
-            fis.read();
-            underlyingStream = new CBZip2InputStream(bufStr);
-        }
-        else {
-            underlyingStream = bufStr;
-        }
-
-        ObjectInputStream deserializer = new ObjectInputStream(underlyingStream);
-
-        Object deserializedObject = null;
-        try {
-            deserializedObject = deserializer.readObject();
-        }
-        catch (ClassNotFoundException e) {
-            throw new IOException("The serialized file was probably corrupted.", e);
-        }
-        finally {
-            deserializer.close();
-        }
-        return (T) deserializedObject;
-    }
-
 }
