@@ -9,6 +9,7 @@ import static org.junit.Assert.fail;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -31,6 +32,12 @@ public class PrincetonWordNetTest
         }
     }
 
+    @AfterClass
+    public static void finish()
+    {
+        wordnet = null;
+    }
+    
     @Test
     public void testContainsLemma() throws Exception
     {
