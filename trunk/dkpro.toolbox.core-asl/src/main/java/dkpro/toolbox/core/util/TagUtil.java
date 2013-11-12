@@ -19,12 +19,16 @@ package dkpro.toolbox.core.util;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 
+import java.io.IOException;
+
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
+import dkpro.toolbox.core.ToolboxException;
 
 
 public class TagUtil
@@ -37,7 +41,7 @@ public class TagUtil
     private static MappingProvider posMappingProviderSTTS = null;
 
 
-    public static MappingProvider getMappingProviderBrown() throws ResourceInitializationException {
+    public static MappingProvider getMappingProviderBrown() throws ToolboxException {
         if (posMappingProviderBrown == null) {
             posMappingProviderBrown = initialize(pathBase + "/en-brown-pos.map");           
         }
@@ -45,7 +49,7 @@ public class TagUtil
         return posMappingProviderBrown;
     }
     
-    public static MappingProvider getMappingProviderPTB() throws ResourceInitializationException {
+    public static MappingProvider getMappingProviderPTB() throws ToolboxException {
         if (posMappingProviderPTB == null) {
             posMappingProviderPTB = initialize(pathBase + "/en-ptb-pos.map");  
         }
@@ -53,7 +57,7 @@ public class TagUtil
         return posMappingProviderPTB;
     }
     
-    public static MappingProvider getMappingProviderSTTS() throws ResourceInitializationException {
+    public static MappingProvider getMappingProviderSTTS() throws ToolboxException {
         if (posMappingProviderSTTS == null) {
             posMappingProviderSTTS = initialize(pathBase + "/de-stts-pos.map");           
         }
@@ -62,16 +66,30 @@ public class TagUtil
     }
     
     private static MappingProvider initialize(String path)
-            throws ResourceInitializationException 
+            throws ToolboxException 
     {
-        MappingProvider provider = new MappingProvider();
-        provider.setDefault(MappingProvider.LOCATION, path);
-        provider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        provider.setDefault("pos.tagset", "default");
+        try {
+            String resolvedPath = ResourceUtils.resolveLocation(path).getFile();
+            
+            MappingProvider provider = new MappingProvider();
+            provider.setDefault(MappingProvider.LOCATION, resolvedPath);
+            provider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+            provider.setDefault("pos.tagset", "default");
 
-        AnalysisEngine engine = createEngine(OpenNlpPosTagger.class);
-        provider.configure(engine.newCAS());
-        
-        return provider;
+            AnalysisEngine engine = createEngine(OpenNlpPosTagger.class);
+            provider.configure(engine.newCAS());
+            
+            if (provider.getResource() == null) {
+                throw new ToolboxException("No resource found at: " + resolvedPath);
+            }
+            
+            return provider;
+        }
+        catch (IOException e) {
+            throw new ToolboxException(e);
+        }
+        catch (ResourceInitializationException e) {
+            throw new ToolboxException(e);
+        }
     }
 }

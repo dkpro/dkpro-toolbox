@@ -18,7 +18,6 @@
 package dkpro.toolbox.core;
 
 import org.apache.uima.cas.Type;
-import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import dkpro.toolbox.core.util.TagUtil;
@@ -65,33 +64,28 @@ public class Tag
             throws ToolboxException
     {
         MappingProvider provider = null;
-        try {
-            if (tagset.equals(Tagset.brown)) {
-                provider = TagUtil.getMappingProviderBrown();
+        if (tagset.equals(Tagset.brown)) {
+            provider = TagUtil.getMappingProviderBrown();
 
-            }
-            else if (tagset.equals(Tagset.penntreebank)) {
-                provider = TagUtil.getMappingProviderPTB();
- 
-            }
-            else if (tagset.equals(Tagset.stts)) {
-                provider = TagUtil.getMappingProviderSTTS();
- 
-            }
-            else {
-                throw new ToolboxException("Tagset currently not provided: " + tagset);
-            }
-
-            Type posType = provider.getTagType(aTag.toUpperCase());
-            String simpleTag = getSimpleTag(posType.getShortName());
-
-            this.originalTag = aTag;
-            this.canonicalTag = posType.getShortName();
-            this.simplifiedTag = simpleTag;
         }
-        catch (ResourceInitializationException e) {
-            throw new ToolboxException();
+        else if (tagset.equals(Tagset.penntreebank)) {
+            provider = TagUtil.getMappingProviderPTB();
+
         }
+        else if (tagset.equals(Tagset.stts)) {
+            provider = TagUtil.getMappingProviderSTTS();
+
+        }
+        else {
+            throw new ToolboxException("Tagset currently not provided: " + tagset);
+        }
+
+        Type posType = provider.getTagType(aTag.toUpperCase());
+        String simpleTag = getSimpleTag(posType.getShortName());
+
+        this.originalTag = aTag;
+        this.canonicalTag = posType.getShortName();
+        this.simplifiedTag = simpleTag;
     }
     
     private String getSimpleTag(String shortName) {
