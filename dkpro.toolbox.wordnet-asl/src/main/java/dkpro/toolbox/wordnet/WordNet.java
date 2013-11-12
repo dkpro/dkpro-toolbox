@@ -15,6 +15,7 @@ public interface WordNet
 
     public boolean containsLemma(String lemma) throws ToolboxException;
 
+    public Set<Synset> getSynsets() throws ToolboxException;
     public Set<Synset> getSynsets(String lemma) throws ToolboxException;
     public Set<Synset> getSynsets(String lemma, WordNetPos pos) throws ToolboxException;
     
