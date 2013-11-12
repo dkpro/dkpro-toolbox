@@ -47,6 +47,13 @@ public class PrincetonWordNet
     }
     
     @Override
+    public Set<Synset> getSynsets()
+        throws ToolboxException
+    {
+        return new HashSet<Synset>(synsetMap.getSynsetMap().values());
+    }
+    
+    @Override
     public Set<Synset> getSynsets(String lemma)
     {
         if (lemmaMap.getLemmaMap().containsKey(lemma)) {
