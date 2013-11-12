@@ -21,7 +21,7 @@ import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.Text;
-import dkpro.toolbox.corpus.BrownTeiCorpus;
+import dkpro.toolbox.corpus.BrownCorpus;
 import dkpro.toolbox.corpus.Corpus;
 
 public class CorpusUsage
@@ -29,7 +29,7 @@ public class CorpusUsage
 
     public static void main(String[] args) throws Exception
     {
-        Corpus brownCorpus = new BrownTeiCorpus();
+        Corpus brownCorpus = new BrownCorpus();
         
         for (Text t : brownCorpus.getTexts()) {
             System.out.println(t);

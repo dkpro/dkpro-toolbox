@@ -32,7 +32,7 @@ public class BrownCorpusTest
 
     @Test
     public void brownTest() throws Exception {
-        Corpus corpus = new BrownTeiCorpus("src/test/resources/test_corpora/brown/");
+        Corpus corpus = new BrownCorpus("src/test/resources/test_corpora/brown/");
         
         int nrOfTexts = 0;
         for (Text text : corpus.getTexts()) {
@@ -75,7 +75,7 @@ public class BrownCorpusTest
     public void cacheTest()
         throws Exception
     {
-        CachableCorpus corpus = new BrownTeiCorpus();
+        CachableCorpus corpus = new BrownCorpus();
         corpus.setUseCaching(true);
         
         for (Sentence s : corpus.getSentences()) {
@@ -89,7 +89,7 @@ public class BrownCorpusTest
     @Ignore
     @Test
     public void brownTest_DKPRO_HOME() throws Exception {
-        CorpusBase corpus = new BrownTeiCorpus();
+        CorpusBase corpus = new BrownCorpus();
         
         for (Text text : corpus.getTexts()) {
             System.out.println(text);

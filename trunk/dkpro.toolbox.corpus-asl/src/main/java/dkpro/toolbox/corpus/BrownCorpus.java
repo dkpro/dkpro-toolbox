@@ -22,7 +22,6 @@ import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.DkproContext;
 import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader;
 import dkpro.toolbox.core.Tag.Tagset;
 
@@ -33,7 +32,7 @@ import dkpro.toolbox.core.Tag.Tagset;
  * @author zesch
  *
  */
-public class BrownTeiCorpus
+public class BrownCorpus
     extends CorpusBase
 {
     static final String LANGUAGE = "en";
@@ -42,15 +41,13 @@ public class BrownTeiCorpus
 
     CollectionReaderDescription reader;
 
-    public BrownTeiCorpus() throws Exception
+    public BrownCorpus() throws Exception
     {
-        String brownPath = DkproContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() +
-        "/brown_tei/";
-
+        String brownPath = "classpath:/corpus/brown_tei/";
         initialize(brownPath);
     }
 
-    public BrownTeiCorpus(String brownPath) throws Exception
+    public BrownCorpus(String brownPath) throws Exception
     {
         initialize(brownPath);
     }
