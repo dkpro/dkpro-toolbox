@@ -38,7 +38,7 @@ public class CorpusReaderTest
 
         CollectionReaderDescription reader = createReaderDescription(
                 CorpusReader.class,
-                CorpusReader.PARAM_CORPUS, BrownTeiCorpus.class.getName()
+                CorpusReader.PARAM_CORPUS, BrownCorpus.class.getName()
         );
 
         int i = 0;

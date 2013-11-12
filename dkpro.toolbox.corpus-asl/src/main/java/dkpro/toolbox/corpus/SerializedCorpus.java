@@ -18,6 +18,7 @@
 package dkpro.toolbox.corpus;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Properties;
 
 import org.apache.uima.collection.CollectionReaderDescription;
@@ -70,7 +71,8 @@ public class SerializedCorpus
         
         try {
             //load a properties file
-            prop.load(ResourceUtils.resolveLocation(corpusPath + "/metadata.prop").openStream());
+            URL url = ResourceUtils.resolveLocation(corpusPath + "/metadata.prop", this, null);
+            prop.load(url.openStream());
  
             name = prop.getProperty("name");
             language = prop.getProperty("language");

@@ -20,14 +20,14 @@ package dkpro.toolbox.tutorial;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
 import dkpro.toolbox.core.Sentence;
-import dkpro.toolbox.corpus.BrownTeiCorpus;
+import dkpro.toolbox.corpus.BrownCorpus;
 import dkpro.toolbox.corpus.Corpus;
 
 public class BrownNgrams {
 
 	public static void main(String[] args) throws Exception
     {
-        Corpus brownCorpus = new BrownTeiCorpus();
+        Corpus brownCorpus = new BrownCorpus();
         
         // disregarding sentence boundaries
         FrequencyDistribution<String> ngramFreqDist = new FrequencyDistribution<String>(
