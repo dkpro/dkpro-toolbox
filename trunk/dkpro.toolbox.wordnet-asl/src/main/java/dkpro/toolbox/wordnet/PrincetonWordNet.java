@@ -19,8 +19,8 @@ import dkpro.toolbox.core.ToolboxException;
 public class PrincetonWordNet
     implements WordNet
 {
-    private static LemmaMap lemmaMap;
-    private static SynsetMap synsetMap;
+    private LemmaMap lemmaMap;
+    private SynsetMap synsetMap;
     
     public PrincetonWordNet() 
             throws ToolboxException
