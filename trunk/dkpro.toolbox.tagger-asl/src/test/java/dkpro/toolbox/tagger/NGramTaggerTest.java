@@ -12,7 +12,7 @@ import dkpro.toolbox.corpus.analyzed.CorpusManager.CorpusName;
 public class NGramTaggerTest
 {
     @Test
-    public void lookupTaggerTest()
+    public void ngramTaggerTest()
         throws Exception
     {
         AnalyzedCorpus corpus = CorpusManager.getCorpus(CorpusName.MobyDick);
