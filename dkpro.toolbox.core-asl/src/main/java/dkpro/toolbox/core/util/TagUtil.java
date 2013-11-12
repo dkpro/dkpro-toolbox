@@ -34,7 +34,7 @@ import dkpro.toolbox.core.ToolboxException;
 public class TagUtil
 {
 
-    private static final String pathBase = "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/";
+    private static final String pathBase = "classpath:/tagmapping";
 
     private static MappingProvider posMappingProviderBrown = null;
     private static MappingProvider posMappingProviderPTB = null;
