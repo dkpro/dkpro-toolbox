@@ -19,14 +19,11 @@ package dkpro.toolbox.core.util;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 
-import java.io.IOException;
-
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import dkpro.toolbox.core.ToolboxException;
 
@@ -69,10 +66,10 @@ public class TagUtil
             throws ToolboxException 
     {
         try {
-            String resolvedPath = ResourceUtils.resolveLocation(path).getFile();
+//            String resolvedPath = ResourceUtils.resolveLocation(path).getFile();
             
             MappingProvider provider = new MappingProvider();
-            provider.setDefault(MappingProvider.LOCATION, resolvedPath);
+            provider.setDefault(MappingProvider.LOCATION, path);
             provider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
             provider.setDefault("pos.tagset", "default");
 
@@ -80,14 +77,14 @@ public class TagUtil
             provider.configure(engine.newCAS());
             
             if (provider.getResource() == null) {
-                throw new ToolboxException("No resource found at: " + resolvedPath);
+                throw new ToolboxException("No resource found at: " + path);
             }
             
             return provider;
         }
-        catch (IOException e) {
-            throw new ToolboxException(e);
-        }
+//        catch (IOException e) {
+//            throw new ToolboxException(e);
+//        }
         catch (ResourceInitializationException e) {
             throw new ToolboxException(e);
         }
