@@ -71,7 +71,10 @@ public class SerializedCorpus
         
         try {
             //load a properties file
-            URL url = ResourceUtils.resolveLocation(corpusPath + "metadata.prop");
+            if (corpusPath.endsWith("/")) {
+                corpusPath = corpusPath.substring(0, corpusPath.length()-1);
+            }
+            URL url = ResourceUtils.resolveLocation(corpusPath + "/metadata.prop");
             prop.load(url.openStream());
  
             name = prop.getProperty("name");
