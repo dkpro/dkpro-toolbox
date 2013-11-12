@@ -32,7 +32,7 @@ public class CmuDict
         
         try {
             URL url = ResourceUtils.resolveLocation("classpath:/corpus/cmudict/cmudict");
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
 
             String line = null;
             while((line = in.readLine()) != null) {
