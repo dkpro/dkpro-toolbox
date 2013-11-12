@@ -31,7 +31,7 @@ public class CmuDict
         dict = new HashMap<String, List<Pronunciation>>();
         
         try {
-            URL url = ResourceUtils.resolveLocation("src/main/resources/corpus/cmudict/cmudict");
+            URL url = ResourceUtils.resolveLocation("classpath:/corpus/cmudict/cmudict");
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 
             String line = null;
