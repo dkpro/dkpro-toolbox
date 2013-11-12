@@ -125,4 +125,42 @@ public class PrincetonWordNet
         }
         return sb.toString();
     }
+
+    @Override
+    public Set<Synset> getHypernyms(Synset synset)
+        throws ToolboxException
+    {
+        return getRelatedSynsets(synset.getHypernyms());
+    }
+
+    @Override
+    public Set<Synset> getHyponyms(Synset synset)
+        throws ToolboxException
+    {
+        return getRelatedSynsets(synset.getHyponyms());
+    }
+
+    @Override
+    public Set<Synset> getHolonyms(Synset synset)
+        throws ToolboxException
+    {
+        return getRelatedSynsets(synset.getHolonyms());
+    }
+
+    @Override
+    public Set<Synset> getMeronyms(Synset synset)
+        throws ToolboxException
+    {
+        return getRelatedSynsets(synset.getMeronyms());
+    }
+    
+    private Set<Synset> getRelatedSynsets(Set<String> senseIds)
+        throws ToolboxException
+    {
+        Set<Synset> synsets = new HashSet<Synset>();
+        for (String senseId : senseIds) {
+            synsets.add(synsetMap.getSynset(senseId));
+        }
+        return synsets;
+    }
 }

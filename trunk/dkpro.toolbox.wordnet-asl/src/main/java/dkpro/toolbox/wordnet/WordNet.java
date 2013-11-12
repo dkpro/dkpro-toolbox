@@ -23,4 +23,9 @@ public interface WordNet
     public Set<String> getLemmas() throws ToolboxException;
     
     public Set<String> getAntonyms(Synset synset) throws ToolboxException;
+        
+    public Set<Synset> getHypernyms(Synset synset) throws ToolboxException;
+    public Set<Synset> getHyponyms(Synset synset) throws ToolboxException;
+    public Set<Synset> getHolonyms(Synset synset) throws ToolboxException;
+    public Set<Synset> getMeronyms(Synset synset) throws ToolboxException;    
 }
