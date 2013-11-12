@@ -116,7 +116,7 @@ public class PrincetonWordNet
 
         URL url = ResourceUtils.resolveLocation(path, this, null);
         InputStream is = url.openStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(new GZIPInputStream(is)));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new GZIPInputStream(is), "UTF-8"));
         
         StringBuilder sb = new StringBuilder();
         String line;
