@@ -35,7 +35,7 @@ public interface Corpus {
     
     public Iterable<Text> getTexts() throws CorpusException;
 
-    public Tagset getTagset();
+    public Tagset getTagset() throws CorpusException;
 
     /**
      * @return The language code of the corpus language.
