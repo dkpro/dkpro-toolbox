@@ -103,6 +103,7 @@ public class MergedCorpus
     
     @Override
     public Tagset getTagset()
+            throws CorpusException
     {
         Set<Tagset> tagsets = new HashSet<Tagset>();
         for (Corpus corpus : corpora) {

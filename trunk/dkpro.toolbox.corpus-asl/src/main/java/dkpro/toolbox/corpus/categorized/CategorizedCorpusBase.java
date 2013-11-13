@@ -152,7 +152,8 @@ public abstract class CategorizedCorpusBase
     }
     
     @Override
-    public Tagset getTagset()
+    public Tagset getTagset() 
+            throws CorpusException
     {
         Set<Tagset> tagsets = new HashSet<Tagset>();
         for (Corpus corpus : categoryCorpusMap.values()) {

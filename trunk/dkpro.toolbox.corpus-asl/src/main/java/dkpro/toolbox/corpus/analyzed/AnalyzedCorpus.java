@@ -204,7 +204,8 @@ public class AnalyzedCorpus
     }
 
     @Override
-    public Tagset getTagset()
+    public Tagset getTagset() 
+        throws CorpusException
     {
         return underlyingCorpus.getTagset();
     }
