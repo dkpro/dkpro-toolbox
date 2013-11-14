@@ -28,4 +28,12 @@ public class CategorizedCorpusTest
         assertEquals(7947, nrOfTokens);
 
     }
+    
+    @Test
+    public void udhrTest()
+            throws Exception
+    {
+        CategorizedCorpus udhr = new UdhrCorpus();
+        assertEquals(94, udhr.getCategories().size());      
+    }
 }
