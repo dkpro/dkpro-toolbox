@@ -21,6 +21,7 @@ import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
+import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader;
 import dkpro.toolbox.core.Tag.Tagset;
@@ -41,24 +42,29 @@ public class BrownCorpus
 
     CollectionReaderDescription reader;
 
-    public BrownCorpus() throws Exception
+    public BrownCorpus() throws CorpusException
     {
         String brownPath = "classpath:/corpus/brown_tei/";
         initialize(brownPath);
     }
 
-    public BrownCorpus(String brownPath) throws Exception
+    public BrownCorpus(String brownPath) throws CorpusException
     {
         initialize(brownPath);
     }
 
-    private void initialize(String brownPath) throws Exception {
-        reader = CollectionReaderFactory.createReaderDescription(
-                TeiReader.class,
-                TeiReader.PARAM_LANGUAGE, LANGUAGE,
-                TeiReader.PARAM_SOURCE_LOCATION, brownPath,
-                TeiReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml", INCLUDE_PREFIX + "*.xml.gz"}
-        );
+    private void initialize(String brownPath) throws CorpusException {
+        try {
+            reader = CollectionReaderFactory.createReaderDescription(
+                    TeiReader.class,
+                    TeiReader.PARAM_LANGUAGE, LANGUAGE,
+                    TeiReader.PARAM_SOURCE_LOCATION, brownPath,
+                    TeiReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml", INCLUDE_PREFIX + "*.xml.gz"}
+            );
+        }
+        catch (ResourceInitializationException e) {
+            throw new CorpusException(e);
+        }
     }
 
     @Override
