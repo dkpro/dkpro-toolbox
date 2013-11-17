@@ -4,12 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import dkpro.toolbox.corpus.CorpusException;
 import dkpro.toolbox.corpus.SerializedCorpus;
+import dkpro.toolbox.corpus.util.ToolboxUtils;
 
 public class UdhrCorpus
     extends CategorizedCorpusBase
@@ -20,10 +19,12 @@ public class UdhrCorpus
     {
         Collection<File> files;
         try {
-            files = FileUtils.listFiles(
-                    new File(ResourceUtils.resolveLocation("classpath:/corpus/udhr").getFile()),
-                    new String[] { "bin" },
-                    false);
+            files = ToolboxUtils.getAllFiles("classpath*:/corpus/udhr/", new String[]{"bin"});
+//
+//            files = FileUtils.listFiles(
+//                    new File(ResourceUtils.resolveLocation("classpath:/corpus/udhr").getFile()),
+//                    new String[] { "bin" },
+//                    false);
         }
         catch (IOException e) {
             throw new CorpusException(e);
