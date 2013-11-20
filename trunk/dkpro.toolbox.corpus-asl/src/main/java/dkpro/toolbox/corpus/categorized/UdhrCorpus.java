@@ -20,11 +20,6 @@ public class UdhrCorpus
         Collection<File> files;
         try {
             files = ToolboxUtils.getAllFiles("classpath*:/corpus/udhr/", new String[]{"bin"});
-//
-//            files = FileUtils.listFiles(
-//                    new File(ResourceUtils.resolveLocation("classpath:/corpus/udhr").getFile()),
-//                    new String[] { "bin" },
-//                    false);
         }
         catch (IOException e) {
             throw new CorpusException(e);
