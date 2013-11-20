@@ -31,10 +31,18 @@ public abstract class CorpusIterableBase
 {
     protected final JCasIterator jcasIterator;
     protected final Tagset tagset;
+    protected final int maxItems;
+    private int itemCounter;
 
     public CorpusIterableBase(JCasIterator jcasIterator, Tagset tagset) {
+        this(jcasIterator, tagset, Integer.MAX_VALUE);
+    }
+    
+    public CorpusIterableBase(JCasIterator jcasIterator, Tagset tagset, int maxItems) {
         this.jcasIterator = jcasIterator;
         this.tagset = tagset;
+        this.maxItems = maxItems;
+        this.itemCounter = 0;
     }
 
     @Override
@@ -59,6 +67,11 @@ public abstract class CorpusIterableBase
         @Override
         public boolean hasNext()
         {
+            // only output a configurable max amount of items
+            if (itemCounter == maxItems) {
+                return false;
+            }
+            
             if (!items.isEmpty()) {
                 return true;
             }
@@ -81,6 +94,7 @@ public abstract class CorpusIterableBase
         @Override
         public T next()
         {
+            itemCounter++;
             return items.poll();
         }
 

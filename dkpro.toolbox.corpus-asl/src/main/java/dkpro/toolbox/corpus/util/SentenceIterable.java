@@ -35,6 +35,11 @@ public class SentenceIterable
     {
         super(jcasIterator, tagset);
     }
+    
+    public SentenceIterable(JCasIterator jcasIterator, Tagset tagset, int maxItems)
+    {
+        super(jcasIterator, tagset, maxItems);
+    }
 
     @Override
     protected void fillQueue(JCasIterator jcasIterator, Queue<Sentence> items)
