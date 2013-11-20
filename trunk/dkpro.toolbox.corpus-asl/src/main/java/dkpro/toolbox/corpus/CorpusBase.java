@@ -52,20 +52,26 @@ public abstract class CorpusBase
     public Iterable<Sentence> getSentences()
         throws CorpusException
     {
+        return getSentences(Integer.MAX_VALUE);
+    }
+
+    public Iterable<Sentence> getSentences(int maxItems)
+        throws CorpusException
+    {
         if (useCaching) {
             if (sentences == null) {
                 sentences = new ArrayList<Sentence>();
-                for (Sentence sentence : new SentenceIterable(new JCasIterable(getReader()).iterator(), getTagset())) {
+                for (Sentence sentence : new SentenceIterable(new JCasIterable(getReader()).iterator(), getTagset(), maxItems)) {
                     sentences.add(sentence);
                 }
             }
             return sentences;
         }
         else {
-            return new SentenceIterable(new JCasIterable(getReader()).iterator(), getTagset());
+            return new SentenceIterable(new JCasIterable(getReader()).iterator(), getTagset(), maxItems);
         }
     }
-
+    
     @Override
     public Iterable<TaggedToken> getTaggedTokens()
         throws CorpusException
