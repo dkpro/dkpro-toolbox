@@ -34,6 +34,9 @@ public class CategorizedCorpusTest
             throws Exception
     {
         CategorizedCorpus udhr = new UdhrCorpus();
-        assertEquals(94, udhr.getCategories().size());      
+//        for (String token : udhr.getTokens("English")) {
+//            System.out.println(token);
+//        }
+        assertEquals(3, udhr.getCategories().size());      
     }
 }
