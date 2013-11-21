@@ -17,12 +17,10 @@
  ******************************************************************************/
 package dkpro.toolbox.corpus.util;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.springframework.core.io.Resource;
@@ -70,17 +68,8 @@ public class ToolboxUtils
         return new Tag(pos.getPosValue(), tagset);
     }
     
-    public static List<File> getAllFiles(String path, String[] extensions) throws IOException {
-     
-        List<File> files = new ArrayList<File>();
-
+    public static Resource[] getResources(String path) throws IOException {  
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        for (Resource resource : resolver.getResources(path)) {
-            for (File datasetFile : FileUtils.listFiles(resource.getFile(), extensions, true)) {
-                files.add(datasetFile);
-            }
-        }
-        
-        return files;
+        return resolver.getResources(path);
     }
 }
