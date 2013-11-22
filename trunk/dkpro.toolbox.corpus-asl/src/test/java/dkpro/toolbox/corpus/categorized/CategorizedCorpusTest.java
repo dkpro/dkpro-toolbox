@@ -43,4 +43,19 @@ public class CategorizedCorpusTest
 //          }
 //        }
     }
+    
+    @Test
+    public void inauguralTest()
+            throws Exception
+    {
+        CategorizedCorpus inaugural = new InauguralCorpus();
+
+        assertEquals(56, inaugural.getCategories().size());
+        
+//        for (String category : inaugural.getCategories()) {
+//          for (String token : inaugural.getTokens(category)) {
+//              System.out.println(token);
+//          }
+//        }
+    }
 }
