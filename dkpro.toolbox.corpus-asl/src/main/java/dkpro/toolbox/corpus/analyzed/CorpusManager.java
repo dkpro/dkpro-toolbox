@@ -6,6 +6,7 @@ import java.util.Map;
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.corpus.CorpusException;
 import dkpro.toolbox.corpus.SerializedCorpus;
+import dkpro.toolbox.corpus.categorized.InauguralCorpus;
 
 public class CorpusManager
 {
@@ -43,7 +44,7 @@ public class CorpusManager
             case TheManWhoWasThursday: corpora.put(CorpusName.TheManWhoWasThursday, new AnalyzedCorpus(new SerializedCorpus("classpath:/corpus/thursday/")));
                 addSentence(CorpusName.TheManWhoWasThursday);
                 break;
-            case InauguralAddresses: corpora.put(CorpusName.InauguralAddresses, new AnalyzedCorpus(new SerializedCorpus("classpath:/corpus/inaugural/")));
+            case InauguralAddresses: corpora.put(CorpusName.InauguralAddresses, new AnalyzedCorpus(new InauguralCorpus()));
                 addSentence(CorpusName.InauguralAddresses);
                 break;
             case BookOfGenesis: corpora.put(CorpusName.BookOfGenesis, new AnalyzedCorpus(new SerializedCorpus("classpath:/corpus/genesis/")));
