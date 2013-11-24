@@ -55,6 +55,7 @@ public abstract class CorpusBase
         return getSentences(Integer.MAX_VALUE);
     }
 
+    @Override
     public Iterable<Sentence> getSentences(int maxItems)
         throws CorpusException
     {
@@ -71,40 +72,54 @@ public abstract class CorpusBase
             return new SentenceIterable(new JCasIterable(getReader()).iterator(), getTagset(), maxItems);
         }
     }
-    
+
     @Override
     public Iterable<TaggedToken> getTaggedTokens()
+        throws CorpusException
+    {
+        return getTaggedTokens(Integer.MAX_VALUE);
+    }
+    
+    @Override
+    public Iterable<TaggedToken> getTaggedTokens(int maxItems)
         throws CorpusException
     {
         if (useCaching) {
             if (taggedTokens == null) {
                 taggedTokens = new ArrayList<TaggedToken>();
-                for (TaggedToken taggedToken : new TaggedTokenIterable(new JCasIterable(getReader()).iterator(), getTagset())) {
+                for (TaggedToken taggedToken : new TaggedTokenIterable(new JCasIterable(getReader()).iterator(), getTagset(), maxItems)) {
                     taggedTokens.add(taggedToken);
                 }
             }
             return taggedTokens;
         }
         else {
-            return new TaggedTokenIterable(new JCasIterable(getReader()).iterator(), getTagset());
+            return new TaggedTokenIterable(new JCasIterable(getReader()).iterator(), getTagset(), maxItems);
         }
     }
-
+    
     @Override
     public Iterable<Tag> getTags()
+        throws CorpusException
+    {
+        return getTags(Integer.MAX_VALUE);
+    }
+    
+    @Override
+    public Iterable<Tag> getTags(int maxItems)
         throws CorpusException
     {
         if (useCaching) {
             if (tags == null) {
                 tags = new ArrayList<Tag>();
-                for (Tag tag : new TagIterable(new JCasIterable(getReader()).iterator(), getTagset())) {
+                for (Tag tag : new TagIterable(new JCasIterable(getReader()).iterator(), getTagset(), maxItems)) {
                     tags.add(tag);
                 }
             }
             return tags;
         }
         else {
-            return new TagIterable(new JCasIterable(getReader()).iterator(), getTagset());
+            return new TagIterable(new JCasIterable(getReader()).iterator(), getTagset(), maxItems);
         }
     }
 
@@ -130,17 +145,24 @@ public abstract class CorpusBase
     public Iterable<String> getTokens()
         throws CorpusException
     {
+        return getTokens(Integer.MAX_VALUE);
+    }
+    
+    @Override
+    public Iterable<String> getTokens(int maxItems)
+        throws CorpusException
+    {
         if (useCaching) {
             if (tokens == null) {
                 tokens = new ArrayList<String>();
-                for (String token : new TokenIterable(new JCasIterable(getReader()).iterator(), getTagset())) {
+                for (String token : new TokenIterable(new JCasIterable(getReader()).iterator(), getTagset(), maxItems)) {
                     tokens.add(token);
                 }
             }
             return tokens;
         }
         else {
-            return new TokenIterable(new JCasIterable(getReader()).iterator(), getTagset());
+            return new TokenIterable(new JCasIterable(getReader()).iterator(), getTagset(), maxItems);
         }
     }
 

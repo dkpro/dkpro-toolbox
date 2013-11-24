@@ -21,6 +21,13 @@ public class CategorizedCorpusTest
         }
         assertEquals(7947, nrOfTokens);
         
+        int nrOfLimitedTokens = 0;
+        for (String token : corpus.getTokens(10)) {
+//            System.out.println(token);
+            nrOfLimitedTokens++;
+        }
+        assertEquals(10, nrOfLimitedTokens);
+        
         nrOfTokens = 0;
         for (String token : corpus.getTokens()) {
             nrOfTokens++;

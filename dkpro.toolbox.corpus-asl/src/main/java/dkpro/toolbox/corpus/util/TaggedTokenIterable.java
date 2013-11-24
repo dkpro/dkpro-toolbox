@@ -37,6 +37,11 @@ public class TaggedTokenIterable
     {
         super(jcasIterator, tagset);
     }
+    
+    public TaggedTokenIterable(JCasIterator jcasIterator, Tagset tagset, int maxItems)
+    {
+        super(jcasIterator, tagset, maxItems);
+    }
 
     @Override
     protected void fillQueue(JCasIterator jcasIterator, Queue<TaggedToken> items)

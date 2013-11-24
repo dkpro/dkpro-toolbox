@@ -6,7 +6,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.zip.GZIPInputStream;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
@@ -76,6 +78,20 @@ public class StopwordsCorpus
     {
         return tokens;
     }
+    
+    @Override
+    public Iterable<String> getTokens(int maxItems)
+        throws CorpusException
+    {   
+        Set<String> tokens = new HashSet<String>();
+        int counter = 0;
+        for (String item : tokens) {
+            if (counter < maxItems) {
+                tokens.add(item);
+            }
+        }
+        return tokens;
+    }
 
     @Override
     public Iterable<TaggedToken> getTaggedTokens()
@@ -100,6 +116,27 @@ public class StopwordsCorpus
 
     @Override
     public Iterable<Text> getTexts()
+        throws CorpusException
+    {
+        throw new CorpusException("Unavailable for this corpus.");
+    }
+    
+    @Override
+    public Iterable<TaggedToken> getTaggedTokens(int maxItems)
+        throws CorpusException
+    {
+        throw new CorpusException("Unavailable for this corpus.");
+    }
+
+    @Override
+    public Iterable<Sentence> getSentences(int maxItems)
+        throws CorpusException
+    {
+        throw new CorpusException("Unavailable for this corpus.");
+    }
+
+    @Override
+    public Iterable<Tag> getTags(int maxItems)
         throws CorpusException
     {
         throw new CorpusException("Unavailable for this corpus.");

@@ -41,12 +41,26 @@ public class MergedCorpus
     { 
         return new MergedTokenIterable(corpora);
     }
+    
+    @Override
+    public Iterable<String> getTokens(int maxItems)
+        throws CorpusException
+    {
+        return new MergedTokenIterable(corpora, maxItems);
+    }
 
     @Override
     public Iterable<TaggedToken> getTaggedTokens()
         throws CorpusException
     {
         return new MergedTaggedTokenIterable(corpora);
+    }
+    
+    @Override
+    public Iterable<TaggedToken> getTaggedTokens(int maxItems)
+        throws CorpusException
+    {
+        return new MergedTaggedTokenIterable(corpora, maxItems);
     }
 
     @Override
@@ -57,11 +71,25 @@ public class MergedCorpus
     }
 
     @Override
+    public Iterable<Sentence> getSentences(int maxItems)
+        throws CorpusException
+    {
+        return new MergedSentenceIterable(corpora, maxItems);
+    }
+    
+    @Override
     public Iterable<Tag> getTags()
         throws CorpusException
     {
         return new MergedTagsIterable(corpora);
 
+    }
+
+    @Override
+    public Iterable<Tag> getTags(int maxItems)
+        throws CorpusException
+    {
+        return new MergedTagsIterable(corpora, maxItems);
     }
 
     @Override

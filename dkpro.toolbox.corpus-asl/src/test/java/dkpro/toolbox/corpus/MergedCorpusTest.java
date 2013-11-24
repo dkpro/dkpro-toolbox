@@ -19,6 +19,7 @@ package dkpro.toolbox.corpus;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import dkpro.toolbox.corpus.analyzed.AnalyzedCorpus;
@@ -36,9 +37,51 @@ public class MergedCorpusTest
 
         int nrOfTokens = 0;
         for (String token : merged.getTokens()) {
-            // System.out.println(token);
             nrOfTokens++;
         }
         assertEquals(262943, nrOfTokens);
+    }
+    
+    @Test
+    public void mergedCorpusLimitedTest() throws Exception {
+        AnalyzedCorpus corpus1 = CorpusManager.getCorpus(CorpusName.FirstNames);
+        AnalyzedCorpus corpus2 = CorpusManager.getCorpus(CorpusName.MobyDick);
+
+        MergedCorpus merged = new MergedCorpus(corpus1.getUnderlyingCorpus(), corpus2.getUnderlyingCorpus());
+
+        int nrOfTokens = 0;
+        for (String token : merged.getTokens(10)) {
+//            System.out.println(token);
+            nrOfTokens++;
+        }
+        assertEquals(10, nrOfTokens);  
+    }
+    
+    @Ignore
+    @Test
+    public void mergedCorpusRereadTest() throws Exception {
+        AnalyzedCorpus corpus1 = CorpusManager.getCorpus(CorpusName.FirstNames);
+        AnalyzedCorpus corpus2 = CorpusManager.getCorpus(CorpusName.MobyDick);
+
+        MergedCorpus merged = new MergedCorpus(corpus1.getUnderlyingCorpus(), corpus2.getUnderlyingCorpus());
+
+        int nrOfTokens = 0;
+        for (String token : merged.getTokens(10)) {
+            System.out.println(token);
+            nrOfTokens++;
+        }
+        assertEquals(10, nrOfTokens);  
+        
+        for (String token : merged.getTokens(10)) {
+            System.out.println(token);
+            nrOfTokens++;
+        }
+        assertEquals(20, nrOfTokens);
+        
+        for (String token : merged.getTokens(10)) {
+            System.out.println(token);
+            nrOfTokens++;
+        }
+        assertEquals(30, nrOfTokens);
     }
 }

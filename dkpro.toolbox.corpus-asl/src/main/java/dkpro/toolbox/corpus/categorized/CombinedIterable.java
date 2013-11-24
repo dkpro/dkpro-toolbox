@@ -10,9 +10,19 @@ public class CombinedIterable
     <T> implements Iterable<T>
 {
     private Queue<Iterator<T>> iteratorQueue;
+    private int maxItems;
+    private int itemCounter;
+    
     public CombinedIterable(List<Iterator<T>> iterators)
     {
+        this(iterators, Integer.MAX_VALUE);
+    }
+    
+    public CombinedIterable(List<Iterator<T>> iterators, int maxItems)
+    {
         iteratorQueue = new ArrayDeque<Iterator<T>>(iterators);
+        this.maxItems = maxItems;
+        this.itemCounter = 0;
     }
 
     @Override
@@ -28,6 +38,11 @@ public class CombinedIterable
         @Override
         public boolean hasNext()
         {
+            // only output a configurable max amount of items
+            if (itemCounter == maxItems) {
+                return false;
+            }
+            
             while (!iteratorQueue.isEmpty()) {
                 if (iteratorQueue.peek().hasNext()) {
                     return true;
@@ -40,6 +55,8 @@ public class CombinedIterable
         @Override
         public T next()
         {
+            itemCounter++;
+            
             Iterator<T> iterator = iteratorQueue.poll();
             T result = iterator.next();
             iteratorQueue.offer(iterator);
