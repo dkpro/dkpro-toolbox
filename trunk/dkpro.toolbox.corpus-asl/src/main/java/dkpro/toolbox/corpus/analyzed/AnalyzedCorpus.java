@@ -165,24 +165,6 @@ public class AnalyzedCorpus
     }
 
     @Override
-    public String getLanguage()
-    {
-        return underlyingCorpus.getLanguage();
-    }
-
-    @Override
-    public String getDescription()
-    {
-        return underlyingCorpus.getDescription();
-    }
-
-    @Override
-    public String getName()
-    {
-        return underlyingCorpus.getName();
-    }
-
-    @Override
     public Iterable<String> getTokens()
         throws CorpusException
     {
@@ -208,5 +190,51 @@ public class AnalyzedCorpus
         throws CorpusException
     {
         return underlyingCorpus.getTagset();
+    }
+
+    @Override
+    public Iterable<String> getTokens(int maxItems)
+        throws CorpusException
+    {
+        return underlyingCorpus.getTokens(maxItems);
+    }
+
+    @Override
+    public Iterable<TaggedToken> getTaggedTokens(int maxItems)
+        throws CorpusException
+    {
+        return underlyingCorpus.getTaggedTokens(maxItems);
+    }
+
+    @Override
+    public Iterable<Sentence> getSentences(int maxItems)
+        throws CorpusException
+    {
+        return underlyingCorpus.getSentences(maxItems);
+    }
+
+    @Override
+    public Iterable<Tag> getTags(int maxItems)
+        throws CorpusException
+    {
+        return underlyingCorpus.getTags(maxItems);
+    }
+    
+    @Override
+    public String getLanguage()
+    {
+        return underlyingCorpus.getLanguage();
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return underlyingCorpus.getDescription();
+    }
+
+    @Override
+    public String getName()
+    {
+        return underlyingCorpus.getName();
     }
 }

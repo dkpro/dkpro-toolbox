@@ -26,13 +26,17 @@ import dkpro.toolbox.core.Text;
 public interface Corpus {
 
 	public Iterable<String> getTokens() throws CorpusException;
-	
+    public Iterable<String> getTokens(int maxItems) throws CorpusException;
+
 	public Iterable<TaggedToken> getTaggedTokens() throws CorpusException;
-	
+    public Iterable<TaggedToken> getTaggedTokens(int maxItems) throws CorpusException;
+
 	public Iterable<Sentence> getSentences() throws CorpusException;
-	
+    public Iterable<Sentence> getSentences(int maxItems) throws CorpusException;
+
     public Iterable<Tag> getTags() throws CorpusException;
-    
+    public Iterable<Tag> getTags(int maxItems) throws CorpusException;
+
     public Iterable<Text> getTexts() throws CorpusException;
 
     public Tagset getTagset() throws CorpusException;

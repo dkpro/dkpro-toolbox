@@ -31,6 +31,11 @@ public class MergedTokenIterable
     {
         super(corpora);
     }
+    
+    public MergedTokenIterable(Queue<Corpus> corpora, int maxItems)
+    {
+        super(corpora, maxItems);
+    }
 
     @Override
     protected void fillQueue(Queue<String> items)

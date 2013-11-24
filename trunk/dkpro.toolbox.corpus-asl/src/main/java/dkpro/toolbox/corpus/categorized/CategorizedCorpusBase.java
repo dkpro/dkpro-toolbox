@@ -41,44 +41,72 @@ public abstract class CategorizedCorpusBase
     public Iterable<String> getTokens()
         throws CorpusException
     {
+        return getTokens(Integer.MAX_VALUE);
+    }
+    
+    @Override
+    public Iterable<String> getTokens(int maxItems)
+        throws CorpusException
+    {
         List<Iterator<String>> iterators = new ArrayList<Iterator<String>>();
         for (String category : this.getCategories()) {
             iterators.add(this.getTokens(category).iterator());
         }
-        return new CombinedIterable<String>(iterators);
+        return new CombinedIterable<String>(iterators, maxItems);
     }
 
     @Override
     public Iterable<TaggedToken> getTaggedTokens()
         throws CorpusException
     {
+        return getTaggedTokens(Integer.MAX_VALUE);
+    }
+    
+    @Override
+    public Iterable<TaggedToken> getTaggedTokens(int maxItems)
+        throws CorpusException
+    {
         List<Iterator<TaggedToken>> iterators = new ArrayList<Iterator<TaggedToken>>();
         for (String category : this.getCategories()) {
             iterators.add(this.getTaggedTokens(category).iterator());
         }
-        return new CombinedIterable<TaggedToken>(iterators);
+        return new CombinedIterable<TaggedToken>(iterators, maxItems);
     }
 
     @Override
     public Iterable<Sentence> getSentences()
         throws CorpusException
     {
+        return getSentences(Integer.MAX_VALUE);
+    }
+    
+    @Override
+    public Iterable<Sentence> getSentences(int maxItems)
+        throws CorpusException
+    {
         List<Iterator<Sentence>> iterators = new ArrayList<Iterator<Sentence>>();
         for (String category : this.getCategories()) {
             iterators.add(this.getSentences(category).iterator());
         }
-        return new CombinedIterable<Sentence>(iterators);
+        return new CombinedIterable<Sentence>(iterators, maxItems);
     }
 
     @Override
     public Iterable<Tag> getTags()
         throws CorpusException
     {
+        return getTags(Integer.MAX_VALUE);
+    }
+    
+    @Override
+    public Iterable<Tag> getTags(int maxItems)
+        throws CorpusException
+    {
         List<Iterator<Tag>> iterators = new ArrayList<Iterator<Tag>>();
         for (String category : this.getCategories()) {
             iterators.add(this.getTags(category).iterator());
         }
-        return new CombinedIterable<Tag>(iterators);
+        return new CombinedIterable<Tag>(iterators, maxItems);
     }
 
     @Override

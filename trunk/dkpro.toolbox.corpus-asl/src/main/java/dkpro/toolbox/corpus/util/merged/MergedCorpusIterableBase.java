@@ -28,9 +28,17 @@ public abstract class MergedCorpusIterableBase
     <T> implements Iterable<T>
 {
     protected Queue<Corpus> corpora;
+    private int maxItems;
+    private int itemCounter;
 
     public MergedCorpusIterableBase(Queue<Corpus> corpora) {
+        this(corpora, Integer.MAX_VALUE);
+    }
+    
+    public MergedCorpusIterableBase(Queue<Corpus> corpora, int maxItems) {
         this.corpora = corpora;
+        this.maxItems = maxItems;
+        this.itemCounter = 0;
     }
 
     @Override
@@ -54,6 +62,11 @@ public abstract class MergedCorpusIterableBase
         @Override
         public boolean hasNext()
         {
+            // only output a configurable max amount of items
+            if (itemCounter == maxItems) {
+                return false;
+            }
+            
             if (!items.isEmpty()) {
                 return true;
             }
@@ -76,6 +89,7 @@ public abstract class MergedCorpusIterableBase
         @Override
         public T next()
         {
+            itemCounter++;
             return items.poll();
         }
 

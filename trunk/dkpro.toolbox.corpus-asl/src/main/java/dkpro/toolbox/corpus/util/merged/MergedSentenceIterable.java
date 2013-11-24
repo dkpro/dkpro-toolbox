@@ -32,6 +32,11 @@ public class MergedSentenceIterable
     {
         super(corpora);
     }
+    
+    public MergedSentenceIterable(Queue<Corpus> corpora, int maxItems)
+    {
+        super(corpora, maxItems);
+    }
 
     @Override
     protected void fillQueue(Queue<Sentence> items)

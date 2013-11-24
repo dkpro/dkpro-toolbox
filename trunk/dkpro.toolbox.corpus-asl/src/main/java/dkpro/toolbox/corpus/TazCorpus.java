@@ -136,4 +136,36 @@ public class TazCorpus
     {
         return Tagset.stts;
     }
+
+    @Override
+    public Iterable<String> getTokens(int maxItems)
+        throws CorpusException
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Iterable<TaggedToken> getTaggedTokens(int maxItems)
+        throws CorpusException
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Iterable<Sentence> getSentences(int maxItems)
+        throws CorpusException
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Iterable<Tag> getTags(int maxItems)
+        throws CorpusException
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

@@ -55,6 +55,13 @@ public class BrownCorpusTest
         }
         assertEquals(6783, nrOfTokens);
 
+        int nrOfLimitedTokens = 0;
+        for (String token : corpus.getTokens(10)) {
+            // System.out.println(token);
+            nrOfLimitedTokens++;
+        }
+        assertEquals(10, nrOfLimitedTokens);
+        
         int nrOfTags = 0;
         for (Tag tag : corpus.getTags()) {
             // System.out.println(tag);
