@@ -18,7 +18,7 @@ public class UdhrCorpus
     {
         Resource[] resources;
         try {
-            resources = ToolboxUtils.getResources("classpath*:/corpus/udhr/*/*");
+            resources = ToolboxUtils.getResources("classpath*:/corpus/udhr/**/*");
         }
         catch (IOException e) {
             throw new CorpusException(e);

@@ -17,7 +17,7 @@ public class InauguralCorpus
     {
         Resource[] resources;
         try {
-            resources = ToolboxUtils.getResources("classpath*:/corpus/inaugural/*/*");
+            resources = ToolboxUtils.getResources("classpath*:/corpus/inaugural/**/*");
         }
         catch (IOException e) {
             throw new CorpusException(e);
