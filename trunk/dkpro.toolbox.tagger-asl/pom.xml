@@ -11,10 +11,6 @@
   		<groupId>dkpro.toolbox</groupId>
   		<artifactId>dkpro.toolbox.core-asl</artifactId>
   	</dependency>
-	<dependency>
-	    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-	    <artifactId>de.tudarmstadt.ukp.dkpro.core.api.frequency-asl</artifactId>
-	</dependency>
     <dependency>
         <groupId>dkpro.toolbox</groupId>
         <artifactId>dkpro.toolbox.corpus-asl</artifactId>
