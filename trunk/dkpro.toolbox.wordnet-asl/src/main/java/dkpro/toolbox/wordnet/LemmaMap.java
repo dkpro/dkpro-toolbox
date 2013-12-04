@@ -14,16 +14,16 @@ public class LemmaMap
         lemmaMap = new HashMap<String, Set<String>>(); 
     }
     
-    public void addLemma(String lemma, String id) {
-        Set<String> synsetIds;
+    public void addLemma(String lemma, String senseId, String pos) {
+        Set<String> ids;
         if (lemmaMap.containsKey(lemma)) {
-            synsetIds = lemmaMap.get(lemma);
+            ids = lemmaMap.get(lemma);
         } 
         else {
-            synsetIds = new HashSet<String>();
+            ids = new HashSet<String>();
         }
-        synsetIds.add(id);
-        lemmaMap.put(lemma, synsetIds);
+        ids.add(senseId + pos);
+        lemmaMap.put(lemma, ids);
     }
     
     public Set<String> getLemmas() {

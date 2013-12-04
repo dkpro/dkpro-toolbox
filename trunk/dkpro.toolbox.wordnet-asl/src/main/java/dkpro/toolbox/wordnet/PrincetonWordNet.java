@@ -75,7 +75,7 @@ public class PrincetonWordNet
             Set<Synset> synsets = new HashSet<Synset>();
             for (String id : lemmaMap.getLemmaMap().get(lemma)) {
                 Synset synset = synsetMap.getSynset(id);
-                if (synset.getPos().equals(pos.name())) {
+                if (synset != null && synset.getPos().equals(pos.name())) {
                     synsets.add(synset);
                 }
             }
@@ -87,14 +87,20 @@ public class PrincetonWordNet
     }
 
     @Override
+    public Synset getSynset(String senseId, WordNetPos pos)
+        throws ToolboxException
+    {
+        return synsetMap.getSynset(senseId, pos.name());
+    }
+
+    @Override
     public Synset getSynset(String lemma, WordNetPos pos, String senseId)
         throws ToolboxException
     {
         if (lemmaMap.getLemmaMap().containsKey(lemma)) {
             for (String id : lemmaMap.getLemmaMap().get(lemma)) {
-                Synset synset = synsetMap.getSynset(id);
-                System.out.println(synset);
-                if (synset.getPos().equals(pos.name()) && synset.getSenseId().equals(senseId)) {
+                Synset synset = synsetMap.getSynset(senseId, pos.name());
+                if (synset != null && synset.getSenseId().equals(senseId)) {
                     return synset;
                 }
             }
@@ -137,36 +143,36 @@ public class PrincetonWordNet
     public Set<Synset> getHypernyms(Synset synset)
         throws ToolboxException
     {
-        return getRelatedSynsets(synset.getHypernyms());
+        return getRelatedSynsets(synset.getHypernyms(), synset.getPos());
     }
 
     @Override
     public Set<Synset> getHyponyms(Synset synset)
         throws ToolboxException
     {
-        return getRelatedSynsets(synset.getHyponyms());
+        return getRelatedSynsets(synset.getHyponyms(), synset.getPos());
     }
 
     @Override
     public Set<Synset> getHolonyms(Synset synset)
         throws ToolboxException
     {
-        return getRelatedSynsets(synset.getHolonyms());
+        return getRelatedSynsets(synset.getHolonyms(), synset.getPos());
     }
 
     @Override
     public Set<Synset> getMeronyms(Synset synset)
         throws ToolboxException
     {
-        return getRelatedSynsets(synset.getMeronyms());
+        return getRelatedSynsets(synset.getMeronyms(), synset.getPos());
     }
     
-    private Set<Synset> getRelatedSynsets(Set<String> senseIds)
+    private Set<Synset> getRelatedSynsets(Set<String> senseIds, String pos)
         throws ToolboxException
     {
         Set<Synset> synsets = new HashSet<Synset>();
         for (String senseId : senseIds) {
-            synsets.add(synsetMap.getSynset(senseId));
+            synsets.add(synsetMap.getSynset(senseId, pos));
         }
         return synsets;
     }

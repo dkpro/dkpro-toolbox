@@ -12,13 +12,22 @@ public class SynsetMap
         synsetMap = new HashMap<String, Synset>();
     }
 
-    public void addSynset(String id, Synset synset) {
-        synsetMap.put(id, synset);
+    public void addSynset(String senseId, Synset synset) {
+        synsetMap.put(senseId + synset.getPos(), synset);
     }
 
-    public Synset getSynset(String id) {
-        if (synsetMap.containsKey(id)) {
-            return synsetMap.get(id);
+    public Synset getSynset(String combinedId) {
+        if (synsetMap.containsKey(combinedId)) {
+            return synsetMap.get(combinedId);
+        }
+        else {
+            return null;
+        }
+    }
+    
+    public Synset getSynset(String senseId, String pos) {
+        if (synsetMap.containsKey(senseId + pos)) {
+            return synsetMap.get(senseId + pos);
         }
         else {
             return null;

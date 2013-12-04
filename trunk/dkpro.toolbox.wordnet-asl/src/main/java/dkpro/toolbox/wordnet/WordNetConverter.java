@@ -77,7 +77,7 @@ public class WordNetConverter
             synset.setPos(entity.getPos().name());
             
             for (String lemma : synset.getLemmas()) {
-                lemmaMap.addLemma(lemma, synset.getSenseId());
+                lemmaMap.addLemma(lemma, synset.getSenseId(), synset.getPos());
             }
             synsetMap.addSynset(synset.getSenseId(), synset);
         }
