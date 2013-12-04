@@ -17,6 +17,7 @@
  ******************************************************************************/
 package dkpro.toolbox.corpus;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.apache.uima.UIMAException;
@@ -26,6 +27,8 @@ import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.resource.ResourceInitializationException;
+
+import com.google.common.io.Files;
 
 import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasReader;
 import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter;
@@ -69,35 +72,37 @@ public class DkproCorpus
           
         // TODO should not serialize to target but into temp directory
         
-            // preprocess text file (tokenize, sentence split, POS tag) and serialize
-            try {
-                AnalysisEngineDescription desc = AnalysisEngineFactory.createEngineDescription(
-                        AnalysisEngineFactory.createEngineDescription(BreakIteratorSegmenter.class),
-                        AnalysisEngineFactory.createEngineDescription(OpenNlpPosTagger.class),
-                        AnalysisEngineFactory.createEngineDescription(
-                                BinaryCasWriter.class,
-                                BinaryCasWriter.PARAM_TARGET_LOCATION, "target/textcorpus/" + name
-                        )
-                );
-                
-                SimplePipeline.runPipeline(sourceReader, desc);
-                
-                // read serialized data
-                serializedReader = CollectionReaderFactory.createReaderDescription(
-                        BinaryCasReader.class,
-                        BinaryCasReader.PARAM_SOURCE_LOCATION, "target/textcorpus/" + name,
-                        BinaryCasReader.PARAM_PATTERNS, "*.bin"
-                );
-            }
-            catch (ResourceInitializationException e) {
-                throw new CorpusException(e);
-            }
-            catch (UIMAException e) {
-                throw new CorpusException(e);
-            }
-            catch (IOException e) {
-                throw new CorpusException(e);
-            }
+        File tempDir = Files.createTempDir();
+        
+        // preprocess text file (tokenize, sentence split, POS tag) and serialize
+        try {
+            AnalysisEngineDescription desc = AnalysisEngineFactory.createEngineDescription(
+                    AnalysisEngineFactory.createEngineDescription(BreakIteratorSegmenter.class),
+                    AnalysisEngineFactory.createEngineDescription(OpenNlpPosTagger.class),
+                    AnalysisEngineFactory.createEngineDescription(
+                            BinaryCasWriter.class,
+                            BinaryCasWriter.PARAM_TARGET_LOCATION, tempDir + "/" + name
+                    )
+            );
+            
+            SimplePipeline.runPipeline(sourceReader, desc);
+            
+            // read serialized data
+            serializedReader = CollectionReaderFactory.createReaderDescription(
+                    BinaryCasReader.class,
+                    BinaryCasReader.PARAM_SOURCE_LOCATION, tempDir + "/" + name,
+                    BinaryCasReader.PARAM_PATTERNS, "*.bin"
+            );
+        }
+        catch (ResourceInitializationException e) {
+            throw new CorpusException(e);
+        }
+        catch (UIMAException e) {
+            throw new CorpusException(e);
+        }
+        catch (IOException e) {
+            throw new CorpusException(e);
+        }
     }
 
     @Override
