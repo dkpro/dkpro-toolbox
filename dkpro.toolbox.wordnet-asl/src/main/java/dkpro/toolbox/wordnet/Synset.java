@@ -1,6 +1,7 @@
 package dkpro.toolbox.wordnet;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -12,7 +13,7 @@ public class Synset
     private List<String> lemmas;
     private String definition;
     private String pos;
-    private String[] examples;
+    private List<String> examples;
     private Set<String> hypernyms;
     private Set<String> hyponyms;
     private Set<String> holonyms;
@@ -23,7 +24,7 @@ public class Synset
         senseId = null;
         definition = null;
         pos = null;
-        examples = null;  
+        examples = new ArrayList<String>();  
         lemmas = new ArrayList<String>();
         hypernyms = new HashSet<String>();
         hyponyms = new HashSet<String>();
@@ -70,14 +71,19 @@ public class Synset
         this.pos = pos;
     }
 
-    public String[] getExamples()
+    public List<String> getExamples()
     {
         return examples;
     }
 
-    public void setExamples(String... examples)
+    public void setExamples(List<String> examples)
     {
-        this.examples = examples;
+        this.examples.addAll(examples);
+    }
+    
+    public void setExamples(String ... examples)
+    {
+        this.examples.addAll(Arrays.asList(examples));
     }
 
     public String getSenseId()
@@ -90,6 +96,8 @@ public class Synset
         this.senseId = senseId;
     }
 
+    // TODO should either return synset directly or not be accessible at all
+    // same is true for other relations
     public Set<String> getHypernyms()
     {
         return hypernyms;
@@ -145,6 +153,4 @@ public class Synset
     {
         return "Synset [senseId=" + senseId + ", lemmas=" + lemmas + ", pos=" + pos + "]";
     }
-    
-    
 }

@@ -19,6 +19,7 @@ public interface WordNet
     public Set<Synset> getSynsets(String lemma) throws ToolboxException;
     public Set<Synset> getSynsets(String lemma, WordNetPos pos) throws ToolboxException;
     
+    public Synset getSynset(String senseId, WordNetPos pos) throws ToolboxException;
     public Synset getSynset(String lemma, WordNetPos pos, String senseId) throws ToolboxException;
 
     public Set<String> getLemmas() throws ToolboxException;
