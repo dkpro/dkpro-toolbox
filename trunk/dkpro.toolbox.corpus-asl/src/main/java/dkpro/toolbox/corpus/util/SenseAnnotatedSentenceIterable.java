@@ -19,6 +19,7 @@ package dkpro.toolbox.corpus.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 import org.apache.uima.fit.pipeline.JCasIterator;
@@ -40,14 +41,18 @@ public class SenseAnnotatedSentenceIterable
     extends CorpusIterableBase<Sentence>
 {
 
-    public SenseAnnotatedSentenceIterable(JCasIterator jcasIterator, Tagset tagset)
+    private Map<String, String> senseMap;
+    
+    public SenseAnnotatedSentenceIterable(JCasIterator jcasIterator, Tagset tagset, Map<String, String> senseMap)
     {
         super(jcasIterator, tagset);
+        this.senseMap = senseMap;
     }
     
-    public SenseAnnotatedSentenceIterable(JCasIterator jcasIterator, Tagset tagset, int maxItems)
+    public SenseAnnotatedSentenceIterable(JCasIterator jcasIterator, Tagset tagset, int maxItems, Map<String, String> senseMap)
     {
         super(jcasIterator, tagset, maxItems);
+        this.senseMap = senseMap;
     }
 
     @Override
@@ -81,10 +86,14 @@ public class SenseAnnotatedSentenceIterable
                             // documented here: http://wordnet.princeton.edu/man/senseidx.5WN.html
                            
                             String senseId = ((Sense) senses.get(0)).getId();
+                            String senseNumber = "1";
+                            if (senseMap.containsKey(senseId)) {             
+                                senseNumber = senseMap.get(senseId);
+                            }
                             String[] parts = senseId.split(":");
                             if (parts.length > 2) {
                                 String lemma = parts[0].split("%")[0];
-                                tokenString = lemma + "#" + parts[2];
+                                tokenString = lemma + "#" + senseNumber;
                             }
                         }
                     }
