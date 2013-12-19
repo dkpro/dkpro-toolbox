@@ -47,7 +47,7 @@ public abstract class ToolboxTaggerBase
         throws ToolboxException
     {
         int correct = 0;
-        int n = 0;
+        int wrong = 0;
         for (Sentence taggedSentence : taggedSentences) {
             List<TaggedToken> assignedTags = new ArrayList<TaggedToken>(this.tag(taggedSentence.getTokens()));
             List<TaggedToken> goldTags = taggedSentence.getTaggedTokens();
@@ -57,7 +57,6 @@ public abstract class ToolboxTaggerBase
             }
             
             for (int i=0; i<goldTags.size(); i++) {
-                n++;
                 
                 String assignedTag;
                 String goldTag;            
@@ -80,11 +79,12 @@ public abstract class ToolboxTaggerBase
 
                 }
                 else {
+                    wrong++;
 //                    System.out.println("w: " + taggedSentence.getTokens().get(i) + " - " + goldTag + " - " + assignedTag);
                 }
             }
         }
         
-        System.out.println("Accuracy: " + (double) correct / n);
+        System.out.println("Accuracy: " + (double) correct / correct+wrong);
     }
 }

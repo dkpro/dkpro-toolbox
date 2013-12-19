@@ -68,7 +68,7 @@ public class TextIterable
             Collection<Sentence> sentences = JCasUtil.select(jcas, Sentence.class);
             for (Sentence sentence : sentences) {
                 try {
-                    toolboxSentences.add(ToolboxUtils.UimaSentence2ToolboxSentence(jcas, tagset , sentence));
+                    toolboxSentences.add(ToolboxUtils.uimaSentence2ToolboxSentence(jcas, tagset , sentence));
                 }
                 catch (ToolboxException e) {
                     throw new RuntimeException(e);

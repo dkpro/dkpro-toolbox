@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.commons.io.IOUtils;
+
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
@@ -57,6 +59,8 @@ public class WordCorpus
         while ((line = br.readLine()) != null) {
             tokens.add(line);
         }
+        IOUtils.closeQuietly(br);
+        
         return tokens;
     }
     

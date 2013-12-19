@@ -37,6 +37,7 @@ public class TextManager
             case BookOfGenesis: texts.put(TextName.BookOfGenesis, new CorpusBackedRawText(new SerializedCorpus("classpath:/corpus/genesis/")));
             case Personals: texts.put(TextName.Personals, new CorpusBackedRawText(new SerializedCorpus("classpath:/corpus/personals/")));
             case ChatText: texts.put(TextName.ChatText, new CorpusBackedRawText(new SerializedCorpus("classpath:/corpus/chat/")));
+            default : throw new CorpusException("Unknown text: " + name); 
         }
     }
     
