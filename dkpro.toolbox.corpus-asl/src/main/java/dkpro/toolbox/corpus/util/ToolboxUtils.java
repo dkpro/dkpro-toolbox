@@ -37,7 +37,7 @@ import dkpro.toolbox.core.ToolboxException;
 public class ToolboxUtils
 {
 
-    public static Sentence UimaSentence2ToolboxSentence(
+    public static Sentence uimaSentence2ToolboxSentence(
             JCas jcas,
             Tagset tagset,
             de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence uimaSentence
@@ -58,7 +58,7 @@ public class ToolboxUtils
         return new Sentence(tokens, lemmas, tagList);
     }
 
-    public static Tag UimaPos2ToolboxTag(
+    public static Tag uimaPos2ToolboxTag(
             JCas jcas,
             Tagset tagset,
             POS pos

@@ -53,7 +53,7 @@ public class TaggedTokenIterable
                 POS pos = token.getPos();
                 items.add(new TaggedToken(
                         token.getCoveredText(),
-                        ToolboxUtils.UimaPos2ToolboxTag(jcas, tagset, pos)
+                        ToolboxUtils.uimaPos2ToolboxTag(jcas, tagset, pos)
                 ));
             }
         }

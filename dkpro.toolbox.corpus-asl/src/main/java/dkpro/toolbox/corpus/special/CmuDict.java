@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.io.IOUtils;
+
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import dkpro.toolbox.core.Pronunciation;
 import dkpro.toolbox.core.Sentence;
@@ -32,9 +34,10 @@ public class CmuDict
         
         dict = new HashMap<String, List<Pronunciation>>();
         
+        BufferedReader in = null;
         try {
             URL url = ResourceUtils.resolveLocation("classpath:/corpus/cmudict/cmudict");
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+            in = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
 
             String line = null;
             while((line = in.readLine()) != null) {
@@ -61,6 +64,9 @@ public class CmuDict
         }
         catch (IOException e) {
             throw new CorpusException(e);
+        }
+        finally {
+            IOUtils.closeQuietly(in);
         }
     }
     

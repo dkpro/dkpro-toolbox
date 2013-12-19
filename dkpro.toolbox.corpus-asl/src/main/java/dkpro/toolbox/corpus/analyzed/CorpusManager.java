@@ -59,6 +59,7 @@ public class CorpusManager
             case FirstNames: corpora.put(CorpusName.FirstNames, new AnalyzedCorpus(new SerializedCorpus("classpath:/corpus/names/")));
                 addSentence(CorpusName.FirstNames);
                 break;
+            default : throw new CorpusException("Unknown corpus: " + name); 
         }
     }
     

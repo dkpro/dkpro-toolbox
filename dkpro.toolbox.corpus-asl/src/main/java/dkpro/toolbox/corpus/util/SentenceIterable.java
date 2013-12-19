@@ -48,7 +48,7 @@ public class SentenceIterable
         if (jcasIterator.hasNext()) {
             JCas jcas = jcasIterator.next();
             for (de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence uimaSentence : JCasUtil.select(jcas, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence.class)) {
-                items.add(ToolboxUtils.UimaSentence2ToolboxSentence(jcas, tagset , uimaSentence));
+                items.add(ToolboxUtils.uimaSentence2ToolboxSentence(jcas, tagset , uimaSentence));
             }
         }
     }

@@ -131,8 +131,8 @@ public class CorpusReader extends JCasCollectionReader_ImplBase {
         }
 
         DocumentMetaData docMetaData = DocumentMetaData.create(jcas);
-        docMetaData.setDocumentTitle(new Integer(currentIndex).toString());
-        docMetaData.setDocumentId(new Integer(currentIndex).toString());
+        docMetaData.setDocumentTitle(Integer.valueOf(currentIndex).toString());
+        docMetaData.setDocumentId(Integer.valueOf(currentIndex).toString());
 
         currentIndex++;
     }

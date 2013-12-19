@@ -49,7 +49,7 @@ public class TagIterable
         if (jcasIterator.hasNext()) {
             JCas jcas = jcasIterator.next();
             for (POS pos : JCasUtil.select(jcas, POS.class)) {
-                items.add(ToolboxUtils.UimaPos2ToolboxTag(jcas, tagset, pos));
+                items.add(ToolboxUtils.uimaPos2ToolboxTag(jcas, tagset, pos));
             }
         }
     }
