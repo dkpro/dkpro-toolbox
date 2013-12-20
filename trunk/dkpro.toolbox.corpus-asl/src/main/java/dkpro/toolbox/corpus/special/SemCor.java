@@ -70,7 +70,7 @@ public class SemCor
     public Iterable<Sentence> getSenseAnnotatedSentences(int maxItems)
         throws CorpusException
     {
-        return new SenseAnnotatedSentenceIterable(new JCasIterable(getReader()).iterator(), Tagset.brown, senseMap);
+        return new SenseAnnotatedSentenceIterable(new JCasIterable(getReader()).iterator(), getTagset(), senseMap);
     }
     
     @Override
