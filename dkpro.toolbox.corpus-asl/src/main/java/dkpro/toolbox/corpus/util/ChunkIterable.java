@@ -20,10 +20,8 @@ package dkpro.toolbox.corpus.util;
 import java.util.Queue;
 
 import org.apache.uima.fit.pipeline.JCasIterator;
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.IOB;
 import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.ToolboxException;
 
@@ -47,9 +45,9 @@ public class ChunkIterable
     {
         if (jcasIterator.hasNext()) {
             JCas jcas = jcasIterator.next();
-            for (IOB iob : JCasUtil.select(jcas, IOB.class)) {
-                items.add(iob.getValue());
-            }
+//            for (IOB iob : JCasUtil.select(jcas, IOB.class)) {
+//                items.add(iob.getValue());
+//            }
         }
     }
 }
