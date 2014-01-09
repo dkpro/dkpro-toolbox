@@ -36,9 +36,9 @@ public class ConllCorpusTest
             i++;
         }
         int j=0;
-        for (String chunk : corpus.getChunks()) {
+        for (String iob : corpus.getIob()) {
             if (j<20) {
-                System.out.println(chunk);
+                System.out.println(iob);
             }
             j++;
         }
