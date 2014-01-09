@@ -20,21 +20,23 @@ package dkpro.toolbox.corpus.util;
 import java.util.Queue;
 
 import org.apache.uima.fit.pipeline.JCasIterator;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
+import de.tudarmstadt.ukp.dkpro.core.api.io.IobEncoder;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.ToolboxException;
 
-public class ChunkIterable
+public class IobIterable
     extends CorpusIterableBase<String>
 {
-
-    public ChunkIterable(JCasIterator jcasIterator, Tagset tagset)
+    public IobIterable(JCasIterator jcasIterator, Tagset tagset)
     {
         super(jcasIterator, tagset);
     }
     
-    public ChunkIterable(JCasIterator jcasIterator, Tagset tagset, int maxItems)
+    public IobIterable(JCasIterator jcasIterator, Tagset tagset, int maxItems)
     {
         super(jcasIterator, tagset, maxItems);
     }
@@ -45,9 +47,10 @@ public class ChunkIterable
     {
         if (jcasIterator.hasNext()) {
             JCas jcas = jcasIterator.next();
-//            for (IOB iob : JCasUtil.select(jcas, IOB.class)) {
-//                items.add(iob.getValue());
-//            }
+            IobEncoder encoder = new IobEncoder(jcas);
+            for (Token token : JCasUtil.select(jcas, Token.class)) {
+                items.add(encoder.encode(token));
+            }
         }
     }
 }
