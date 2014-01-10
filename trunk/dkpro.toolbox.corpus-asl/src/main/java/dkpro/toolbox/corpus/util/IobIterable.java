@@ -19,12 +19,15 @@ package dkpro.toolbox.corpus.util;
 
 import java.util.Queue;
 
+import org.apache.uima.cas.Feature;
+import org.apache.uima.cas.Type;
 import org.apache.uima.fit.pipeline.JCasIterator;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.IobEncoder;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.ToolboxException;
 
@@ -47,7 +50,9 @@ public class IobIterable
     {
         if (jcasIterator.hasNext()) {
             JCas jcas = jcasIterator.next();
-            IobEncoder encoder = new IobEncoder(jcas);
+            Type chunkType = JCasUtil.getType(jcas, Chunk.class);
+            Feature chunkValue = chunkType.getFeatureByBaseName("chunkValue");
+            IobEncoder encoder = new IobEncoder(jcas.getCas(), chunkType, chunkValue);
             for (Token token : JCasUtil.select(jcas, Token.class)) {
                 items.add(encoder.encode(token));
             }
