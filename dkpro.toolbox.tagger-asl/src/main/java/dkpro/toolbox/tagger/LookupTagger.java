@@ -6,12 +6,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import dkpro.toolbox.core.Tag;
 import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
+import dkpro.toolbox.core.util.CFD;
+import dkpro.toolbox.core.util.FD;
 import dkpro.toolbox.corpus.Corpus;
 import dkpro.toolbox.corpus.CorpusException;
 
@@ -19,7 +19,7 @@ public class LookupTagger
     extends ToolboxTaggerBase
 {
 
-    private ConditionalFrequencyDistribution<String, String> wordTagCfd;
+    private CFD<String, String> wordTagCfd;
     private Tagset tagset;
     
     public LookupTagger(Corpus corpus, int useTopN)
@@ -27,13 +27,13 @@ public class LookupTagger
     {
         this.tagset = corpus.getTagset();
         
-        FrequencyDistribution<String> tokenFd = new FrequencyDistribution<String>();
+        FD<String> tokenFd = new FD<String>();
         for (String token : corpus.getTokens()) {
             tokenFd.inc(token);
         }
         Set<String> topN = new HashSet<String>(tokenFd.getMostFrequentSamples(useTopN));
         
-        this.wordTagCfd = new ConditionalFrequencyDistribution<String, String>();
+        this.wordTagCfd = new CFD<String, String>();
         for (TaggedToken taggedToken : corpus.getTaggedTokens()) {
             if (topN.contains(taggedToken.getToken())) {
                 wordTagCfd.inc(taggedToken.getToken(), taggedToken.getTag().getOriginalTag());

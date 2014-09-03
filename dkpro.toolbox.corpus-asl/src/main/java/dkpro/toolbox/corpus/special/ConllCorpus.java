@@ -5,10 +5,10 @@ import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2000Reader;
 import dkpro.toolbox.core.Tag.Tagset;
 import dkpro.toolbox.corpus.CorpusBase;
 import dkpro.toolbox.corpus.CorpusException;
+import dkpro.toolbox.corpus.io.Conll2000Reader;
 import dkpro.toolbox.corpus.util.IobIterable;
 
 public class ConllCorpus

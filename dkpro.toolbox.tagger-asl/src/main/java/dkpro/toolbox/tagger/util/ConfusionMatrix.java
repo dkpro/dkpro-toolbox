@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
+import dkpro.toolbox.core.util.CFD;
 
 public class ConfusionMatrix
 {
@@ -15,7 +15,7 @@ public class ConfusionMatrix
             throw new IllegalArgumentException("Gold and predicted need to be of equal size.");
         }
                 
-        ConditionalFrequencyDistribution<T, T> cfd = new ConditionalFrequencyDistribution<T, T>();
+        CFD<T, T> cfd = new CFD<T, T>();
         
         for (int i=0; i<goldValues.size(); i++) {
             T goldValue = goldValues.get(i);
