@@ -19,7 +19,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RectangleInsets;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
+import dkpro.toolbox.core.util.FD;
 
 public class FdChart
     extends ApplicationFrame
@@ -35,7 +35,7 @@ public class FdChart
         private CategoryDataset data;
         private String title;
 
-        private CategoryDataset createData(FrequencyDistribution<String> fd, boolean cumulative)
+        private CategoryDataset createData(FD<String> fd, boolean cumulative)
         {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -75,7 +75,7 @@ public class FdChart
             return chartpanel;
         }
 
-        public FdPanel(String title, FrequencyDistribution<String> fd, boolean cumulative)
+        public FdPanel(String title, FD<String> fd, boolean cumulative)
         {
             super(new BorderLayout());
             data = createData(fd, cumulative);
@@ -84,7 +84,7 @@ public class FdChart
         }
     }
 
-    public FdChart(String title, FrequencyDistribution<String> fd, boolean cumulative)
+    public FdChart(String title, FD<String> fd, boolean cumulative)
     {
         super(title);
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -93,7 +93,7 @@ public class FdChart
         getContentPane().add(jpanel);
     }
 
-    public static JPanel createPanel(String title, FrequencyDistribution<String> fd, boolean cumulative)
+    public static JPanel createPanel(String title, FD<String> fd, boolean cumulative)
     {
         return new FdPanel(title, fd, cumulative);
     }

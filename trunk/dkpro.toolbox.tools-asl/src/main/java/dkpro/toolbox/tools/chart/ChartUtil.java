@@ -2,9 +2,9 @@ package dkpro.toolbox.tools.chart;
 
 import org.jfree.ui.RefineryUtilities;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import dkpro.toolbox.core.TaggedToken;
+import dkpro.toolbox.core.util.CFD;
+import dkpro.toolbox.core.util.FD;
 import dkpro.toolbox.corpus.analyzed.AnalyzedCorpus;
 import dkpro.toolbox.corpus.analyzed.CorpusManager;
 import dkpro.toolbox.corpus.analyzed.CorpusManager.CorpusName;
@@ -17,10 +17,10 @@ public class ChartUtil
         throws Exception
     {
         CategorizedCorpus corpus = new FirstNamesCorpus();
-        ConditionalFrequencyDistribution<String, String> cfd = new ConditionalFrequencyDistribution<String, String>();
+        CFD<String, String> cfd = new CFD<String, String>();
         for (String category : corpus.getCategories()) {
             for (String token : corpus.getTokens(category)) {
-                cfd.inc(category, token.substring(token.length()-1, token.length()));
+            	cfd.inc(category, token.substring(token.length()-1, token.length()));
             }
         }
         
@@ -28,7 +28,7 @@ public class ChartUtil
         
         
         AnalyzedCorpus corpus2 = CorpusManager.getCorpus(CorpusName.MobyDick);
-        FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
+        FD<String> fd = new FD<String>();
         for (TaggedToken taggedToken : corpus2.getTaggedTokens()) {
             fd.inc(taggedToken.getTag().getSimplifiedTag());
         }
@@ -38,18 +38,18 @@ public class ChartUtil
 
     }
 
-    public static void getChart(FrequencyDistribution<String> fd) {
+    public static void getChart(FD<String> fd) {
         getChart(fd, false);
     }
     
-    public static void getChart(FrequencyDistribution<String> fd, boolean cumulative) {
+    public static void getChart(FD<String> fd, boolean cumulative) {
         FdChart chart = new FdChart("test", fd, cumulative);
         chart.pack();
         RefineryUtilities.centerFrameOnScreen(chart);
         chart.setVisible(true);
     }
     
-    public static void getChart(ConditionalFrequencyDistribution<String, String> cfd) {
+    public static void getChart(CFD<String, String> cfd) {
         CfdChart chart = new CfdChart("test", cfd);
         chart.pack();
         RefineryUtilities.centerFrameOnScreen(chart);

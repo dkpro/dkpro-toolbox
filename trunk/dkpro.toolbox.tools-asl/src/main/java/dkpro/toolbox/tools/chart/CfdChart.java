@@ -22,7 +22,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RectangleInsets;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
+import dkpro.toolbox.core.util.CFD;
 
 public class CfdChart
     extends ApplicationFrame
@@ -38,7 +38,7 @@ public class CfdChart
         private CategoryDataset data;
         private String title;
 
-        private CategoryDataset createData(ConditionalFrequencyDistribution<String, String> cfd)
+        private CategoryDataset createData(CFD<String, String> cfd)
         {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -75,7 +75,7 @@ public class CfdChart
             return chartpanel;
         }
 
-        public CfdPanel(String title, ConditionalFrequencyDistribution<String, String> cfd)
+        public CfdPanel(String title, CFD<String, String> cfd)
         {
             super(new BorderLayout());
             data = createData(cfd);
@@ -84,7 +84,7 @@ public class CfdChart
         }
     }
 
-    public CfdChart(String title, ConditionalFrequencyDistribution<String, String> cfd)
+    public CfdChart(String title, CFD<String, String> cfd)
     {
         super(title);
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -93,7 +93,7 @@ public class CfdChart
         getContentPane().add(jpanel);
     }
 
-    public static JPanel createPanel(String title, ConditionalFrequencyDistribution<String, String> cfd)
+    public static JPanel createPanel(String title, CFD<String, String> cfd)
     {
         return new CfdPanel(title, cfd);
     }

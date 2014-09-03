@@ -6,12 +6,12 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import dkpro.toolbox.core.Sentence;
 import dkpro.toolbox.core.Tag;
 import dkpro.toolbox.core.Tag.TagLevel;
 import dkpro.toolbox.core.TaggedToken;
 import dkpro.toolbox.core.ToolboxException;
+import dkpro.toolbox.core.util.CFD;
 import dkpro.toolbox.corpus.CorpusException;
 import dkpro.toolbox.tagger.util.LimitedQueue;
 
@@ -20,7 +20,7 @@ public class NGramTagger
 {
     public static final String BOS = "<BOS>";
     
-    private ConditionalFrequencyDistribution<String, String> cfd;
+    private CFD<String, String> cfd;
     private int ngramSize;
     private TagLevel tagLevel;
     
@@ -32,7 +32,7 @@ public class NGramTagger
         
         LimitedQueue<String> context = initializeContext();
         
-        this.cfd = new ConditionalFrequencyDistribution<String, String>();
+        this.cfd = new CFD<String, String>();
         for (Sentence sentence : sentences) {
             for (TaggedToken taggedToken : sentence.getTaggedTokens()) {
                 // construct key from context tags and actual word
