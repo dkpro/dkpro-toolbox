@@ -17,6 +17,8 @@
  ******************************************************************************/
 package dkpro.toolbox.corpus.specialcorpora;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 import dkpro.toolbox.core.Sentence;
@@ -33,8 +35,9 @@ public class SemCorTest
         for (Sentence sentence : semCor.getSenseAnnotatedSentences()) {
             if (i==0) {
                 System.out.println(sentence);
-                break;
             }
+            i++;
         }
+        assertEquals(11182, i);
     }
 }
