@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.didion.jwnl.dictionary.Dictionary;
+
+
+import net.sf.extjwnl.dictionary.Dictionary;
 
 import org.apache.commons.io.FileUtils;
 
@@ -66,7 +68,7 @@ public class WordNetConverter
             }
             
             StringBuilder sb = new StringBuilder();
-            for (net.didion.jwnl.data.Synset wnSynset : WordNetUtils.entityToSynsets(dict, entity, false)) {
+            for (net.sf.extjwnl.data.Synset wnSynset : WordNetUtils.entityToSynsets(dict, entity, false)) {
                 sb.append(wnSynset.getGloss());
                 sb.append(" ");
             }
