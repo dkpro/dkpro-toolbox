@@ -181,9 +181,9 @@
   <module>dkpro.toolbox.wordnet-asl</module>
   </modules>
     <scm>
-    <url>http://code.google.com/p/dkpro-toolbox/source/browse/#svn/trunk</url>
-    <connection>http://dkpro-toolbox.googlecode.com/svn/trunk</connection>
-    <developerConnection>scm:svn:https://dkpro-toolbox.googlecode.com/svn/trunk</developerConnection>
+    <url>https://github.com/dkpro/dkpro-toolbox</url>
+    <connection>scm:git:https://github.com/dkpro/dkpro-wsd</connection>
+    <developerConnection>scm:git:https://github.com/dkpro/dkpro-toolbox</developerConnection>
   </scm>
   <dependencies>
   	<dependency>
@@ -195,4 +195,10 @@
   	<url>https://www.ukp.tu-darmstadt.de/</url>
   	<name>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</name>
   </organization>
+  <issueManagement>
+  	<system>GitHub Issues</system>
+  	<url>https://github.com/dkpro/dkpro-toolbox/issues</url>
+  </issueManagement>
+  <name>DKPro Toolbox</name>
+  <url>https://github.com/dkpro/dkpro-toolbox</url>
 </project>
