@@ -28,7 +28,7 @@ import dkpro.toolbox.core.NGram;
  * Creates a NGram iterable from a list of items.
  * It does not detect any sentence (or other) boundaries.
  * Thus, one should make sure to only add lists that reflect a sentence or a phrase (or similar).
- * 
+ *
  * @author zesch
  * @param <T>
  *
@@ -41,17 +41,13 @@ public class NGramIterable<T> implements Iterable<NGram<T>>
 	{
 		this.nGramList = createNGramList(items, minN, maxN);
 	}
-	
-	/**
-     * @param <T>
-	 * @param tokens An array of tokens.
-     */
+
     public NGramIterable(T[] items, int minN, int maxN)
     {
         this.nGramList = createNGramList(Arrays.asList(items), minN, maxN);
     }
 
-	
+
 	@Override
 	public Iterator<NGram<T>> iterator()
 	{
@@ -89,7 +85,7 @@ public class NGramIterable<T> implements Iterable<NGram<T>>
 
 		int size = itemList.size();
 		for (int i = 0; i < (size + 1 - k); i++) {
-		    List<T> parts = new ArrayList<T>(); 
+		    List<T> parts = new ArrayList<T>();
 		    for (int j=0; j<k; j++) {
 		        parts.add(itemList.get(i+j));
 		    }
