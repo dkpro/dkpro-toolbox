@@ -28,6 +28,7 @@ import dkpro.toolbox.corpus.analyzed.CorpusManager.CorpusName;
 
 public class MergedCorpusTest
 {
+    @SuppressWarnings("unused")
     @Test
     public void mergedCorpusTest() throws Exception {
         AnalyzedCorpus corpus1 = CorpusManager.getCorpus(CorpusName.FirstNames);
@@ -37,11 +38,13 @@ public class MergedCorpusTest
 
         int nrOfTokens = 0;
         for (String token : merged.getTokens()) {
+//          System.out.println(token);
             nrOfTokens++;
         }
         assertEquals(262943, nrOfTokens);
     }
-    
+
+    @SuppressWarnings("unused")
     @Test
     public void mergedCorpusLimitedTest() throws Exception {
         AnalyzedCorpus corpus1 = CorpusManager.getCorpus(CorpusName.FirstNames);
@@ -54,9 +57,9 @@ public class MergedCorpusTest
 //            System.out.println(token);
             nrOfTokens++;
         }
-        assertEquals(10, nrOfTokens);  
+        assertEquals(10, nrOfTokens);
     }
-    
+
     @Ignore
     @Test
     public void mergedCorpusRereadTest() throws Exception {
@@ -70,14 +73,14 @@ public class MergedCorpusTest
             System.out.println(token);
             nrOfTokens++;
         }
-        assertEquals(10, nrOfTokens);  
-        
+        assertEquals(10, nrOfTokens);
+
         for (String token : merged.getTokens(10)) {
             System.out.println(token);
             nrOfTokens++;
         }
         assertEquals(20, nrOfTokens);
-        
+
         for (String token : merged.getTokens(10)) {
             System.out.println(token);
             nrOfTokens++;

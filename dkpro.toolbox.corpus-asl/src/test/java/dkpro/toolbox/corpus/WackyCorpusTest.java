@@ -29,7 +29,8 @@ import dkpro.toolbox.corpus.WackyCorpus.WackyLanguageEdition;
 
 public class WackyCorpusTest
 {
-    
+
+    @SuppressWarnings("unused")
     @Test
     public void tigerTest() throws Exception {
         WackyCorpus corpus = new WackyCorpus(
@@ -39,14 +40,14 @@ public class WackyCorpusTest
 
         assertEquals(WackyLanguageEdition.DEWAC.name(), corpus.getName());
         assertEquals("de", corpus.getLanguage());
-        
+
         int nrOfTexts = 0;
         for (Text text : corpus.getTexts()) {
             // System.out.println(text);
             nrOfTexts++;
         }
         assertEquals(4, nrOfTexts);
-        
+
         int nrOfSentences = 0;
         for (Sentence sentence : corpus.getSentences()) {
         	// System.out.println(sentence);

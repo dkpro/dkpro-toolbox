@@ -29,20 +29,20 @@ import org.apache.uima.fit.util.CasUtil;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Converts a chunk annotations into IOB-style 
- * 
+ * Converts a chunk annotations into IOB-style
+ *
  * @author Torsten Zesch
  *
  */
 public class IobEncoder
-{  
-    private Map<Integer, String> iobBeginMap;
-    private Map<Integer, String> iobInsideMap;
+{
+    private final Map<Integer, String> iobBeginMap;
+    private final Map<Integer, String> iobInsideMap;
 
     public IobEncoder(CAS aCas, Type chunkType, Feature aChunkValueFeature)
     {
         super();
-        
+
         // fill map for whole jcas in order to efficiently encode IOB
         iobBeginMap = new HashMap<Integer, String>();
         iobInsideMap = new HashMap<Integer, String>();
@@ -61,22 +61,22 @@ public class IobEncoder
             }
         }
     }
-    
+
     /**
      * Returns the IOB tag for a given token.
-     * @param annotation
-     * @return
+     * @param token The token whose IOB tag to return.
+     * @return The IOB tag for the given token.
      */
     public String encode(Token token)
     {
         if (iobBeginMap.containsKey(token.getBegin())) {
             return "B-" + iobBeginMap.get(token.getBegin());
         }
-        
+
         if (iobInsideMap.containsKey(token.getBegin())) {
             return "I-" + iobInsideMap.get(token.getBegin());
         }
-        
+
         return "O";
     }
 }

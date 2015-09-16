@@ -29,17 +29,18 @@ import dkpro.toolbox.core.Text;
 
 public class TigerCorpusTest
 {
+    @SuppressWarnings("unused")
     @Test
     public void tigerTest() throws Exception {
         Corpus corpus = new TigerCorpus("src/test/resources/test_corpora/tiger/tiger.txt");
-        
+
         int nrOfTexts = 0;
         for (Text text : corpus.getTexts()) {
             // System.out.println(text);
             nrOfTexts++;
         }
         assertEquals(1, nrOfTexts);
-        
+
         int nrOfSentences = 0;
         for (Sentence sentence : corpus.getSentences()) {
             // System.out.println(sentence);
@@ -73,7 +74,7 @@ public class TigerCorpusTest
     @Test
     public void tigerTest_DKPRO_HOME() throws Exception {
         CorpusBase corpus = new TigerCorpus();
-        
+
         int i=0;
         for (Text text : corpus.getTexts()) {
             System.out.println(text);

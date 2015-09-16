@@ -30,17 +30,18 @@ import dkpro.toolbox.core.Text;
 public class BrownCorpusTest
 {
 
+    @SuppressWarnings("unused")
     @Test
     public void brownTest() throws Exception {
         Corpus corpus = new BrownCorpus("src/test/resources/test_corpora/brown/");
-        
+
         int nrOfTexts = 0;
         for (Text text : corpus.getTexts()) {
             // System.out.println(text);
             nrOfTexts++;
         }
         assertEquals(3, nrOfTexts);
-        
+
         int nrOfSentences = 0;
         for (Sentence sentence : corpus.getSentences()) {
             // System.out.println(sentence);
@@ -61,14 +62,14 @@ public class BrownCorpusTest
             nrOfLimitedTokens++;
         }
         assertEquals(10, nrOfLimitedTokens);
-        
+
         int nrOfTags = 0;
         for (Tag tag : corpus.getTags()) {
             // System.out.println(tag);
             nrOfTags++;
         }
         assertEquals(6783, nrOfTags);
-        
+
         int nrOfTaggedTokens = 0;
         for (TaggedToken tt : corpus.getTaggedTokens()) {
             // System.out.println(tt);
@@ -76,19 +77,19 @@ public class BrownCorpusTest
         }
         assertEquals(6783, nrOfTaggedTokens);
     }
-    
+
     @Ignore
-    @Test    
+    @Test
     public void cacheTest()
         throws Exception
     {
         CachableCorpus corpus = new BrownCorpus();
         corpus.setUseCaching(true);
-        
-        for (Sentence s : corpus.getSentences()) {
+
+        for (@SuppressWarnings("unused") Sentence s : corpus.getSentences()) {
         }
         System.out.println("Finished 1");
-        for (Sentence s : corpus.getSentences()) {
+        for (@SuppressWarnings("unused") Sentence s : corpus.getSentences()) {
         }
         System.out.println("Finished 2");
     }
@@ -97,7 +98,7 @@ public class BrownCorpusTest
     @Test
     public void brownTest_DKPRO_HOME() throws Exception {
         CorpusBase corpus = new BrownCorpus();
-        
+
         for (Text text : corpus.getTexts()) {
             System.out.println(text);
         }
