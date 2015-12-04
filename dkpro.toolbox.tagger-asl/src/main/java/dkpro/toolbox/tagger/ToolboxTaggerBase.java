@@ -85,6 +85,6 @@ public abstract class ToolboxTaggerBase
             }
         }
         
-        System.out.println("Accuracy: " + (double) correct / correct+wrong);
+        System.out.println("Accuracy: " + (double) correct / (correct+wrong));
     }
 }
