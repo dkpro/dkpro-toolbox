@@ -17,8 +17,6 @@
  ******************************************************************************/
 package dkpro.toolbox.corpus;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
-
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -28,9 +26,8 @@ import dkpro.toolbox.core.Tag.Tagset;
 
 
 /**
- * Tiger Corpus
- *
- * @author zesch
+ * Brown Corpus
+ * @see "http://clu.uni.no/icame/brown/bcm.html"
  *
  */
 public class BrownCorpus
@@ -59,7 +56,7 @@ public class BrownCorpus
                     TeiReader.class,
                     TeiReader.PARAM_LANGUAGE, LANGUAGE,
                     TeiReader.PARAM_SOURCE_LOCATION, brownPath,
-                    TeiReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml", INCLUDE_PREFIX + "*.xml.gz"}
+                    TeiReader.PARAM_PATTERNS, "*.xml.gz"
             );
         }
         catch (ResourceInitializationException e) {
