@@ -182,7 +182,7 @@
   </modules>
     <scm>
     <url>https://github.com/dkpro/dkpro-toolbox</url>
-    <connection>scm:git:https://github.com/dkpro/dkpro-wsd</connection>
+    <connection>scm:git:https://github.com/dkpro/dkpro-toolbox</connection>
     <developerConnection>scm:git:https://github.com/dkpro/dkpro-toolbox</developerConnection>
   </scm>
   <dependencies>
@@ -192,8 +192,8 @@
   	</dependency>  
   </dependencies>
   <organization>
-  	<url>https://www.ukp.tu-darmstadt.de/</url>
-  	<name>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</name>
+  	<url>http://www.ltl.uni-due.de/</url>
+  	<name>Language Technology Lab, University of Duisburg-Essen</name>
   </organization>
   <issueManagement>
   	<system>GitHub Issues</system>
