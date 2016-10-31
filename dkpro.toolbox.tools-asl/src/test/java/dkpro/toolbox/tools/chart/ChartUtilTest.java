@@ -14,7 +14,7 @@ import dkpro.toolbox.corpus.categorized.FirstNamesCorpus;
 public class ChartUtilTest
 {
     
-    @Ignore
+  //  @Ignore
     @Test
     public void testPrintCfd() throws Exception {
         
@@ -29,7 +29,7 @@ public class ChartUtilTest
         ChartUtil.getChart(cfd);
     }
     
-    @Ignore
+ //   @Ignore
     @Test
     public void testPrintFd() throws Exception {
         

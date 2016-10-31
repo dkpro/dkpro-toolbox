@@ -56,7 +56,7 @@ public class BrownCorpus
                     TeiReader.class,
                     TeiReader.PARAM_LANGUAGE, LANGUAGE,
                     TeiReader.PARAM_SOURCE_LOCATION, brownPath,
-                    TeiReader.PARAM_PATTERNS, "*.xml.gz"
+                    TeiReader.PARAM_PATTERNS, new String[] {"*.xml.gz", "*.xml"}
             );
         }
         catch (ResourceInitializationException e) {
