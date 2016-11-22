@@ -42,7 +42,7 @@ import java.util.Set;
  * cfd.addSample("despite", "in");
  * cfd.addSample("because", "of");
  *
- * System.out.println(cfd.getCount("despite", "of"));
+ * System.out.println(cfd.getCount("because", "of"));
  * }
  * </pre></blockquote>
  * 
